@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>4Abuy - Shoes & Footwear</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background: #f8f8f8;
+      color: #111;
+    }
+    #cart-count {
+      color: red !important;
+      font-weight: bold;
+      font-size: 0.9rem;
+      margin-left: 4px;
+    }
+    .announcement {
+      background: #f4f4f4;
+      color: #111;
+      text-align: center;
+      font-size: 1rem;
+      padding: 0.5rem;
+      letter-spacing: 1px;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      background-color: #fff;
+      color: #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .icons {
+      display: flex;
+      gap: 20px;
+      font-size: 20px;
+      padding-right: 40px;
+      align-items: center;
+      white-space: nowrap;
+    }
+    .icons i {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .icons i:hover {
+      transform: scale(1.2);
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 120px 20px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 9px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+    .product-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+    .product-card h3 {
+      font-size: 1rem;
+      margin: 10px 0 5px;
+    }
+    .product-card .price {
+      font-size: 0.95rem;
+      color: #000;
+      font-weight: bold;
+    }
+    .shop-now {
+      margin-top: 10px;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .shop-now:hover {
+      background-color: #444;
+    }
+    .about-us {
+      padding: 60px 20px;
+      background: #f8f8f8;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .auth-modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .auth-modal-content {
+      background-color: #fff;
+      margin: auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.3);
+      width: 90%;
+      max-width: 450px;
+      position: relative;
+      text-align: center;
+    }
+    .auth-modal .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: #aaa;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .auth-modal h2 {
+      margin-top: 0;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+      color: #333;
+    }
+    .auth-modal input[type="email"],
+    .auth-modal input[type="password"] {
+      width: calc(100% - 24px);
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .auth-modal button[type="submit"] {
+      background-color: #000;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      width: 100%;
+      transition: background-color 0.2s;
+      box-sizing: border-box;
+    }
+    .auth-modal .switch-form-link {
+      display: block;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .auth-modal .switch-form-link a {
+      color: #cc00aa;
+      text-decoration: underline;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .icons a {
+      color: #000;
+    }
+    /* Search Overlay */
+    .search-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 100px;
+    }
+
+    .search-container {
+      width: 90%;
+      max-width: 600px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .search-form {
+      display: flex;
+      gap: 10px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .search-submit {
+      padding: 12px 24px;
+      background: #000;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .close-search {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">
+    JOIN OUR LOYALTY PROGRAM & ENJOY THE BENEFITS!
+  </div>
+  <header>
+    <div class="header-left">
+      <div class="menu-icon">
+        <i class="fas fa-bars"></i>
+      </div>
+      <a href="index1.html.html">
+        <img src="logo.png" alt="4Abuy Logo" style="height: 40px;">
+      </a>
+    </div>
+    <div class="icons">
+      <i class="fas fa-search" onclick="openSearchOverlay()"></i>
+      <a href="cart.html"><i class="fas fa-shopping-cart"></i><span id="cart-count">0</span></a>
+      <i class="fas fa-user" id="userAccountIcon" style="cursor: pointer;"></i>
+      <div id="userDropupMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 250px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserName" style="font-weight: 900;">user</span></strong>
+          <span id="closeDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">&times;</span>
+        </div>
+        <div style="font-weight: 600; margin-bottom: 8px; cursor: pointer;" id="accountSettingsMain">Account Settings</div>
+        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="passwordPersonalInfoMain"><i class="fas fa-lock"></i> Password & Personal Info</div>
+        <div style="font-weight: 600; margin: 15px 0 8px 0;">We're here to help, 24/7</div>
+        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="contactUs"><i class="fas fa-comment"></i> Contact Us</div>
+        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutMain"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
+      </div>
+      <div id="userAccountSettingsMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 280px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <button id="backToMainMenu" style="background:none; border:none; font-size: 1.2rem; cursor: pointer;">&#8592;</button>
+          <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserNameSettings" style="font-weight: 900;">user</span></strong>
+          <span id="closeSettingsDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">&times;</span>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <label for="userNameDisplay" style="font-weight: 600;">Name:</label>
+          <div id="userNameDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">User Name</div>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <label for="userEmailDisplay" style="font-weight: 600;">Email:</label>
+          <div id="userEmailDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">user@example.com</div>
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label for="newPasswordInput" style="font-weight: 600;">Change Password:</label>
+          <input type="password" id="newPasswordInput" placeholder="New Password" style="width: 100%; padding: 6px 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px;">
+          <button id="changePasswordBtn" style="margin-top: 8px; width: 100%; padding: 8px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Change Password</button>
+        </div>
+        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutSettings"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-container">
+      <span class="close-search" onclick="closeSearchOverlay()">&times;</span>
+      <form class="search-form" onsubmit="handleSearch(event)">
+        <input type="text" class="search-input" placeholder="Search for products..." required>
+        <button type="submit" class="search-submit">Search</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="product-grid">
+    <h1 style="text-align: center; grid-column: 1 / -1;">Explore Our Shoes & Footwear Collection</h1>
+    <!-- Product 1 -->
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x300/FFC0CB/000000?text=Product+1" alt="Product 1">
+      <h3>Women's Blouse</h3>
+      <p class="price">$49.99</p>
+      <button class="shop-now" data-name="Women's Blouse" data-price="49.99" data-image="https://via.placeholder.com/300x300/FFC0CB/000000?text=Product+1">Add to cart</button>
+    </div>
+    <!-- Product 2 -->
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x300/ADD8E6/000000?text=Product+2" alt="Product 2">
+      <h3>Skinny Jeans</h3>
+      <p class="price">$89.99</p>
+      <button class="shop-now" data-name="Skinny Jeans" data-price="89.99" data-image="https://via.placeholder.com/300x300/ADD8E6/000000?text=Product+2">Add to cart</button>
+    </div>
+    <!-- Product 3 -->
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x300/90EE90/000000?text=Product+3" alt="Product 3">
+      <h3>Summer Dress</h3>
+      <p class="price">$69.99</p>
+      <button class="shop-now" data-name="Summer Dress" data-price="69.99" data-image="https://via.placeholder.com/300x300/90EE90/000000?text=Product+3">Add to cart</button>
+    </div>
+    <!-- Product 4 -->
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x300/FFFFE0/000000?text=Product+4" alt="Product 4">
+      <h3>Leather Jacket</h3>
+      <p class="price">$199.99</p>
+      <button class="shop-now" data-name="Leather Jacket" data-price="199.99" data-image="https://via.placeholder.com/300x300/FFFFE0/000000?text=Product+4">Add to cart</button>
+    </div>
+    <!-- Product 5 -->
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x300/F08080/000000?text=Product+5" alt="Product 5">
+      <h3>Knit Sweater</h3>
+      <p class="price">$79.99</p>
+      <button class="shop-now" data-name="Knit Sweater" data-price="79.99" data-image="https://via.placeholder.com/300x300/F08080/000000?text=Product+5">Add to cart</button>
+    </div>
+    <!-- Product 6 -->
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x300/E6E6FA/000000?text=Product+6" alt="Product 6">
+      <h3>Maxi Skirt</h3>
+      <p class="price">$59.99</p>
+      <button class="shop-now" data-name="Maxi Skirt" data-price="59.99" data-image="https://via.placeholder.com/300x300/E6E6FA/000000?text=Product+6">Add to cart</button>
+    </div>
+    <!-- Product 7 -->
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x300/DDA0DD/000000?text=Product+7" alt="Product 7">
+      <h3>Ankle Boots</h3>
+      <p class="price">$129.99</p>
+      <button class="shop-now" data-name="Ankle Boots" data-price="129.99" data-image="https://via.placeholder.com/300x300/DDA0DD/000000?text=Product+7">Add to cart</button>
+    </div>
+    <!-- Product 8 -->
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x300/B0E0E6/000000?text=Product+8" alt="Product 8">
+      <h3>Trench Coat</h3>
+      <p class="price">$149.99</p>
+      <button class="shop-now" data-name="Trench Coat" data-price="149.99" data-image="https://via.placeholder.com/300x300/B0E0E6/000000?text=Product+8">Add to cart</button>
+    </div>
+    <!-- Product 9 -->
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x300/FFDAB9/000000?text=Product+9" alt="Product 9">
+      <h3>Handbag</h3>
+      <p class="price">$99.99</p>
+      <button class="shop-now" data-name="Handbag" data-price="99.99" data-image="https://via.placeholder.com/300x300/FFDAB9/000000?text=Product+9">Add to cart</button>
+    </div>
+    <!-- Product 10 -->
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x300/FFE4E1/000000?text=Product+10" alt="Product 10">
+      <h3>Sunglasses</h3>
+      <p class="price">$39.99</p>
+      <button class="shop-now" data-name="Sunglasses" data-price="39.99" data-image="https://via.placeholder.com/300x300/FFE4E1/000000?text=Product+10">Add to cart</button>
+    </div>
+  </div>
+
+  <section class="about-us">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <h2 style="font-size: 2rem; letter-spacing: 2px; color: #111;">ABOUT US</h2>
+      <div style="width: 80px; height: 3px; background: #111; margin: 15px auto;"></div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center;">
+      <div style="flex: 1; min-width: 300px; max-width: 500px;">
+        <h3 style="font-size: 1.5rem; margin-bottom: 20px;">OUR STORY</h3>
+        <p style="line-height: 1.6; color: #444;">
+          4Abuy was founded in 2020 with a simple mission: to bring high-quality fashion to everyone at affordable prices. 
+          What started as a small online store has grown into a premier destination for modern, stylish clothing and accessories.
+        </p>
+        <p style="line-height: 1.6; color: #444; margin-top: 15px;">
+          We believe fashion should be accessible, sustainable, and expressive. Our team carefully curates each collection 
+          to ensure you get the best styles that fit your lifestyle.
+        </p>
+      </div>
+      <div style="flex: 1; min-width: 300px; max-width: 500px;">
+        <h3 style="font-size: 1.5rem; margin-bottom: 20px;">OUR VALUES</h3>
+        <ul style="list-style-type: none; padding: 0; line-height: 1.6; color: #444;">
+          <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+            <span style="font-weight: bold; margin-right: 10px;">✓</span>
+            <span>Quality craftsmanship in every product</span>
+          </li>
+          <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+            <span style="font-weight: bold; margin-right: 10px;">✓</span>
+            <span>Ethical and sustainable sourcing</span>
+          </li>
+          <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+            <span style="font-weight: bold; margin-right: 10px;">✓</span>
+            <span>Exceptional customer service</span>
+          </li>
+          <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+            <span style="font-weight: bold; margin-right: 10px;">✓</span>
+            <span>Innovative and trend-forward designs</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 50px;">
+      <h3 style="font-size: 1.3rem; margin-bottom: 20px;">JOIN OUR COMMUNITY</h3>
+      <p style="max-width: 700px; margin: 0 auto 20px; line-height: 1.6; color: #444;">
+        Follow us on social media to stay updated on new arrivals, exclusive deals, and style inspiration.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 20px;">
+        <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+        <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+        <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+        <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-pinterest"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <div id="loginModal" class="auth-modal">
+    <div class="auth-modal-content">
+      <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Email Address" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button type="submit">LOGIN</button>
+      </form>
+      <p class="switch-form-link">Don't have an account? <a onclick="openModal('signupModal'); closeModal('loginModal'); return false;">Sign Up</a></p>
+    </div>
+  </div>
+
+  <div id="signupModal" class="auth-modal">
+    <div class="auth-modal-content">
+      <span class="close-btn" onclick="closeModal('signupModal')">&times;</span>
+      <h2>Create Account</h2>
+      <form id="signupForm">
+        <input type="text" id="signupFirstName" placeholder="First Name" required style="margin-bottom: 10px; padding: 10px; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc; width: calc(100% - 22px); box-sizing: border-box;">
+        <input type="email" id="signupEmail" placeholder="Email Address" required>
+        <input type="password" id="signupPassword" placeholder="Password" required>
+        <button type="submit">SIGN UP</button>
+      </form>
+      <p class="switch-form-link">Already have an account? <a onclick="openModal('loginModal'); closeModal('signupModal'); return false;">Login</a></p>
+    </div>
+  </div>
+
+  <script src="cart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+  <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDelMOFKyvYx4u9FCgpq1HTr9eAoyjBjS0",
+      authDomain: "abuy-77b4e.firebaseapp.com",
+      projectId: "abuy-77b4e",
+      storageBucket: "abuy-77b4e.firebasestorage.app",
+      messagingSenderId: "1081289117876",
+      appId: "1:1081289117876:web:b3479e942dea9dc14607e1",
+      measurementId: "G-31SH8VCRYG"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // DOM Elements
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const userAccountIcon = document.getElementById('userAccountIcon');
+
+    // Event Listeners for Forms
+    if (loginForm) {
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        try {
+          await auth.signInWithEmailAndPassword(email, password);
+          closeModal('loginModal');
+        } catch (error) {
+          alert('Login failed: ' + error.message);
+        }
+      });
+    }
+
+    if (signupForm) {
+      signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const firstName = document.getElementById('signupFirstName').value.trim();
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
+        try {
+          const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+          await userCredential.user.updateProfile({ displayName: firstName });
+          closeModal('signupModal');
+        } catch (error) {
+          alert('Signup failed: ' + error.message);
+        }
+      });
+    }
+
+    // Auth State Observer
+    auth.onAuthStateChanged(user => {
+      const dropupMenu = document.getElementById('userDropupMenu');
+      const welcomeUserName = document.getElementById('welcomeUserName');
+      if (user) {
+        if (userAccountIcon) {
+          userAccountIcon.className = 'fas fa-user-check';
+          userAccountIcon.onclick = () => {
+            if (dropupMenu.style.display === 'block') {
+              dropupMenu.style.display = 'none';
+            } else {
+              dropupMenu.style.display = 'block';
+            }
+          };
+        }
+        if (welcomeUserName) {
+          welcomeUserName.textContent = user.displayName || 'user';
+        }
+        closeModal('loginModal');
+        closeModal('signupModal');
+      } else {
+        if (userAccountIcon) {
+          userAccountIcon.className = 'fas fa-user';
+          userAccountIcon.onclick = () => openModal('loginModal');
+        }
+        if (dropupMenu) {
+          dropupMenu.style.display = 'none';
+        }
+        if (welcomeUserName) {
+          welcomeUserName.textContent = 'user';
+        }
+      }
+    });
+
+    // Modal Functions
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = "flex";
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = "none";
+    }
+
+    // Search functionality
+    function openSearchOverlay() {
+      document.getElementById('searchOverlay').style.display = 'flex';
+    }
+
+    function closeSearchOverlay() {
+      document.getElementById('searchOverlay').style.display = 'none';
+    }
+
+    function handleSearch(event) {
+      event.preventDefault();
+      const searchQuery = event.target.querySelector('.search-input').value;
+      window.location.href = `search.html?q=${encodeURIComponent(searchQuery)}`;
+    }
+
+    // Dropdown Menu Logic
+    document.addEventListener('click', function(event) {
+      const dropupMenu = document.getElementById('userDropupMenu');
+      const userIcon = document.getElementById('userAccountIcon');
+      if (dropupMenu && userIcon && !dropupMenu.contains(event.target) && !userIcon.contains(event.target)) {
+        dropupMenu.style.display = 'none';
+      }
+    });
+
+    document.getElementById('closeDropup').addEventListener('click', () => {
+      document.getElementById('userDropupMenu').style.display = 'none';
+    });
+
+    document.getElementById('closeSettingsDropup').addEventListener('click', () => {
+      document.getElementById('userAccountSettingsMenu').style.display = 'none';
+    });
+
+    document.getElementById('backToMainMenu').addEventListener('click', () => {
+      document.getElementById('userAccountSettingsMenu').style.display = 'none';
+      document.getElementById('userDropupMenu').style.display = 'block';
+    });
+
+    document.getElementById('accountSettingsMain').addEventListener('click', () => {
+      document.getElementById('userDropupMenu').style.display = 'none';
+      document.getElementById('userAccountSettingsMenu').style.display = 'block';
+      updateAccountSettingsMenu();
+    });
+
+    document.getElementById('passwordPersonalInfoMain').addEventListener('click', () => {
+      document.getElementById('userDropupMenu').style.display = 'none';
+      document.getElementById('userAccountSettingsMenu').style.display = 'block';
+      updateAccountSettingsMenu();
+    });
+
+    document.getElementById('contactUs').addEventListener('click', () => {
+      window.open('https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==', '_blank');
+    });
+
+    document.getElementById('signOutMain').addEventListener('click', () => {
+      if (confirm('Are you sure you want to sign out?')) {
+        auth.signOut().catch(error => alert('Logout failed: ' + error.message));
+      }
+    });
+
+    document.getElementById('signOutSettings').addEventListener('click', () => {
+      if (confirm('Are you sure you want to sign out?')) {
+        auth.signOut().catch(error => alert('Logout failed: ' + error.message));
+      }
+    });
+
+    function updateAccountSettingsMenu() {
+      const user = auth.currentUser;
+      if (user) {
+        document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user';
+        document.getElementById('userNameDisplay').textContent = user.displayName || 'user';
+        document.getElementById('userEmailDisplay').textContent = user.email || '';
+        document.getElementById('newPasswordInput').value = '';
+      }
+    }
+
+    document.getElementById('changePasswordBtn').addEventListener('click', () => {
+      const newPassword = document.getElementById('newPasswordInput').value.trim();
+      if (newPassword.length < 6) {
+        alert('Password must be at least 6 characters long.');
+        return;
+      }
+      const user = auth.currentUser;
+      if (user) {
+        user.updatePassword(newPassword)
+          .then(() => {
+            alert('Password changed successfully.');
+            document.getElementById('newPasswordInput').value = '';
+          })
+          .catch(error => alert('Failed to change password: ' + error.message));
+      } else {
+        alert('No user is currently signed in.');
+      }
+    });
+
+    // Add to cart functionality
+    document.querySelectorAll('.shop-now').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const name = e.target.dataset.name;
+        const price = parseFloat(e.target.dataset.price);
+        const image = e.target.dataset.image;
+        const product = { name, price, image, quantity: 1 };
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existingProductIndex = cart.findIndex(item => item.name === name);
+
+        if (existingProductIndex > -1) {
+          cart[existingProductIndex].quantity += 1;
+        } else {
+          cart.push(product);
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+      });
+    });
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+      document.getElementById('cart-count').textContent = cartCount;
+    }
+
+    document.addEventListener('DOMContentLoaded', updateCartCount);
+  </script>
+</body>
+</html>

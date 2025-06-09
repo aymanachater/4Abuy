@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>4Abuy - Fashion Store</title>
+  <style>
+    #cart-count {
+      color: red !important;
+      font-weight: bold;
+      font-size: 0.9rem;
+      margin-left: 4px;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background: #f8f8f8;
+      color: #111;
+    }
+    .announcement {
+      background: #f4f4f4;
+      color: #111;
+      text-align: center;
+      font-size: 1rem;
+      padding: 0.5rem;
+      letter-spacing: 1px;
+    }
+    header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  color: #111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+    .icons {
+      display: flex;
+      gap: 20px;
+      font-size: 20px;
+      padding-right: 40px; /* padding to keep user icon away from edge */
+      align-items: center;
+      white-space: nowrap;
+    }
+  .icons i {
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .icons i:hover {
+    transform: scale(1.2);
+  }
+    .header-left,
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.3rem;
+      flex: 1 1 0;
+      min-width: 0;
+    }
+    .header-left {
+      justify-content: flex-start;
+    }
+    .header-right {
+      justify-content: flex-end;
+    }
+    .header-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 0 0 auto;
+      min-width: 0;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+    .header-icon-btn {
+      background: none;
+      border: none;
+      padding: 0.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    .header-icons svg,
+    .header-icon-btn svg {
+      width: 1.6em;
+      height: 1.6em;
+      fill: #111;
+      transition: fill 0.2s;
+    }
+    .header-icons svg:hover,
+    .header-icon-btn svg:hover {
+      fill: #c4b5fd;
+    }
+    @media (max-width: 700px) {
+      header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  color: #111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.icons {
+  display: flex;
+  gap: 20px;
+  font-size: 20px;
+}
+
+.icons i {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.icons i:hover {
+  transform: scale(1.2);
+}
+    }
+
+    /*  section */
+    .hero {
+  padding-top: 80px;
+      position: relative;
+      min-height: 65vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      overflow: hidden;
+      background: #111;
+    }
+    .hero video {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    .hero-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.60);
+      z-index: 2;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      width: 100%;
+      max-width: 480px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+    .hero .available {
+      font-size: 1rem;
+      letter-spacing: 1px;
+      opacity: 0.7;
+      margin-bottom: 0.7rem;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0 0 1rem 0;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px #0008;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.93;
+      text-shadow: 0 2px 8px #0008;
+    }
+    .shop-btn {
+      padding: 0.8rem 2.2rem;
+      font-size: 1.1rem;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transition: background .2s, color .2s;
+    }
+    .shop-btn:hover {
+      background: #444;
+      color: #fff;
+    }
+
+    /* SHOP BY CATEGORY SECTION */
+    .shop-category-section {
+      max-width: 1100px;
+      margin: 0 auto 2.5rem auto;
+      padding: 0 2vw;
+    }
+    .shop-category-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2.5rem 0 2rem 0;
+    }
+    .shop-category-title span {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-align: center;
+      color: #222;
+      margin: 0 1.2rem;
+    }
+    .shop-category-title:before,
+    .shop-category-title:after {
+      content: "";
+      display: block;
+      height: 2px;
+      background: #222;
+      flex: 1 1 0%;
+      max-width: 180px;
+    }
+    .category-carousel-wrapper {
+      position: relative;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .category-carousel {
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+      min-height: 390px;
+      background: transparent;
+      gap: 1.5rem;
+      justify-content: center;
+      align-items: stretch;
+    }
+    .category-slide {
+      flex: 0 0 calc(50% - 0.75rem);
+      min-width: 400px;
+      max-width: 600px;
+      background: #fff;
+      border-radius: 7px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+    }
+    .category-slide img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      display: block;
+      border-radius: 7px;
+      transition: transform .2s;
+    }
+    
+
+.category-label {
+  position: absolute;
+  left: 1.2rem;
+  bottom: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px #222;
+  padding: 0.4rem 1.2rem;
+  border-radius: 25px;
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
+  /* cursor: pointer; */ /* Removed as the whole slide is now a link */
+  text-transform: uppercase;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.category-label.clicked {
+  background: #fff;
+  color: #000;
+}
+.category-label:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.category-label:hover {
+  background: #444;
+}
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fff;
+      border: 1.5px solid #222;
+      color: #222;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      transition: background .18s;
+      box-shadow: 0 2px 10px rgba(0,0,0,.09);
+      opacity: 0.93;
+    }
+    
+.carousel-btn:active,
+.carousel-btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+    .carousel-btn.left { left: -18px; }
+    .carousel-btn.right { right: -18px; }
+    @media (max-width: 900px) {
+      .category-slide img { height: 450px; }
+      .category-slide { min-width: 200px; }
+      .category-carousel { min-height: 250px; }
+      .carousel-btn.left { left: -9px;}
+      .carousel-btn.right { right: -9px;}
+    }
+    @media (max-width: 700px) {
+      .category-slide img { height: 450px; }
+      .category-slide { min-width: 160px; }
+      .category-carousel { min-height: 170px; gap: 0.5rem;}
+      .carousel-btn { width: 32px; height: 32px; font-size: 1.3rem;}
+    }
+
+    /* NEW ARRIVALS section */
+    .new-arrivals-section {
+      max-width: 1200px;
+      margin: 3rem auto 2.5rem auto;
+      padding: 0 2vw;
+    }
+    .new-arrivals-title {
+      text-align: center;
+      font-size: 2rem;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 2.2rem;
+      margin-top: 0;
+    }
+    .new-arrivals-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    .new-arrival-card {
+      background: #fff;
+      border-radius: 9px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      position: relative;
+      aspect-ratio: 3/4;
+      display: flex;
+      align-items: stretch;
+    }
+    .new-arrival-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .new-badge {
+      position: absolute;
+      top: 13px;
+      left: 13px;
+      background: #fff;
+      color: #222;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 3px;
+      letter-spacing: 0.08em;
+      padding: 2.5px 10px;
+      box-shadow: 0 2px 8px #0001;
+      z-index: 2;
+    }
+    @media (max-width: 1000px) {
+      .new-arrivals-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.3rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .new-arrivals-section {
+        padding: 0 1vw;
+      }
+      .new-arrivals-title {
+        font-size: 1.3rem;
+        margin-bottom: 1.2rem;
+      }
+      .new-arrivals-grid {
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
+      }
+    }
+  
+/* Updated New Arrivals Section */
+.new-arrivals {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.product-card {
+  width: 100%;
+  max-width: 250px;
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.product-card h3 {
+  font-size: 1rem;
+  margin: 10px 0 5px;
+}
+
+.product-card .brand {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+}
+
+.product-card .price {
+  font-size: 0.95rem;
+  color: #000;
+  font-weight: bold;
+}
+
+.shop-now {
+  margin-top: 10px;
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.shop-now:hover {
+  background-color: #444;
+}
+
+@media (min-width: 600px) {
+  .product-card {
+    flex: 1 0 45%;
+  }
+}
+
+@media (min-width: 900px) {
+  .product-card {
+    flex: 1 0 22%;
+  }
+}
+
+/* ALL SEASONS COLLECTION SECTION */
+.all-seasons-collection-section {
+  max-width: 1200px;
+  margin: 3rem auto 2.5rem auto;
+  padding: 0 2vw;
+  text-align: center;
+}
+
+.seasons-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  margin-top: 2.2rem; /* Consistent with space after new-arrivals-title */
+}
+
+.season-card {
+  background: #fff;
+  border-radius: 9px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  text-align: center;
+  padding: 20px;
+  flex: 1 1 300px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.season-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.season-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.season-card h3 {
+  font-size: 1.4rem;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+  color: #333;
+}
+
+.season-card p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  flex-grow: 1; 
+}
+
+.season-card .shop-now {
+  margin-top: auto; 
+}
+
+/* Responsive adjustments for seasons-grid */
+@media (max-width: 1024px) {
+  .season-card {
+    flex-basis: calc(50% - 20px); /* Two cards per row, accounting for gap */
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .seasons-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  .season-card {
+    flex-basis: 80%;
+    max-width: 400px; /* Max width for single column cards */
+  }
+}
+
+/* Auth Modals (Login/Sign Up) */
+.auth-modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 10000; /* Higher than VIP modal if they can overlap */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.auth-modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.3);
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  text-align: center;
+}
+
+.auth-modal .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.auth-modal .close-btn:hover,
+.auth-modal .close-btn:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+.auth-modal h2 {
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.auth-modal input[type="email"],
+.auth-modal input[type="password"] {
+  width: calc(100% - 24px); /* Account for padding and border */
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.auth-modal button[type="submit"] {
+  background-color: #000;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 100%;
+  transition: background-color 0.2s;
+  box-sizing: border-box;
+}
+
+.auth-modal button[type="submit"]:hover {
+  background-color: #444;
+}
+
+.auth-modal .switch-form-link {
+  display: block;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.auth-modal .switch-form-link a {
+  color: #cc00aa; /* Using VIP modal accent color */
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+  <div class="announcement">
+    JOIN OUR LOYALTY PROGRAM & ENJOY THE BENEFITS!
+  </div>
+  
+  
+
+<header>
+  <div class="header-left">
+      <div class="menu-icon">
+        <i class="fas fa-bars"></i>
+      </div>
+      <a href="index.html.html"> <!-- Link back to homepage -->
+        <img src="logo.png" alt="4Abuy Logo" style="height: 40px;">
+      </a>
+    </div>
+
+  
+  <div class="icons">
+<i class="fas fa-search" onclick="openSearchOverlay()"></i>
+  <a href="cart.html"><i class="fas fa-shopping-cart"></i><span id="cart-count">0</span></a>
+  <i class="fas fa-user" id="userAccountIcon" style="cursor: pointer;"></i>
+
+  <!-- Dropup Menu for User Account -->
+  <div id="userDropupMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 250px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserName" style="font-weight: 900;">user</span></strong>
+      <span id="closeDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">&times;</span>
+    </div>
+
+    <div style="font-weight: 600; margin-bottom: 8px; cursor: pointer;" id="accountSettingsMain">
+      Account Settings
+    </div>
+
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="passwordPersonalInfoMain">
+      <i class="fas fa-lock"></i> Password & Personal Info
+    </div>
+
+    <div style="font-weight: 600; margin: 15px 0 8px 0;">We're here to help, 24/7</div>
+
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="contactUs">
+      <i class="fas fa-comment"></i> Contact Us
+    </div>
+
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutMain">
+      <i class="fas fa-sign-out-alt"></i> Sign Out
+    </div>
+
+  </div>
+
+  <!-- New Account Settings Dropup Menu -->
+  <div id="userAccountSettingsMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 280px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <button id="backToMainMenu" style="background:none; border:none; font-size: 1.2rem; cursor: pointer;">&#8592;</button>
+      <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserNameSettings" style="font-weight: 900;">user</span></strong>
+      <span id="closeSettingsDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">&times;</span>
+    </div>
+
+    <div style="margin-bottom: 10px;">
+      <label for="userNameDisplay" style="font-weight: 600;">Name:</label>
+      <div id="userNameDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">User Name</div>
+    </div>
+
+    <div style="margin-bottom: 10px;">
+      <label for="userEmailDisplay" style="font-weight: 600;">Email:</label>
+      <div id="userEmailDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">user@example.com</div>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label for="newPasswordInput" style="font-weight: 600;">Change Password:</label>
+      <input type="password" id="newPasswordInput" placeholder="New Password" style="width: 100%; padding: 6px 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px;">
+      <button id="changePasswordBtn" style="margin-top: 8px; width: 100%; padding: 8px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Change Password</button>
+    </div>
+
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutSettings">
+      <i class="fas fa-sign-out-alt"></i> Sign Out
+    </div>
+
+  </div>
+</div>
+
+</header>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-container">
+    <span class="close-search" onclick="closeSearchOverlay()">&times;</span>
+    <form class="search-form" onsubmit="handleSearch(event)">
+      <input type="text" class="search-input" placeholder="Search for products..." required>
+      <button type="submit" class="search-submit">Search</button>
+    </form>
+  </div>
+</div>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    /* Search Overlay */
+    .search-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 100px;
+    }
+
+    .search-container {
+      width: 90%;
+      max-width: 600px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .search-form {
+      display: flex;
+      gap: 10px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .search-submit {
+      padding: 12px 24px;
+      background: #000;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .close-search {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  color: #111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.icons {
+  display: flex;
+  gap: 20px;
+  font-size: 20px;
+}
+
+.icons i {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.icons i:hover {
+  transform: scale(1.2);
+}
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .icons {
+      display: flex;
+      gap: 20px;
+      font-size: 20px;
+    }
+
+    .icons i {
+      cursor: pointer;
+      transition: transform 0.2s;
+      color: #000 !important;
+    }
+    .icons i:hover {
+      transform: scale(1.2);
+    }
+  
+/* Updated New Arrivals Section */
+.new-arrivals {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.product-card {
+  width: 100%;
+  max-width: 250px;
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.product-card h3 {
+  font-size: 1rem;
+  margin: 10px 0 5px;
+}
+
+.product-card .brand {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+}
+
+.product-card .price {
+  font-size: 0.95rem;
+  color: #000;
+  font-weight: bold;
+}
+
+.shop-now {
+  margin-top: 10px;
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.shop-now:hover {
+  background-color: #444;
+}
+
+@media (min-width: 600px) {
+  .product-card {
+    flex: 1 0 45%;
+  }
+}
+
+@media (min-width: 900px) {
+  .product-card {
+    flex: 1 0 22%;
+  }
+}
+
+</style>
+
+  <section class="hero">
+    <video src="https://www.dropbox.com/scl/fi/d0qyg7jr8zznqrl8o2q9s/PinDown.io_1747068231.mp4?rlkey=qb027jb5plz7y83yj78d0j160&st=m8c9w1p1&raw=1" autoplay loop muted playsinline></video>
+    <div class="hero-bg-overlay"></div>
+    
+<div class="hero-content">
+  <div class="available">AVAILABLE!</div>
+  <h1>NEW SEASON COLLECTION</h1>
+  <p>Shop the latest trends in men's and women's fashion at 4Abuy. Modern styles, fast shipping, and exclusive deals.</p>
+  <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
+    <a href="shop-womens.html" style="text-decoration: none;">
+      <button class="shop-btn">SHOP WOMENS</button>
+    </a>
+    <a href="shop-mens.html" class="shop-btn">SHOP MENS</a>
+  </div>
+</div>
+
+</section>
+
+  <!-- SHOP BY CATEGORY CAROUSEL (now first) -->
+  <section class="shop-category-section" id="shop-categories">
+    <div class="shop-category-title"><span>SHOP BY CATEGORY</span></div>
+    <div class="category-carousel-wrapper">
+      <button class="carousel-btn left" onclick="moveCategory(-1)" aria-label="Previous">&#10094;</button>
+      <div class="category-carousel" id="category-carousel">
+        <!-- Slides will be injected by JS -->
+      </div>
+      <button class="carousel-btn right" onclick="moveCategory(1)" aria-label="Next">&#10095;</button>
+    </div>
+  </section>
+
+  <!-- NEW ARRIVALS SECTION (now second) -->
+  
+<section class="new-arrivals">
+  <div class="shop-category-title"><span>NEW ARRIVALS</span></div>
+  <div class="product-grid">
+    
+    <div class="product-card">
+      <img src="https://www.dropbox.com/scl/fi/m1ykwl7bevu1y4ciemcid/Vice-84-Track-Field-Embroidered-Jogger-Shorts-Ash-XXL.jpg?rlkey=m1850ktm9pn50hst3vfoyvolf&st=n8mdujzc&raw=1" alt="Product 1">
+      <h3>T-SHIRT</h3>
+      <p class="price">$110.00</p>
+      <button class="shop-now">Add to cart</button>
+    </div>
+    
+    <div class="product-card">
+      <img src="https://www.dropbox.com/scl/fi/47tcdxtztbezjvhf5eatc/Vice-84-Off-Court-GSM-Vintage-Washed-Sweater-Orchid-L.jpg?rlkey=zibhmpght805c9j486kk141bt&st=5v56bwdv&raw=1" alt="Product 2">
+      <h3>PRODUCT 2</h3>
+      <p class="price">$120.00</p>
+      <button class="shop-now">Add to cart</button>
+    </div>
+    
+    <div class="product-card">
+      <img src="https://www.dropbox.com/scl/fi/vpltfwna3ttd7iuyhkxst/Shorts-Personality-White-White-_-Man-_-2XL-pre-oder.jpg?rlkey=xg2fmhilbi3sbs3htou75gs1y&st=o8um88z2&raw=1" alt="Product 3">
+      <h3>PRODUCT 3</h3>
+      <p class="price">$130.00</p>
+      <button class="shop-now">Add to cart</button>
+    </div>
+    
+    <div class="product-card">
+      <img src="https://www.dropbox.com/scl/fi/6aqgz0t5l08sx122auv1t/Mens-River-Island-Khaki-Oversized-Luminis-Studios-Sweatshirt.jpg?rlkey=3io26onwo7ucd4my3qk2xmr56&st=o5fjrc3i&raw=1" alt="Product 4">
+      <h3>PRODUCT 4</h3>
+      <p class="price">$140.00</p>
+      <button class="shop-now">Add to cart</button>
+    </div>
+    
+    <div class="product-card">
+      <img src="https://www.dropbox.com/scl/fi/mnnwtuc91wa47rq7b3rr1/Eternal-Knit-Tee.jpg?rlkey=lbmuovx03owhi1z43r7yv1coe&st=z2w423oc&raw=1" alt="Product 5">
+      <h3>PRODUCT 5</h3>
+      <p class="price">$150.00</p>
+      <button class="shop-now">Add to cart</button>
+    </div>
+    
+    <div class="product-card">
+      <img src="https://www.dropbox.com/scl/fi/ay81a6v4ofq9mfujuukcq/Jerry-Lorenzo-s-ESSENTIAL-Kids-Is-FoG-for-the-Whole-Family.jpg?rlkey=97cu34tp5yove73ovzmidroxo&st=ykmmmay3&raw=1" alt="Product 6">
+      <h3>PRODUCT 6</h3>
+      <p class="price">$160.00</p>
+      <button class="shop-now">Add to cart</button>
+    </div>
+    
+    <div class="product-card">
+      <img src="https://www.dropbox.com/scl/fi/ugsozbwlieimim1r0vh7a/Mens-River-Island-Black-Oversized-Long-Sleeve-Luminis-Hoodie.jpg?rlkey=r9qlbfyb4evpcp0lh7xzzs9pt&st=vri84bco&raw=1" alt="Product 7">
+      <h3>PRODUCT 7</h3>
+      <p class="price">$170.00</p>
+      <button class="shop-now">Add to cart</button>
+    </div>
+    
+    <div class="product-card">
+      <img src="https://www.dropbox.com/scl/fi/9sqfdee3jv7clx1f0cp2j/CORE-SWEATSHORT-VINTAGE-BROWN-_-L.jpg?rlkey=kk8249orvbfxq7legnrx52mhm&st=9m7hlhg9&raw=1" alt="Product 8">
+      <h3>PRODUCT 8</h3>
+      <p class="price">$180.00</p>
+      <button class="shop-now">Add to cart</button>
+    </div>
+    
+  </div>
+</section>
+
+
+  <script>
+    // Category data: image, label, link
+    const categories = [
+      {
+        img: "https://www.dropbox.com/scl/fi/azzcwif6igmeh19l3hhot/make-a-picture-to-represent-EVERYDAY-LUXE-for-my-clothes-store-without-text.png?rlkey=hh2apiyydjl1gu8gtpl81aytc&st=zz6btv0t&raw=1",
+        label: "ACCESSORIES",
+        link: "accessories.html"
+      },
+      {
+        img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80",
+        label: "FIT MODE",
+        link: "fit-mode.html"
+      },
+      {
+        img: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=600&q=80",
+        label: "SHOES & FOOTWEAR",
+        link: "shoes-footwear.html"
+      },
+      {
+        img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80",
+        label: "Style STREETWEAR & URBAN",
+        link: "streetwear-urban.html"
+      },
+      {
+        img: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80",
+        label: "KIDS' CLOTHING",
+        link: "kids-clothing.html"
+      },
+      {
+        img: "https://images.unsplash.com/photo-1519397153925-33c6bda1c94c?auto=format&fit=crop&w=600&q=80",
+        label: "EVERYDAY LUXE",
+        link: "everyday-luxe.html"
+      }
+    ];
+
+    let currentIndex = 0;
+
+    function renderCarousel() {
+      const carousel = document.getElementById('category-carousel');
+      carousel.innerHTML = '';
+      // Show 2 at a time
+      for (let i = 0; i < 2; i++) {
+        const idx = (currentIndex + i) % categories.length;
+        const cat = categories[idx];
+        
+        const slideLink = document.createElement('a'); // Create an anchor tag
+        slideLink.href = cat.link; // Set its href
+        slideLink.className = 'category-slide'; // Keep the class for styling
+        slideLink.style.textDecoration = 'none'; // Remove underline from link
+
+        slideLink.innerHTML = `
+          <img src="${cat.img}" alt="${cat.label}">
+          <div class="category-label">${cat.label}</div>
+        `;
+        carousel.appendChild(slideLink); // Append the link
+      }
+    }
+
+    function moveCategory(dir) {
+      currentIndex = (currentIndex + dir + categories.length) % categories.length;
+      renderCarousel();
+    }
+
+    // Initialize
+    renderCarousel();
+  </script>
+
+<!-- VIP Modal Popup -->
+<div id="vipModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.6); z-index:9999; justify-content:center; align-items:center;">
+  <div style="background:white; max-width:700px; width:90%; border-radius:12px; display:flex; overflow:hidden; box-shadow:0 0 30px rgba(0,0,0,0.3); position:relative; font-family:sans-serif;">
+    
+    <!-- Close Button -->
+    <span onclick="document.getElementById('vipModal').style.display='none'" style="position:absolute; top:10px; right:15px; font-size:28px; font-weight:bold; color:#333; cursor:pointer;">&times;</span>
+
+    <!-- Left Image Section -->
+    <div style="flex:1;">
+      <img src="https://www.dropbox.com/scl/fi/pkuoqer2bgj7zol0yroew/714c5d7e0bb7f6f8da2fa8b5407a3625-1.jpg?rlkey=g7r8x2jvvpg8hugr0mmf5ald2&st=kqwq8u0g&raw=1" alt="VIP Style" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+
+    <!-- Right Text Section -->
+    <div style="flex:1; padding:25px; display:flex; flex-direction:column; justify-content:center;">
+      <h2 style="margin:0; font-size:20px;">REWARDS, DISCOUNTS AND MORE.</h2>
+      <p style="margin:10px 0; font-size:18px; color:#cc00aa;"><strong>PLUS, IT'S FREE.</strong></p>
+      <p style="margin:5px 0 20px;">It pays to be a VIP.</p>
+      <input type="email" placeholder="EMAIL ADDRESS" style="padding:10px; width:100%; margin-bottom:10px; border:1px solid #ccc; border-radius:5px;">
+      <button style="padding:12px; background:black; color:white; border:none; width:100%; border-radius:5px; cursor:pointer;" onclick="openModal('signupModal'); closeModal('vipModal');">SIGN UP NOW</button>
+      <p style="margin-top:15px; font-size:14px;">Already a VIP? <a href="#" style="text-decoration:underline;" onclick="openModal('loginModal'); closeModal('vipModal'); return false;">Login Now</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- Login Modal -->
+<div id="loginModal" class="auth-modal">
+  <div class="auth-modal-content">
+    <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Email Address" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
+      <button type="submit">LOGIN</button>
+    </form>
+    <p class="switch-form-link">Don't have an account? <a onclick="openModal('signupModal'); closeModal('loginModal'); return false;">Sign Up</a></p>
+  </div>
+</div>
+
+<!-- Sign Up Modal -->
+<div id="signupModal" class="auth-modal">
+  <div class="auth-modal-content">
+    <span class="close-btn" onclick="closeModal('signupModal')">&times;</span>
+    <h2>Create Account</h2>
+    <form id="signupForm">
+      <input type="text" id="signupFirstName" placeholder="First Name" required style="margin-bottom: 10px; padding: 10px; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc; width: calc(100% - 22px); box-sizing: border-box;">
+      <input type="email" id="signupEmail" placeholder="Email Address" required>
+      <input type="password" id="signupPassword" placeholder="Password" required>
+      <button type="submit">SIGN UP</button>
+    </form>
+    <p class="switch-form-link">Already have an account? <a onclick="openModal('loginModal'); closeModal('signupModal'); return false;">Login</a></p>
+  </div>
+</div>
+
+<!-- ALL SEASONS COLLECTION SECTION -->
+<section class="all-seasons-collection-section">
+  <div class="shop-category-title"><span>ALL SEASONS COLLECTION</span></div>
+  <div class="seasons-grid">
+    <!-- Summer Card -->
+    <div class="season-card">
+      <img src="https://www.dropbox.com/scl/fi/5tj0m9t6mb0gc5r8wecjw/Givenchy-s-Beach-Collection-Takes-Summer-to-New-Heights-1.jpg?rlkey=pgeh8wjz4dezv9w5m19ynqqyr&st=t5ggz451&raw=1" alt="Summer Collection">
+      <h3>SUMMER</h3>
+      <p>Explore our vibrant and breezy summer collection, perfect for sunny days and warm nights.</p>
+      <button class="shop-now" onclick="window.location.href='summer-collection.html'">SEE MORE</button>
+    </div>
+    <!-- Winter Card -->
+    <div class="season-card">
+      <img src="https://via.placeholder.com/350x300/E0F2FE/7DD3FC?text=Winter+Warmth" alt="Winter Collection">
+      <h3>WINTER</h3>
+      <p>Stay warm and stylish with our cozy winter essentials, from knitwear to outerwear.</p>
+      <button class="shop-now" onclick="window.location.href='winter-collection.html'">SEE MORE</button>
+    </div>
+    <!-- Autumn Card -->
+    <div class="season-card">
+      <img src="https://via.placeholder.com/350x300/FFEDD5/FB923C?text=Autumn+Hues" alt="Autumn Collection">
+      <h3>AUTUMN</h3>
+      <p>Discover earthy tones and comfortable chic in our autumn arrivals, perfect for the changing season.</p>
+      <button class="shop-now" onclick="window.location.href='autumn-collection.html'">SEE MORE</button>
+    </div>
+  </div>
+</section>
+
+<!-- About Us Section -->
+<section class="about-us" style="padding: 60px 20px; background: #f8f8f8; max-width: 1200px; margin: 0 auto;">
+  <div style="text-align: center; margin-bottom: 40px;">
+    <h2 style="font-size: 2rem; letter-spacing: 2px; color: #111;">ABOUT US</h2>
+    <div style="width: 80px; height: 3px; background: #111; margin: 15px auto;"></div>
+  </div>
+  
+  <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center;">
+    <div style="flex: 1; min-width: 300px; max-width: 500px;">
+      <h3 style="font-size: 1.5rem; margin-bottom: 20px;">OUR STORY</h3>
+      <p style="line-height: 1.6; color: #444;">
+        4Abuy was founded in 2020 with a simple mission: to bring high-quality fashion to everyone at affordable prices. 
+        What started as a small online store has grown into a premier destination for modern, stylish clothing and accessories.
+      </p>
+      <p style="line-height: 1.6; color: #444; margin-top: 15px;">
+        We believe fashion should be accessible, sustainable, and expressive. Our team carefully curates each collection 
+        to ensure you get the best styles that fit your lifestyle.
+      </p>
+    </div>
+    
+    <div style="flex: 1; min-width: 300px; max-width: 500px;">
+      <h3 style="font-size: 1.5rem; margin-bottom: 20px;">OUR VALUES</h3>
+      <ul style="list-style-type: none; padding: 0; line-height: 1.6; color: #444;">
+        <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+          <span style="font-weight: bold; margin-right: 10px;">✓</span>
+          <span>Quality craftsmanship in every product</span>
+        </li>
+        <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+          <span style="font-weight: bold; margin-right: 10px;">✓</span>
+          <span>Ethical and sustainable sourcing</span>
+        </li>
+        <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+          <span style="font-weight: bold; margin-right: 10px;">✓</span>
+          <span>Exceptional customer service</span>
+        </li>
+        <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+          <span style="font-weight: bold; margin-right: 10px;">✓</span>
+          <span>Innovative and trend-forward designs</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div style="text-align: center; margin-top: 50px;">
+    <h3 style="font-size: 1.3rem; margin-bottom: 20px;">JOIN OUR COMMUNITY</h3>
+    <p style="max-width: 700px; margin: 0 auto 20px; line-height: 1.6; color: #444;">
+      Follow us on social media to stay updated on new arrivals, exclusive deals, and style inspiration.
+    </p>
+    <div style="display: flex; justify-content: center; gap: 20px;">
+      <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+      <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+      <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+      <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-pinterest"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- Show popup only once per session and only for non-logged-in users -->
+<script>
+  // Wait for Firebase auth state to be known
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (!user) { // User is not logged in
+      if (!sessionStorage.getItem("popupShown")) {
+        document.getElementById("vipModal").style.display = "flex";
+        sessionStorage.setItem("popupShown", "true");
+      }
+    }
+  });
+</script>
+
+<!-- Firebase SDKs -->
+<script src="cart.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+
+<script>
+  // Firebase Configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDelMOFKyvYx4u9FCgpq1HTr9eAoyjBjS0",
+    authDomain: "abuy-77b4e.firebaseapp.com",
+    projectId: "abuy-77b4e",
+    storageBucket: "abuy-77b4e.firebasestorage.app",
+    messagingSenderId: "1081289117876",
+    appId: "1:1081289117876:web:b3479e942dea9dc14607e1",
+    measurementId: "G-31SH8VCRYG"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  // DOM Elements
+  const loginForm = document.getElementById('loginForm');
+  const signupForm = document.getElementById('signupForm');
+  const userAccountIcon = document.getElementById('userAccountIcon');
+
+  // Event Listeners for Forms
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+        // console.log('User logged in');
+        closeModal('loginModal'); 
+      } catch (error) {
+        console.error('Login error:', error.code, error.message);
+        alert('Login failed: ' + error.message);
+      }
+    });
+  }
+
+  if (signupForm) {
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const firstName = document.getElementById('signupFirstName').value.trim();
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+      try {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        // Save first name in user profile
+        await userCredential.user.updateProfile({ displayName: firstName });
+        closeModal('signupModal');
+      } catch (error) {
+        console.error('Signup error:', error.code, error.message);
+        alert('Signup failed: ' + error.message);
+      }
+    });
+  }
+
+  // Auth State Observer
+  auth.onAuthStateChanged(user => {
+    const dropupMenu = document.getElementById('userDropupMenu');
+    const welcomeUserName = document.getElementById('welcomeUserName');
+    if (user) {
+      // User is signed in
+      console.log('User is signed in:', user.email);
+      if (userAccountIcon) {
+        userAccountIcon.className = 'fas fa-user-check'; // Class for logged-in state
+        userAccountIcon.onclick = () => {
+          // Toggle dropup menu visibility with dynamic positioning
+          if (dropupMenu.style.display === 'block') {
+            dropupMenu.style.display = 'none';
+          } else {
+            // Show dropup menu first to get its width
+            dropupMenu.style.display = 'block';
+
+            // Get bounding rects
+            const iconRect = userAccountIcon.getBoundingClientRect();
+            const menuRect = dropupMenu.getBoundingClientRect();
+            const viewportWidth = window.innerWidth;
+
+            // Margin from screen edge
+            const margin = 15;
+
+            // Calculate left position to keep menu fully visible
+            let leftPos = iconRect.right - menuRect.width;
+
+            // If leftPos is less than margin, adjust to margin
+            if (leftPos < margin) {
+              leftPos = margin;
+            }
+
+            // If menu overflows right edge, adjust leftPos
+            if (leftPos + menuRect.width + margin > viewportWidth) {
+              leftPos = viewportWidth - menuRect.width - margin;
+            }
+
+            // Set dropup menu position
+            dropupMenu.style.left = leftPos + 'px';
+            dropupMenu.style.right = 'auto'; // unset right to avoid conflict
+          }
+        };
+      }
+      // Update welcome message with user's first name or displayName
+      if (welcomeUserName) {
+        welcomeUserName.textContent = user.displayName || 'user';
+      }
+      // Close auth modals if they are open
+      closeModal('loginModal');
+      closeModal('signupModal');
+    } else {
+      // User is signed out
+      console.log('User is signed out');
+      if (userAccountIcon) {
+        userAccountIcon.className = 'fas fa-user'; // Class for logged-out state
+        userAccountIcon.onclick = () => openModal('loginModal'); // Restore original functionality
+      }
+      // Hide dropup menu if visible
+      if (dropupMenu) {
+        dropupMenu.style.display = 'none';
+      }
+      // Reset welcome message
+      if (welcomeUserName) {
+        welcomeUserName.textContent = 'user';
+      }
+    }
+  });
+
+  // Search functionality
+  function openSearchOverlay() {
+    document.getElementById('searchOverlay').style.display = 'flex';
+  }
+
+  function closeSearchOverlay() {
+    document.getElementById('searchOverlay').style.display = 'none';
+  }
+
+  function handleSearch(event) {
+    event.preventDefault();
+    const searchQuery = event.target.querySelector('.search-input').value;
+    // Redirect to search results page with query parameter
+    window.location.href = `search.html?q=${encodeURIComponent(searchQuery)}`;
+  }
+
+  // Function to open a modal by ID
+  function openModal(modalId) {
+    var modal = document.getElementById(modalId);
+    if (modal) {
+      modal.style.display = "flex";
+    }
+  }
+
+  // Function to close a modal by ID
+  function closeModal(modalId) {
+    var modal = document.getElementById(modalId);
+    if (modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  // Close dropup menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const dropupMenu = document.getElementById('userDropupMenu');
+    const userIcon = document.getElementById('userAccountIcon');
+    if (dropupMenu && userIcon) {
+      if (!dropupMenu.contains(event.target) && !userIcon.contains(event.target)) {
+        dropupMenu.style.display = 'none';
+      }
+    }
+  });
+
+  // Close dropup menu on clicking close icon
+  document.getElementById('closeDropup').addEventListener('click', function() {
+    const dropupMenu = document.getElementById('userDropupMenu');
+    if (dropupMenu) {
+      dropupMenu.style.display = 'none';
+    }
+  });
+
+  // Close account settings dropup menu on clicking close icon
+  document.getElementById('closeSettingsDropup').addEventListener('click', function() {
+    const settingsMenu = document.getElementById('userAccountSettingsMenu');
+    if (settingsMenu) {
+      settingsMenu.style.display = 'none';
+    }
+  });
+
+  // Back button to return to main dropup menu
+  document.getElementById('backToMainMenu').addEventListener('click', function() {
+    const settingsMenu = document.getElementById('userAccountSettingsMenu');
+    const mainMenu = document.getElementById('userDropupMenu');
+    if (settingsMenu && mainMenu) {
+      settingsMenu.style.display = 'none';
+      mainMenu.style.display = 'block';
+    }
+  });
+
+  // Click handlers for clickable menu items in main menu
+  document.getElementById('accountSettingsMain').addEventListener('click', function() {
+    const mainMenu = document.getElementById('userDropupMenu');
+    const settingsMenu = document.getElementById('userAccountSettingsMenu');
+    if (mainMenu && settingsMenu) {
+      mainMenu.style.display = 'none';
+      settingsMenu.style.display = 'block';
+      updateAccountSettingsMenu();
+    }
+  });
+
+  document.getElementById('passwordPersonalInfoMain').addEventListener('click', function() {
+    const mainMenu = document.getElementById('userDropupMenu');
+    const settingsMenu = document.getElementById('userAccountSettingsMenu');
+    if (mainMenu && settingsMenu) {
+      mainMenu.style.display = 'none';
+      settingsMenu.style.display = 'block';
+      updateAccountSettingsMenu();
+
+      // Dynamic positioning for second dropup menu
+      const iconRect = userAccountIcon.getBoundingClientRect();
+      const menuRect = settingsMenu.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const margin = 15;
+      let leftPos = iconRect.right - menuRect.width;
+      if (leftPos < margin) {
+        leftPos = margin;
+      }
+      if (leftPos + menuRect.width + margin > viewportWidth) {
+        leftPos = viewportWidth - menuRect.width - margin;
+      }
+      settingsMenu.style.left = leftPos + 'px';
+      settingsMenu.style.right = 'auto';
+
+    }
+  });
+
+  document.getElementById('contactUs').addEventListener('click', function() {
+    // Redirect to Instagram link for contact
+    window.open('https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==', '_blank');
+  });
+
+  document.getElementById('signOutMain').addEventListener('click', function() {
+    if (confirm('Are you sure you want to sign out?')) {
+      auth.signOut().catch(error => {
+        console.error('Logout error:', error.message);
+        alert('Logout failed: ' + error.message);
+      });
+    }
+  });
+
+  document.getElementById('signOutSettings').addEventListener('click', function() {
+    if (confirm('Are you sure you want to sign out?')) {
+      auth.signOut().catch(error => {
+        console.error('Logout error:', error.message);
+        alert('Logout failed: ' + error.message);
+      });
+    }
+  });
+
+  // Function to update account settings menu with user info
+  function updateAccountSettingsMenu() {
+    const user = auth.currentUser;
+    if (user) {
+      document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user';
+      document.getElementById('userNameDisplay').textContent = user.displayName || 'user';
+      document.getElementById('userEmailDisplay').textContent = user.email || '';
+      document.getElementById('newPasswordInput').value = '';
+    }
+  }
+
+  // Change password button handler
+  document.getElementById('changePasswordBtn').addEventListener('click', function() {
+    const newPassword = document.getElementById('newPasswordInput').value.trim();
+    if (newPassword.length < 6) {
+      alert('Password must be at least 6 characters long.');
+      return;
+    }
+    const user = auth.currentUser;
+    if (user) {
+      user.updatePassword(newPassword).then(() => {
+        alert('Password changed successfully.');
+        document.getElementById('newPasswordInput').value = '';
+      }).catch(error => {
+        console.error('Password change error:', error);
+        alert('Failed to change password: ' + error.message);
+      });
+    } else {
+      alert('No user is currently signed in.');
+    }
+  });
+</script>
+
+</body>
+</html>
