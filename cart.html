@@ -110,6 +110,8 @@
     }
     .cart-item-details {
       flex-grow: 1;
+      display: flex;
+      flex-direction: column;
     }
     .cart-item-details h3 {
       margin: 0;
@@ -121,6 +123,13 @@
       padding: 10px 15px;
       cursor: pointer;
       border-radius: 5px;
+      margin-top: 15px;
+      width: 100%;
+      box-sizing: border-box;
+      font-weight: 600;
+    }
+    .cart-item-remove:hover {
+      background: #e60000;
     }
     .cart-item-selector {
         margin-top: 10px;
@@ -129,13 +138,11 @@
         gap: 10px;
         flex-wrap: wrap;
     }
-
     .cart-item-selector label {
         font-weight: 600;
         min-width: 70px;
         text-align: left;
     }
-    
     .cart-item-selector select {
         padding: 6px 8px;
         border-radius: 5px;
@@ -193,6 +200,21 @@
       background: #f8f8f8;
       max-width: 1200px;
       margin: 0 auto;
+    }
+    @media (max-width: 768px) {
+        .cart-item {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .cart-item img {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 15px;
+            align-self: center;
+        }
+        .cart-item-details {
+            width: 100%;
+        }
     }
   </style>
 </head>
@@ -275,7 +297,7 @@
     </div>
   </header>
 
-  <h1 class="cart-title">WELCOME TO YOUR CART</h1>
+  <h1 class="cart-title">YOUR CART</h1>
 
   <div class="cart-container" id="cart-items">
     </div>
