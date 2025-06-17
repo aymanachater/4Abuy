@@ -218,7 +218,7 @@
       <div class="menu-icon">
         <i class="fas fa-bars"></i>
       </div>
-      <a href="index1.html.html">
+      <a href="index.html">
         <img src="logo.png" alt="4Abuy Logo" style="height: 40px;">
       </a>
     </div>
@@ -396,8 +396,8 @@
     <script>
     // --- NEW SEARCH SCRIPT STARTS HERE ---
     const products = [
-        { name: "T-SHIRT", price: "$110.00", image: "https://www.dropbox.com/scl/fi/m1ykwl7bevu1y4ciemcid/Vice-84-Track-Field-Embroidered-Jogger-Shorts-Ash-XXL.jpg?rlkey=m1850ktm9pn50hst3vfoyvolf&st=n8mdujzc&raw=1", url: "index1.html.html" },
-        { name: "Vintage Washed Sweater", price: "$120.00", image: "https://www.dropbox.com/scl/fi/47tcdxtztbezjvhf5eatc/Vice-84-Off-Court-GSM-Vintage-Washed-Sweater-Orchid-L.jpg?rlkey=zibhmpght805c9j486kk141bt&st=5v56bwdv&raw=1", url: "index1.html.html" },
+        { name: "T-SHIRT", price: "$110.00", image: "https://www.dropbox.com/scl/fi/m1ykwl7bevu1y4ciemcid/Vice-84-Track-Field-Embroidered-Jogger-Shorts-Ash-XXL.jpg?rlkey=m1850ktm9pn50hst3vfoyvolf&st=n8mdujzc&raw=1", url: "index.html" },
+        { name: "Vintage Washed Sweater", price: "$120.00", image: "https://www.dropbox.com/scl/fi/47tcdxtztbezjvhf5eatc/Vice-84-Off-Court-GSM-Vintage-Washed-Sweater-Orchid-L.jpg?rlkey=zibhmpght805c9j486kk141bt&st=5v56bwdv&raw=1", url: "index.html" },
         { name: "Women's Blouse", price: "$49.99", image: "https://via.placeholder.com/300x300/FFC0CB/000000?text=Product+1", url: "accessories.html" },
         { name: "Skinny Jeans", price: "$89.99", image: "https://via.placeholder.com/300x300/ADD8E6/000000?text=Product+2", url: "accessories.html" },
         { name: "Cozy Knit Cardigan", price: "$89.99", image: "https://via.placeholder.com/300x300/D2B48C/000000?text=Product+1", url: "autumn-collection.html" },
@@ -405,7 +405,13 @@
         { name: "Kids T-Shirt", price: "$19.99", image: "https://via.placeholder.com/300x300/FFD700/000000?text=Product+1", url: "kids-clothing.html" },
         { name: "Men's T-Shirt", price: "$29.99", image: "https://via.placeholder.com/300x300/87CEEB/000000?text=Product+1", url: "shop-mens.html" }
     ];
-    function openSearchOverlay(){document.getElementById("searchOverlay").style.display="flex"}function closeSearchOverlay(){document.getElementById("searchOverlay").style.display="none"}function handleSearch(e){e.preventDefault();const t=e.target.querySelector(".search-input").value;window.location.href=`search.html?q=${encodeURIComponent(t)}`}function dynamicSearch(e){const t=document.getElementById("searchResults");if(t.innerHTML="",""===e.trim()){t.style.display="none";return}const o=e.toLowerCase(),n=products.filter(e=>e.name.toLowerCase().includes(o));n.length>0?n.forEach(e=>{const o=document.createElement("div");o.className="search-result-item",o.innerHTML=`\n<img src="${e.image}" alt="${e.name}">\n<div class="search-result-details">\n<h4>${e.name}</h4>\n<p>${e.price}</p>\n</div>\n<button class="shop-now" data-name="${e.name}" data-price="${e.price.replace("$","")}" data-image="${e.image}">Add to cart</button>`,t.appendChild(o)}):t.innerHTML='<p style="padding: 10px; text-align: center;">No products found.</p>',t.style.display="block"}
+    function openSearchOverlay(){document.getElementById("searchOverlay").style.display="flex"}function closeSearchOverlay(){document.getElementById("searchOverlay").style.display="none"}function handleSearch(e){e.preventDefault();const t=e.target.querySelector(".search-input").value;window.location.href=`search.html?q=${encodeURIComponent(t)}`}function dynamicSearch(e){const t=document.getElementById("searchResults");if(t.innerHTML="",""===e.trim()){t.style.display="none";return}const o=e.toLowerCase(),n=products.filter(e=>e.name.toLowerCase().includes(o));n.length>0?n.forEach(e=>{const o=document.createElement("div");o.className="search-result-item",o.innerHTML=`
+<img src="${e.image}" alt="${e.name}">
+<div class="search-result-details">
+<h4>${e.name}</h4>
+<p>${e.price}</p>
+</div>
+<button class="shop-now" data-name="${e.name}" data-price="${e.price.replace("$","")}" data-image="${e.image}">Add to cart</button>`,t.appendChild(o)}):t.innerHTML='<p style="padding: 10px; text-align: center;">No products found.</p>',t.style.display="block"}
     // --- NEW SEARCH SCRIPT ENDS HERE ---
   </script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
