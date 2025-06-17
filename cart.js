@@ -80,9 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <button class="quantity-btn plus-btn" data-index="${index}">+</button>
                             </div>
                         </div>
-
+                        
+                        <button class="cart-item-remove" data-index="${index}">Remove</button>
                     </div>
-                    <button class="cart-item-remove" data-index="${index}">Remove</button>
                 `;
                 cartItemsContainer.appendChild(cartItem);
             });
