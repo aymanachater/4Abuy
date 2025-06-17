@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>4Abuy - Streetwear & Urban</title>
+  <link rel="icon" href="logo.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f8f8f8;color:#111}#cart-count{color:red!important;font-weight:700;font-size:.9rem;margin-left:4px}.announcement{background:#f4f4f4;color:#111;text-align:center;font-size:1rem;padding:.5rem;letter-spacing:1px}header{position:fixed;top:0;left:0;width:100%;z-index:999;box-shadow:0 2px 6px rgba(0,0,0,.15);background-color:#fff;color:#111;display:flex;justify-content:space-between;align-items:center;padding:10px 20px}.header-left{display:flex;align-items:center;gap:1rem}.menu-icon{font-size:24px;cursor:pointer}.icons{display:flex;gap:20px;font-size:20px;padding-right:40px;align-items:center;white-space:nowrap}.icons i{cursor:pointer;transition:transform .2s}.icons i:hover{transform:scale(1.2)}.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;padding:120px 20px 40px;max-width:1200px;margin:0 auto}.product-card{background:#fff;border-radius:9px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06);text-align:center}.product-card img{width:100%;height:300px;object-fit:cover}.product-card h3{font-size:1rem;margin:10px 0 5px}.product-card .price{font-size:.95rem;color:#000;font-weight:700}.shop-now{margin-top:10px;padding:8px 20px;font-size:.9rem;background-color:#000;color:#fff;border:none;border-radius:20px;cursor:pointer;margin-bottom:10px}.shop-now:hover{background-color:#444}.about-us{padding:60px 20px;background:#f8f8f8;max-width:1200px;margin:0 auto}.auth-modal{display:none;position:fixed;z-index:10000;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;font-family:'Segoe UI',Arial,sans-serif}.auth-modal-content{background-color:#fff;margin:auto;padding:30px;border-radius:12px;box-shadow:0 0 30px rgba(0,0,0,.3);width:90%;max-width:450px;position:relative;text-align:center}.auth-modal .close-btn{position:absolute;top:10px;right:20px;color:#aaa;font-size:28px;font-weight:700;cursor:pointer}.auth-modal h2{margin-top:0;margin-bottom:25px;font-size:1.8rem;color:#333}.auth-modal input[type=email],.auth-modal input[type=password]{width:calc(100% - 24px);padding:12px;margin-bottom:20px;border:1px solid #ccc;border-radius:5px;font-size:1rem;box-sizing:border-box}.auth-modal button[type=submit]{background-color:#000;color:#fff;padding:12px 20px;border:none;border-radius:25px;cursor:pointer;font-size:1rem;font-weight:600;width:100%;transition:background-color .2s;box-sizing:border-box}.auth-modal .switch-form-link{display:block;margin-top:20px;font-size:.9rem;color:#555}.auth-modal .switch-form-link a{color:#cc00aa;text-decoration:underline;font-weight:700;cursor:pointer}.icons a{color:#000}.search-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);z-index:10001;justify-content:center;align-items:flex-start;padding-top:100px}.search-container{width:90%;max-width:600px;background:#fff;padding:20px;border-radius:8px;position:relative}.search-form{display:flex;gap:10px}.search-input{flex:1;padding:12px;border:2px solid #ddd;border-radius:4px;font-size:16px}.search-submit{padding:12px 24px;background:#000;color:#fff;border:none;border-radius:4px;cursor:pointer}.close-search{position:absolute;top:-40px;right:0;color:#fff;font-size:24px;cursor:pointer}.search-results-container{margin-top:15px;max-height:400px;overflow-y:auto;background:#fdfdfd;border-radius:4px;border:1px solid #eee;display:none}.search-result-item{display:flex;align-items:center;padding:10px;border-bottom:1px solid #f0f0f0; text-decoration: none; color: inherit;}.search-result-item:last-child{border-bottom:none}.search-result-item img{width:60px;height:60px;object-fit:cover;margin-right:15px;border-radius:4px}.search-result-details{flex-grow:1}.search-result-details h4{margin:0 0 5px;font-size:1rem}.search-result-details p{margin:0;font-size:.9rem;color:#333;font-weight:700}.search-result-item .shop-now{padding:6px 12px;font-size:.8rem;white-space:nowrap}
@@ -44,7 +45,7 @@
       <div id="userDropupMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 250px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
           <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserName" style="font-weight: 900;">user</span></strong>
-          <span id="closeDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">&times;</span>
+          <span id="closeDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">×</span>
         </div>
         <div style="font-weight: 600; margin-bottom: 8px; cursor: pointer;" id="accountSettingsMain">Account Settings</div>
         <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="passwordPersonalInfoMain"><i class="fas fa-lock"></i> Password &amp; Personal Info</div>
@@ -54,9 +55,9 @@
       </div>
       <div id="userAccountSettingsMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 280px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-          <button id="backToMainMenu" style="background:none; border:none; font-size: 1.2rem; cursor: pointer;">&#8592;</button>
+          <button id="backToMainMenu" style="background:none; border:none; font-size: 1.2rem; cursor: pointer;">←</button>
           <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserNameSettings" style="font-weight: 900;">user</span></strong>
-          <span id="closeSettingsDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">&times;</span>
+          <span id="closeSettingsDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">×</span>
         </div>
         <div style="margin-bottom: 10px;">
           <label for="userNameDisplay" style="font-weight: 600;">Name:</label>
@@ -78,7 +79,7 @@
 
   <div class="search-overlay" id="searchOverlay">
     <div class="search-container">
-      <span class="close-search" onclick="closeSearchOverlay()">&times;</span>
+      <span class="close-search" onclick="closeSearchOverlay()">×</span>
       <form class="search-form" onsubmit="handleSearch(event)">
         <input type="text" class="search-input" placeholder="Search for products..." oninput="dynamicSearch(this.value)" required>
         <button type="submit" class="search-submit">Search</button>
@@ -180,7 +181,7 @@
   
   <div id="loginModal" class="auth-modal">
     <div class="auth-modal-content">
-      <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
+      <span class="close-btn" onclick="closeModal('loginModal')">×</span>
       <h2>Login</h2>
       <form id="loginForm">
         <input type="email" id="loginEmail" placeholder="Email Address" required>
@@ -193,7 +194,7 @@
 
   <div id="signupModal" class="auth-modal">
     <div class="auth-modal-content">
-      <span class="close-btn" onclick="closeModal('signupModal')">&times;</span>
+      <span class="close-btn" onclick="closeModal('signupModal')">×</span>
       <h2>Create Account</h2>
       <form id="signupForm">
         <input type="text" id="signupFirstName" placeholder="First Name" required style="margin-bottom: 10px; padding: 10px; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc; width: calc(100% - 22px); box-sizing: border-box;">
