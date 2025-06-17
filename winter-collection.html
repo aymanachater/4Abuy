@@ -6,192 +6,7 @@
   <title>4Abuy - Winter Collection</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-      background: #f8f8f8;
-      color: #111;
-    }
-    #cart-count {
-      color: red !important;
-      font-weight: bold;
-      font-size: 0.9rem;
-      margin-left: 4px;
-    }
-    .announcement {
-      background: #f4f4f4;
-      color: #111;
-      text-align: center;
-      font-size: 1rem;
-      padding: 0.5rem;
-      letter-spacing: 1px;
-    }
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 999;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-      background-color: #fff;
-      color: #111;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-    }
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .menu-icon {
-      font-size: 24px;
-      cursor: pointer;
-    }
-    .icons {
-      display: flex;
-      gap: 20px;
-      font-size: 20px;
-      padding-right: 40px;
-      align-items: center;
-      white-space: nowrap;
-    }
-    .icons i {
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .icons i:hover {
-      transform: scale(1.2);
-    }
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 120px 20px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .product-card {
-      background: #fff;
-      border-radius: 9px;
-      overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-      text-align: center;
-    }
-    .product-card img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-    }
-    .product-card h3 {
-      font-size: 1rem;
-      margin: 10px 0 5px;
-    }
-    .product-card .price {
-      font-size: 0.95rem;
-      color: #000;
-      font-weight: bold;
-    }
-    .shop-now {
-      margin-top: 10px;
-      padding: 8px 20px;
-      font-size: 0.9rem;
-      background-color: #000;
-      color: #fff;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      margin-bottom: 10px;
-    }
-    .shop-now:hover {
-      background-color: #444;
-    }
-    .about-us {
-      padding: 60px 20px;
-      background: #f8f8f8;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .auth-modal {
-      display: none;
-      position: fixed;
-      z-index: 10000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-      font-family: 'Segoe UI', Arial, sans-serif;
-    }
-    .auth-modal-content {
-      background-color: #fff;
-      margin: auto;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.3);
-      width: 90%;
-      max-width: 450px;
-      position: relative;
-      text-align: center;
-    }
-    .auth-modal .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      color: #aaa;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .auth-modal h2 {
-      margin-top: 0;
-      margin-bottom: 25px;
-      font-size: 1.8rem;
-      color: #333;
-    }
-    .auth-modal input[type="email"],
-    .auth-modal input[type="password"] {
-      width: calc(100% - 24px);
-      padding: 12px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
-    .auth-modal button[type="submit"] {
-      background-color: #000;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 600;
-      width: 100%;
-      transition: background-color 0.2s;
-      box-sizing: border-box;
-    }
-    .auth-modal .switch-form-link {
-      display: block;
-      margin-top: 20px;
-      font-size: 0.9rem;
-      color: #555;
-    }
-    .auth-modal .switch-form-link a {
-      color: #cc00aa;
-      text-decoration: underline;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .icons a {
-      color: #000;
-    }
-    .search-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);z-index:10001;justify-content:center;align-items:flex-start;padding-top:100px}.search-container{width:90%;max-width:600px;background:#fff;padding:20px;border-radius:8px;position:relative}.search-form{display:flex;gap:10px}.search-input{flex:1;padding:12px;border:2px solid #ddd;border-radius:4px;font-size:16px}.search-submit{padding:12px 24px;background:#000;color:#fff;border:none;border-radius:4px;cursor:pointer}.close-search{position:absolute;top:-40px;right:0;color:#fff;font-size:24px;cursor:pointer}.search-results-container{margin-top:15px;max-height:400px;overflow-y:auto;background:#fdfdfd;border-radius:4px;border:1px solid #eee;display:none}.search-result-item{display:flex;align-items:center;padding:10px;border-bottom:1px solid #f0f0f0}.search-result-item:last-child{border-bottom:none}.search-result-item img{width:60px;height:60px;object-fit:cover;margin-right:15px;border-radius:4px}.search-result-details{flex-grow:1}.search-result-details h4{margin:0 0 5px;font-size:1rem}.search-result-details p{margin:0;font-size:.9rem;color:#333;font-weight:700}.search-result-item .shop-now{padding:6px 12px;font-size:.8rem;white-space:nowrap}
+    body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f8f8f8;color:#111}#cart-count{color:red!important;font-weight:700;font-size:.9rem;margin-left:4px}.announcement{background:#f4f4f4;color:#111;text-align:center;font-size:1rem;padding:.5rem;letter-spacing:1px}header{position:fixed;top:0;left:0;width:100%;z-index:999;box-shadow:0 2px 6px rgba(0,0,0,.15);background-color:#fff;color:#111;display:flex;justify-content:space-between;align-items:center;padding:10px 20px}.header-left{display:flex;align-items:center;gap:1rem}.menu-icon{font-size:24px;cursor:pointer}.icons{display:flex;gap:20px;font-size:20px;padding-right:40px;align-items:center;white-space:nowrap}.icons i{cursor:pointer;transition:transform .2s}.icons i:hover{transform:scale(1.2)}.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;padding:120px 20px 40px;max-width:1200px;margin:0 auto}.product-card{background:#fff;border-radius:9px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06);text-align:center}.product-card img{width:100%;height:300px;object-fit:cover}.product-card h3{font-size:1rem;margin:10px 0 5px}.product-card .price{font-size:.95rem;color:#000;font-weight:700}.shop-now{margin-top:10px;padding:8px 20px;font-size:.9rem;background-color:#000;color:#fff;border:none;border-radius:20px;cursor:pointer;margin-bottom:10px}.shop-now:hover{background-color:#444}.about-us{padding:60px 20px;background:#f8f8f8;max-width:1200px;margin:0 auto}.auth-modal{display:none;position:fixed;z-index:10000;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;font-family:'Segoe UI',Arial,sans-serif}.auth-modal-content{background-color:#fff;margin:auto;padding:30px;border-radius:12px;box-shadow:0 0 30px rgba(0,0,0,.3);width:90%;max-width:450px;position:relative;text-align:center}.auth-modal .close-btn{position:absolute;top:10px;right:20px;color:#aaa;font-size:28px;font-weight:700;cursor:pointer}.auth-modal h2{margin-top:0;margin-bottom:25px;font-size:1.8rem;color:#333}.auth-modal input[type=email],.auth-modal input[type=password]{width:calc(100% - 24px);padding:12px;margin-bottom:20px;border:1px solid #ccc;border-radius:5px;font-size:1rem;box-sizing:border-box}.auth-modal button[type=submit]{background-color:#000;color:#fff;padding:12px 20px;border:none;border-radius:25px;cursor:pointer;font-size:1rem;font-weight:600;width:100%;transition:background-color .2s;box-sizing:border-box}.auth-modal .switch-form-link{display:block;margin-top:20px;font-size:.9rem;color:#555}.auth-modal .switch-form-link a{color:#cc00aa;text-decoration:underline;font-weight:700;cursor:pointer}.icons a{color:#000}.search-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);z-index:10001;justify-content:center;align-items:flex-start;padding-top:100px}.search-container{width:90%;max-width:600px;background:#fff;padding:20px;border-radius:8px;position:relative}.search-form{display:flex;gap:10px}.search-input{flex:1;padding:12px;border:2px solid #ddd;border-radius:4px;font-size:16px}.search-submit{padding:12px 24px;background:#000;color:#fff;border:none;border-radius:4px;cursor:pointer}.close-search{position:absolute;top:-40px;right:0;color:#fff;font-size:24px;cursor:pointer}.search-results-container{margin-top:15px;max-height:400px;overflow-y:auto;background:#fdfdfd;border-radius:4px;border:1px solid #eee;display:none}.search-result-item{display:flex;align-items:center;padding:10px;border-bottom:1px solid #f0f0f0; text-decoration: none; color: inherit;}.search-result-item:last-child{border-bottom:none}.search-result-item img{width:60px;height:60px;object-fit:cover;margin-right:15px;border-radius:4px}.search-result-details{flex-grow:1}.search-result-details h4{margin:0 0 5px;font-size:1rem}.search-result-details p{margin:0;font-size:.9rem;color:#333;font-weight:700}.search-result-item .shop-now{padding:6px 12px;font-size:.8rem;white-space:nowrap}
   </style>
 </head>
 <body>
@@ -263,7 +78,7 @@
 
   <div class="search-overlay" id="searchOverlay">
     <div class="search-container">
-      <span class="close-search" onclick="closeSearchOverlay()">&times;</span>
+      <span class="close-search" onclick="closeSearchOverlay()">×</span>
       <form class="search-form" onsubmit="handleSearch(event)">
         <input type="text" class="search-input" placeholder="Search for products..." oninput="dynamicSearch(this.value)" required>
         <button type="submit" class="search-submit">Search</button>
@@ -275,37 +90,25 @@
   <div class="product-grid">
     <h1 style="text-align: center; grid-column: 1 / -1;">Explore Our Winter Collection</h1>
     <div class="product-card">
-      <img src="https://www.dropbox.com/scl/fi/bvuvf9tsn6cfxf6izgy1v/Picsart_25-06-16_00-10-35-563.png?rlkey=69xpqoqd6ywg0or7f73kr1wc4&st=aqhg8yvz&raw=1" alt="Product 1">
-      <h3>HIGH-NECK ZIP-UP PUFFER JACKET</h3>
-      <p class="price">500 DH</p>
-      <button class="shop-now" data-name="HIGH-NECK ZIP-UP PUFFER JACKET" data-price="500" data-image="https://www.dropbox.comqhg8yvz&dl=0g?rlkey=69xpqoqd6ywg0or7f73kr1wc4&st=aqhg8yvz&dl=0g?rlkey=69xpqoqd6ywg0or7f73kr1wc4&st=aqhg8yvz&raw=1">Add to cart</button>
-    </div>
-    <div class="product-card">
-      <img src="https://www.dropbox.com/scl/fi/3sh94wskcr8e4uezi1776/Picsart_25-06-16_17-53-23-387.png?rlkey=qcfxxrnf1m6dnu5k8s1l88oum&st=j6pz1r1h&raw=1" alt="Product 2">
-      <h3>MEN'S LIGHT BLUE JEANS</h3>
-      <p class="price">400 DH</p>
-      <button class="shop-now" data-name="MEN'S LIGHT BLUE JEANS" data-price="400" data-image="https://www.dropbox.com/scl/fi/3sh94wskcr8e4uezi1776/Picsart_25-06-16_17-53-23-387.png?rlkey=qcfxxrnf1m6dnu5k8s1l88oum&st=j6pz1r1h&raw=1">Add to cart</button>
-    </div>
-    <div class="product-card">
-      <img src="https://www.dropbox.com/scl/fi/qjo8jtffamf49kd182ayx/Picsart_25-06-16_17-55-03-982.png?rlkey=ahhk5nma58rqdv2ost60x1ngf&st=eo0vu6l3&raw=1" alt="Product 3">
-      <h3>GUIRENIAO MEN'S POLO SHIRT</h3>
-      <p class="price">350 DH</p>
-      <button class="shop-now" data-name="GUIRENIAO MEN'S POLO SHIRT" data-price="350" data-image="https://www.dropbox.com/scl/fi/qjo8jtffamf49kd182ayx/Picsart_25-06-16_17-55-03-982.png?rlkey=ahhk5nma58rqdv2ost60x1ngf&st=eo0vu6l3&raw=1">Add to cart</button>
-    </div>
-    <div class="product-card">
-      <img src="https://www.dropbox.com/scl/fi/3980ifchostefu2ln47x0/Picsart_25-06-16_17-50-46-448.png?rlkey=nqtr1fljq1jmtnakyap6gozyi&st=g5vavuvs&raw=1" alt="Product 4">
+      <img src="https://www.dropbox.com/scl/fi/3980ifchostefu2ln47x0/Picsart_25-06-16_17-50-46-448.png?rlkey=nqtr1fljq1jmtnakyap6gozyi&st=y7s10i3h&raw=1" alt="Product 1">
       <h3>MEN'S WINTER JACKET</h3>
       <p class="price">550 DH</p>
-      <button class="shop-now" data-name="MEN'S WINTER JACKET" data-price="550" data-image="https://www.dropbox.com/scl/fi/3980ifchostefu2ln47x0/Picsart_25-06-16_17-50-46-448.png?rlkey=nqtr1fljq1jmtnakyap6gozyi&st=g5vavuvs&raw=1">Add to cart</button>
+      <button class="shop-now" data-name="MEN'S WINTER JACKET" data-price="550" data-image="https://www.dropbox.com/scl/fi/3980ifchostefu2ln47x0/Picsart_25-06-16_17-50-46-448.png?rlkey=nqtr1fljq1jmtnakyap6gozyi&st=y7s10i3h&raw=1">Add to cart</button>
     </div>
     <div class="product-card">
-      <img src="https://www.dropbox.com/scl/fi/5j3gr4ww6z75wun4qbbpq/Picsart_25-06-16_18-47-13-922.png?rlkey=jqegxws3f05kr7s57evb5j3vl&st=xdpj9yv7&raw=1" alt="Product 9">
+      <img src="https://www.dropbox.com/scl/fi/bvuvf9tsn6cfxf6izgy1v/Picsart_25-06-16_00-10-35-563.png?rlkey=69xpqoqd6ywg0or7f73kr1wc4&st=2g55iymu&raw=1" alt="Product 2">
+      <h3>HIGH-NECK ZIP-UP PUFFER JACKET</h3>
+      <p class="price">500 DH</p>
+      <button class="shop-now" data-name="HIGH-NECK ZIP-UP PUFFER JACKET" data-price="500" data-image="https://www.dropbox.com/scl/fi/bvuvf9tsn6cfxf6izgy1v/Picsart_25-06-16_00-10-35-563.png?rlkey=69xpqoqd6ywg0or7f73kr1wc4&st=2g55iymu&raw=1">Add to cart</button>
+    </div>
+    <div class="product-card">
+      <img src="https://www.dropbox.com/scl/fi/5j3gr4ww6z75wun4qbbpq/Picsart_25-06-16_18-47-13-922.png?rlkey=jqegxws3f05kr7s57evb5j3vl&st=xdpj9yv7&raw=1" alt="Product 3">
       <h3>MEN'S VINTAGE-INSPIRED CREWNECK SWEATSHIRT</h3>
       <p class="price">350 DH</p>
-      <button class="shop-now" data-name="MEN'S VINTAGE-INSPIRED CREWNECK SWEATSHIRT" data-price="350 DH" data-image="https://www.dropbox.com/scl/fi/5j3gr4ww6z75wun4qbbpq/Picsart_25-06-16_18-47-13-922.png?rlkey=jqegxws3f05kr7s57evb5j3vl&st=xdpj9yv7&raw=1">Add to cart</button>
+      <button class="shop-now" data-name="MEN'S VINTAGE-INSPIRED CREWNECK SWEATSHIRT" data-price="350" data-image="https://www.dropbox.com/scl/fi/5j3gr4ww6z75wun4qbbpq/Picsart_25-06-16_18-47-13-922.png?rlkey=jqegxws3f05kr7s57evb5j3vl&st=xdpj9yv7&raw=1">Add to cart</button>
     </div>
     <div class="product-card">
-      <img src="https://www.dropbox.com/scl/fi/2hxoc3nyv51t723adu17d/Picsart_25-06-16_18-48-04-533.png?rlkey=qsid1wfvqvc3gfqg51qt11gpa&st=fr4ehxkl&raw=1" alt="Product 10">
+      <img src="https://www.dropbox.com/scl/fi/2hxoc3nyv51t723adu17d/Picsart_25-06-16_18-48-04-533.png?rlkey=qsid1wfvqvc3gfqg51qt11gpa&st=fr4ehxkl&raw=1" alt="Product 4">
       <h3>MEN'S WINTER CAMO JACKET</h3>
       <p class="price">550 DH</p>
       <button class="shop-now" data-name="MEN'S WINTER CAMO JACKET" data-price="550" data-image="https://www.dropbox.com/scl/fi/2hxoc3nyv51t723adu17d/Picsart_25-06-16_18-48-04-533.png?rlkey=qsid1wfvqvc3gfqg51qt11gpa&st=fr4ehxkl&raw=1">Add to cart</button>
@@ -364,7 +167,7 @@
       </div>
     </div>
   </section>
-
+  
   <div id="loginModal" class="auth-modal">
     <div class="auth-modal-content">
       <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
@@ -393,257 +196,149 @@
   </div>
 
   <script src="cart.js"></script>
-    <script>
-    // --- SCRIPT FOR SEARCH ---
-    const products = [
-        { name: "T-SHIRT", price: "$110.00", image: "https://www.dropbox.com/scl/fi/m1ykwl7bevu1y4ciemcid/Vice-84-Track-Field-Embroidered-Jogger-Shorts-Ash-XXL.jpg?rlkey=m1850ktm9pn50hst3vfoyvolf&st=n8mdujzc&raw=1", url: "index.html" },
-        { name: "Vintage Washed Sweater", price: "$120.00", image: "https://www.dropbox.com/scl/fi/47tcdxtztbezjvhf5eatc/Vice-84-Off-Court-GSM-Vintage-Washed-Sweater-Orchid-L.jpg?rlkey=zibhmpght805c9j486kk141bt&st=5v56bwdv&raw=1", url: "index.html" },
-        { name: "Women's Blouse", price: "$49.99", image: "https://via.placeholder.com/300x300/FFC0CB/000000?text=Product+1", url: "accessories.html" },
-        { name: "Skinny Jeans", price: "$89.99", image: "https://via.placeholder.com/300x300/ADD8E6/000000?text=Product+2", url: "accessories.html" },
-        { name: "Cozy Knit Cardigan", price: "$89.99", image: "https://via.placeholder.com/300x300/D2B48C/000000?text=Product+1", url: "autumn-collection.html" },
-        { name: "Leather Ankle Boots", price: "$149.99", image: "https://via.placeholder.com/300x300/8B4513/FFFFFF?text=Product+2", url: "autumn-collection.html" },
-        { name: "Kids T-Shirt", price: "$19.99", image: "https://via.placeholder.com/300x300/FFD700/000000?text=Product+1", url: "kids-clothing.html" },
-        { name: "Men's T-Shirt", price: "$29.99", image: "https://via.placeholder.com/300x300/87CEEB/000000?text=Product+1", url: "shop-mens.html" }
-    ];
-    function openSearchOverlay(){document.getElementById("searchOverlay").style.display="flex"}function closeSearchOverlay(){document.getElementById("searchOverlay").style.display="none"}function handleSearch(e){e.preventDefault();const t=e.target.querySelector(".search-input").value;window.location.href=`search.html?q=${encodeURIComponent(t)}`}function dynamicSearch(e){const t=document.getElementById("searchResults");if(t.innerHTML="",""===e.trim()){t.style.display="none";return}const o=e.toLowerCase(),n=products.filter(e=>e.name.toLowerCase().includes(o));n.length>0?n.forEach(e=>{const o=document.createElement("div");o.className="search-result-item",o.innerHTML=`
-<img src="${e.image}" alt="${e.name}">
-<div class="search-result-details">
-<h4>${e.name}</h4>
-<p>${e.price}</p>
-</div>
-<button class="shop-now" data-name="${e.name}" data-price="${e.price.replace("$","")}" data-image="${e.image}">Add to cart</button>`,t.appendChild(o)}):t.innerHTML='<p style="padding: 10px; text-align: center;">No products found.</p>',t.style.display="block"}
-  </script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+  
   <script>
-    // --- ORIGINAL SCRIPT ---
-    const firebaseConfig = {
-      apiKey: "AIzaSyDelMOFKyvYx4u9FCgpq1HTr9eAoyjBjS0",
-      authDomain: "abuy-77b4e.firebaseapp.com",
-      projectId: "abuy-77b4e",
-      storageBucket: "abuy-77b4e.firebasestorage.app",
-      messagingSenderId: "1081289117876",
-      appId: "1:1081289117876:web:b3479e942dea9dc14607e1",
-      measurementId: "G-31SH8VCRYG"
-    };
+    // --- SCRIPT TO CONTROL THE SIDE MENU, MODALS, AND SEARCH ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuIcon = document.querySelector('.menu-icon');
+        const sideMenu = document.getElementById('sideMenu');
+        const closeSideMenu = document.getElementById('closeSideMenu');
+
+        if (menuIcon) {
+            menuIcon.addEventListener('click', (event) => {
+                event.stopPropagation();
+                sideMenu.style.width = '280px';
+            });
+        }
+
+        if (closeSideMenu) {
+            closeSideMenu.addEventListener('click', () => {
+                sideMenu.style.width = '0';
+            });
+        }
+
+        window.addEventListener('click', (event) => {
+            const menuIconContainer = document.querySelector('.menu-icon');
+            if (event.target !== sideMenu && !sideMenu.contains(event.target) && event.target !== menuIconContainer && !menuIconContainer.contains(event.target)) {
+                if (sideMenu.style.width === '280px') {
+                    sideMenu.style.width = '0';
+                }
+            }
+        });
+    });
+
+    const products = [
+        // Autumn Collection
+        { name: "VARSITY POLO CROP TOP", price: "350", image: "https://www.dropbox.com/scl/fi/uwhh020bcmhbh3jxfeyj7/Picsart_25-06-16_00-04-01-001.png?rlkey=6rdfyt52h6kndfr7hx1ayeugc&st=5n28lpxn&raw=1", url: "autumn-collection.html" },
+        { name: "MEN'S RELAXED FIT POLO", price: "350", image: "https://www.dropbox.com/scl/fi/bm9a6ibukyhzofr0tjoex/Picsart_25-06-16_00-03-06-166.jpg?rlkey=5sygxecpy2awogs5dfohr7k8l&st=xmk06467&raw=1", url: "autumn-collection.html" },
+        { name: "SUMMER MEADOW DRESS", price: "750", image: "https://www.dropbox.com/scl/fi/zpynavtbpiep6dik5o7si/Picsart_25-06-16_00-04-35-040.jpg?rlkey=735ild6ahjkuryh2xw35jl2uh&st=jxx1bxt5&raw=1", url: "autumn-collection.html" },
+        { name: "GUIRENIAO MEN'S POLO SHIRT", price: "350", image: "https://www.dropbox.com/scl/fi/qjo8jtffamf49kd182ayx/Picsart_25-06-16_17-55-03-982.png?rlkey=ahhk5nma58rqdv2ost60x1ngf&st=wg6zd3q6&raw=1", url: "autumn-collection.html" },
+        { name: "MEN'S LIGHT BLUE JEANS", price: "400", image: "https://www.dropbox.com/scl/fi/3sh94wskcr8e4uezi1776/Picsart_25-06-16_17-53-23-387.png?rlkey=qcfxxrnf1m6dnu5k8s1l88oum&st=8kvfxqiv&raw=1", url: "autumn-collection.html" },
+        { name: "THE FLORA DRESS", price: "750", image: "https://www.dropbox.com/scl/fi/2656yxhkmkar8a48i7ejq/Picsart_25-06-16_00-09-03-032.jpg?rlkey=pcjhndrubinwzily2zvhykd1v&st=crssept7&raw=1", url: "autumn-collection.html" },
+        // Everyday Luxe
+        { name: "PROVENCAL GARDEN DRESS", price: "750", image: "https://www.dropbox.com/scl/fi/x49cxbsbxgha0bikcvwc0/Picsart_25-06-16_00-05-01-894.jpg?rlkey=2nuloxz028mvxokey3ezx4s55&st=slt7zzz4&raw=1", url: "everyday-luxe.html" },
+        { name: "BLUE PORCELAIN BOW TOP", price: "400", image: "https://www.dropbox.com/scl/fi/5l8aieje8ntppt9a9ukl8/Picsart_25-06-16_00-09-29-556.png?rlkey=vy1bc7xgor2g2akbqp1jnpk6l&st=xoogxe6w&raw=1", url: "everyday-luxe.html" },
+        // Fit Mode
+        { name: "WOMEN'S GYM & BARBELL GRAPHIC PRINT T-SHIRT", price: "200", image: "https://www.dropbox.com/scl/fi/xvst4zsw2n2tui3xe3d2u/Picsart_25-06-16_21-08-51-123.png?rlkey=312s0et5auebht6227fqvcd2i&st=acn6y872&raw=1", url: "fit-mode.html" },
+        { name: "MEN'S ATHELTIC PANTS", price: "300", image: "https://www.dropbox.com/scl/fi/z4c0lp8lg02h1lxufhsfj/Picsart_25-06-16_21-09-26-913.png?rlkey=f83crvlhrv1egirh38m143ig3&st=qslrnr57&raw=1", url: "fit-mode.html" },
+        { name: "MEN'S QUICK-DRY ATHLETIC SHORTS", price: "200", image: "https://www.dropbox.com/scl/fi/1dzpnutpopylb41m4if96/Picsart_25-06-16_21-10-16-542.png?rlkey=dnl4e8k2v8m5w2koh6e6ejos7&st=llcrpd82&raw=1", url: "fit-mode.html" },
+        { name: "MEN'S HOODED SHORT SLEEVE T-SHIRT", price: "300", image: "https://www.dropbox.com/scl/fi/iq427qmqeuum0tbguazg2/Picsart_25-06-16_21-10-52-765.png?rlkey=43rkiwi49vec3i40uh0sbjfa3&st=rho9hlrz&raw=1", url: "fit-mode.html" },
+        { name: "MEN'S QUICK-DRY VEST", price: "200", image: "https://www.dropbox.com/scl/fi/4zuqrguhuotngs1nd5htc/Picsart_25-06-16_21-11-30-025.png?rlkey=30ahli5s4k24hybpmh8vrit2c&st=we8syspn&raw=1", url: "fit-mode.html" },
+        { name: "MEN'S HIGH-NECK ATHLETIC T-SHIRT", price: "300", image: "https://www.dropbox.com/scl/fi/xyddswe5dilei3iape3jx/Picsart_25-06-16_21-12-07-157.png?rlkey=a7oqb9ka5m7ju5021rzqkdbdh&st=hh380sq2&raw=1", url: "fit-mode.html" },
+        // Kids Clothing
+        { name: "BOYS' SUMMER DENIM 2PCS SET", price: "300", image: "https://www.dropbox.com/scl/fi/vdvasd7zx2ab05d0pkgho/Picsart_25-06-16_20-21-35-180.png?rlkey=yt2xk8xvzz7lg7suz6k1sdz3p&st=m0deeigf&raw=1", url: "kids-clothing.html" },
+        { name: "4PCS SET FOR BABY BOYS", price: "350", image: "https://www.dropbox.com/scl/fi/6mxdeky5bfznx6kxooed0/Picsart_25-06-16_20-22-22-964.png?rlkey=1hrfeb9onzpvvf5nct7ci9oya&st=osfwy33c&raw=1", url: "kids-clothing.html" },
+        { name: "2PCS YOUNG BOY'S CASUAL CARTOON BEAR", price: "250", image: "https://www.dropbox.com/scl/fi/m43gjgtb73t0dx4omw75l/Picsart_25-06-16_20-23-10-144.png?rlkey=pphge1punw5gt0s8wh2qhz6rq&st=pspb7xfb&raw=1", url: "kids-clothing.html" },
+        { name: "YOUNGSTERS BOYS SUMMER SOLID COLOR JACQUARD 2PCS", price: "250", image: "https://www.dropbox.com/scl/fi/owwjbame7lp9kx3y5c756/Picsart_25-06-16_20-23-59-165.png?rlkey=p6rxj8sjl4jlxnm3z4l0t5xqq&st=250xdm2r&raw=1", url: "kids-clothing.html" },
+        { name: "NEW GIRLS' ROUND NECK SHORT SLEEVE", price: "350", image: "https://www.dropbox.com/scl/fi/45k8nyczwoihakavax3ki/Picsart_25-06-16_20-24-54-490.png?rlkey=7v2uar6opzbvex1ubigl142mg&st=58b1yifa&raw=1", url: "kids-clothing.html" },
+        { name: "2PCS TRENDY GIRLS SUMMER OUTFIT", price: "300", image: "https://www.dropbox.com/scl/fi/dwnoaiibobkzfuwwdudqx/Picsart_25-06-16_20-25-47-978.png?rlkey=8ldszb4gpt30fe9kgng8sfd1y&st=imfsefmd&raw=1", url: "kids-clothing.html" },
+        // Mens Collection
+        { name: "MEN'S LINEN SHIRT & SHORTS SET", price: "400", image: "https://www.dropbox.com/scl/fi/k2zbgyfr53cdvq6xnxq5z/Picsart_25-06-16_00-02-34-826.jpg?rlkey=8ytwyssc6u6hcog7eg08pyue3&st=9t2k3unu&raw=1", url: "shop-mens.html" },
+        { name: "MEN'S WINTER JACKET", price: "550", image: "https://www.dropbox.com/scl/fi/3980ifchostefu2ln47x0/Picsart_25-06-16_17-50-46-448.png?rlkey=nqtr1fljq1jmtnakyap6gozyi&st=j91f9wos&raw=1", url: "shop-mens.html" },
+        { name: "MENS' CASUAL SHORT SLEEVE T-SHIRT AND SHORT SET-KNIT", price: "350", image: "https://www.dropbox.com/scl/fi/zpuyiue5mbhg4t8brid7j/Picsart_25-06-16_17-51-40-255.png?rlkey=9xksqnjoitpzdks01ke38tima&st=q3sg58f4&raw=1", url: "shop-mens.html" },
+        // Womens Collection
+        { name: "HIGH-NECK ZIP-UP PUFFER JACKET", price: "500", image: "https://www.dropbox.com/scl/fi/bvuvf9tsn6cfxf6izgy1v/Picsart_25-06-16_00-10-35-563.png?rlkey=69xpqoqd6ywg0or7f73kr1wc4&st=b39t3joe&raw=1", url: "shop-womens.html" },
+        // Winter Collection
+        { name: "MEN'S VINTAGE-INSPIRED CREWNECK SWEATSHIRT", price: "350", image: "https://www.dropbox.com/scl/fi/5j3gr4ww6z75wun4qbbpq/Picsart_25-06-16_18-47-13-922.png?rlkey=jqegxws3f05kr7s57evb5j3vl&st=xdpj9yv7&raw=1", url: "winter-collection.html" },
+        { name: "MEN'S WINTER CAMO JACKET", price: "550", image: "https://www.dropbox.com/scl/fi/2hxoc3nyv51t723adu17d/Picsart_25-06-16_18-48-04-533.png?rlkey=qsid1wfvqvc3gfqg51qt11gpa&st=fr4ehxkl&raw=1", url: "winter-collection.html" }
+    ];
+
+    function openSearchOverlay(){document.getElementById("searchOverlay").style.display="flex"}function closeSearchOverlay(){document.getElementById("searchOverlay").style.display="none"}function handleSearch(e){e.preventDefault();const t=e.target.querySelector(".search-input").value;window.location.href=`search.html?q=${encodeURIComponent(t)}`}
+    
+    function dynamicSearch(e) {
+        const t = document.getElementById("searchResults");
+        t.innerHTML = "";
+        if ("" === e.trim()) {
+            t.style.display = "none";
+            return;
+        }
+        const o = e.toLowerCase();
+        const uniqueProducts = Array.from(new Map(products.map(item => [item.name, item])).values());
+        const n = uniqueProducts.filter(item => item.name.toLowerCase().includes(o));
+        
+        if (n.length > 0) {
+            n.forEach(item => {
+                const resultLink = document.createElement("a");
+                resultLink.href = item.url;
+                resultLink.className = "search-result-item";
+                
+                resultLink.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="search-result-details">
+                        <h4>${item.name}</h4>
+                        <p>${item.price} DH</p>
+                    </div>
+                    <button class="shop-now" data-name="${item.name}" data-price="${item.price}" data-image="${item.image}">Add to cart</button>
+                `;
+                t.appendChild(resultLink);
+            });
+        } else {
+            t.innerHTML = '<p style="padding: 10px; text-align: center;">No products found.</p>';
+        }
+        t.style.display = "block";
+    }
+
+    const firebaseConfig = { apiKey: "AIzaSyDelMOFKyvYx4u9FCgpq1HTr9eAoyjBjS0", authDomain: "abuy-77b4e.firebaseapp.com", projectId: "abuy-77b4e", storageBucket: "abuy-77b4e.appspot.com", messagingSenderId: "1081289117876", appId: "1:1081289117876:web:b3479e942dea9dc14607e1", measurementId: "G-31SH8VCRYG" };
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
     const userAccountIcon = document.getElementById('userAccountIcon');
-    if (loginForm) {
-      loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = document.getElementById('loginEmail').value;
-        const password = document.getElementById('loginPassword').value;
-        try {
-          await auth.signInWithEmailAndPassword(email, password);
-          closeModal('loginModal');
-        } catch (error) {
-          alert('Login failed: ' + error.message);
-        }
-      });
-    }
-    if (signupForm) {
-      signupForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const firstName = document.getElementById('signupFirstName').value.trim();
-        const email = document.getElementById('signupEmail').value;
-        const password = document.getElementById('signupPassword').value;
-        try {
-          const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-          await userCredential.user.updateProfile({ displayName: firstName });
-          closeModal('signupModal');
-        } catch (error) {
-          alert('Signup failed: ' + error.message);
-        }
-      });
-    }
+
+    if (loginForm) { loginForm.addEventListener('submit', async (e) => { e.preventDefault(); const email = document.getElementById('loginEmail').value; const password = document.getElementById('loginPassword').value; try { await auth.signInWithEmailAndPassword(email, password); closeModal('loginModal'); } catch (error) { alert('Login failed: ' + error.message); } }); }
+    if (signupForm) { signupForm.addEventListener('submit', async (e) => { e.preventDefault(); const firstName = document.getElementById('signupFirstName').value.trim(); const email = document.getElementById('signupEmail').value; const password = document.getElementById('signupPassword').value; try { const userCredential = await auth.createUserWithEmailAndPassword(email, password); await userCredential.user.updateProfile({ displayName: firstName }); closeModal('signupModal'); } catch (error) { alert('Signup failed: ' + error.message); } }); }
+
     auth.onAuthStateChanged(user => {
       const dropupMenu = document.getElementById('userDropupMenu');
       const welcomeUserName = document.getElementById('welcomeUserName');
       if (user) {
-        console.log('User is signed in:', user.email);
-        if (userAccountIcon) {
-          userAccountIcon.className = 'fas fa-user-check';
-          userAccountIcon.onclick = () => {
-            if (dropupMenu.style.display === 'block') {
-              dropupMenu.style.display = 'none';
-            } else {
-              dropupMenu.style.display = 'block';
-              const iconRect = userAccountIcon.getBoundingClientRect();
-              const menuRect = dropupMenu.getBoundingClientRect();
-              const viewportWidth = window.innerWidth;
-              const margin = 15;
-              let leftPos = iconRect.right - menuRect.width;
-              if (leftPos < margin) {
-                leftPos = margin;
-              }
-              if (leftPos + menuRect.width + margin > viewportWidth) {
-                leftPos = viewportWidth - menuRect.width - margin;
-              }
-              dropupMenu.style.left = leftPos + 'px';
-              dropupMenu.style.right = 'auto';
-            }
-          };
-        }
-        if (welcomeUserName) {
-          welcomeUserName.textContent = user.displayName || 'user';
-        }
+        if (userAccountIcon) { userAccountIcon.className = 'fas fa-user-check'; userAccountIcon.onclick = () => { dropupMenu.style.display = dropupMenu.style.display === 'block' ? 'none' : 'block'; }; }
+        if (welcomeUserName) { welcomeUserName.textContent = user.displayName || 'user'; }
         closeModal('loginModal');
         closeModal('signupModal');
       } else {
-        console.log('User is signed out');
-        if (userAccountIcon) {
-          userAccountIcon.className = 'fas fa-user';
-          userAccountIcon.onclick = () => openModal('loginModal');
-        }
-        if (dropupMenu) {
-          dropupMenu.style.display = 'none';
-        }
-        if (welcomeUserName) {
-          welcomeUserName.textContent = 'user';
-        }
+        if (userAccountIcon) { userAccountIcon.className = 'fas fa-user'; userAccountIcon.onclick = () => openModal('loginModal'); }
+        if (dropupMenu) { dropupMenu.style.display = 'none'; }
+        if (welcomeUserName) { welcomeUserName.textContent = 'user'; }
       }
     });
+
     function openModal(modalId) { document.getElementById(modalId).style.display = "flex"; }
     function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
-    document.addEventListener('click', function(event) {
-      const dropupMenu = document.getElementById('userDropupMenu');
-      const userIcon = document.getElementById('userAccountIcon');
-      if (dropupMenu && userIcon && !dropupMenu.contains(event.target) && !userIcon.contains(event.target)) {
-        dropupMenu.style.display = 'none';
-      }
-    });
-    document.getElementById('closeDropup').addEventListener('click', () => {
-      document.getElementById('userDropupMenu').style.display = 'none';
-    });
-    document.getElementById('closeSettingsDropup').addEventListener('click', () => {
-      document.getElementById('userAccountSettingsMenu').style.display = 'none';
-    });
-    document.getElementById('backToMainMenu').addEventListener('click', () => {
-      document.getElementById('userAccountSettingsMenu').style.display = 'none';
-      document.getElementById('userDropupMenu').style.display = 'block';
-    });
-    document.getElementById('accountSettingsMain').addEventListener('click', () => {
-      document.getElementById('userDropupMenu').style.display = 'none';
-      document.getElementById('userAccountSettingsMenu').style.display = 'block';
-      updateAccountSettingsMenu();
-    });
-    document.getElementById('passwordPersonalInfoMain').addEventListener('click', () => {
-      const mainMenu = document.getElementById('userDropupMenu');
-      const settingsMenu = document.getElementById('userAccountSettingsMenu');
-      if (mainMenu && settingsMenu) {
-        mainMenu.style.display = 'none';
-        settingsMenu.style.display = 'block';
-        updateAccountSettingsMenu();
-        setTimeout(() => {
-          const iconRect = userAccountIcon.getBoundingClientRect();
-          const menuRect = settingsMenu.getBoundingClientRect();
-          const viewportWidth = window.innerWidth;
-          const margin = 15;
-          let leftPos = iconRect.right - menuRect.width;
-          if (leftPos < margin) {
-            leftPos = margin;
-          }
-          if (leftPos + menuRect.width + margin > viewportWidth) {
-            leftPos = viewportWidth - menuRect.width - margin;
-          }
-          settingsMenu.style.left = leftPos + 'px';
-          settingsMenu.style.right = 'auto';
-        }, 0);
-      }
-    });
-    document.getElementById('contactUs').addEventListener('click', () => {
-      window.open('https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==', '_blank');
-    });
-    document.getElementById('signOutMain').addEventListener('click', () => {
-      if (confirm('Are you sure you want to sign out?')) {
-        auth.signOut().catch(error => alert('Logout failed: ' + error.message));
-      }
-    });
-    document.getElementById('signOutSettings').addEventListener('click', () => {
-      if (confirm('Are you sure you want to sign out?')) {
-        auth.signOut().catch(error => alert('Logout failed: ' + error.message));
-      }
-    });
-    function updateAccountSettingsMenu() {
-      const user = auth.currentUser;
-      if (user) {
-        document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user';
-        document.getElementById('userNameDisplay').textContent = user.displayName || 'user';
-        document.getElementById('userEmailDisplay').textContent = user.email || '';
-        document.getElementById('newPasswordInput').value = '';
-      }
-    }
-    document.getElementById('changePasswordBtn').addEventListener('click', () => {
-      const newPassword = document.getElementById('newPasswordInput').value.trim();
-      if (newPassword.length < 6) {
-        alert('Password must be at least 6 characters long.');
-        return;
-      }
-      const user = auth.currentUser;
-      if (user) {
-        user.updatePassword(newPassword)
-          .then(() => {
-            alert('Password changed successfully.');
-            document.getElementById('newPasswordInput').value = '';
-          })
-          .catch(error => alert('Failed to change password: ' + error.message));
-      } else {
-        alert('No user is currently signed in.');
-      }
-    });
-    document.querySelectorAll('.shop-now').forEach(button => {
-      button.addEventListener('click', (e) => {
-        const name = e.target.dataset.name;
-        const price = parseFloat(e.target.dataset.price);
-        const image = e.target.dataset.image;
-        const product = { name, price, image, quantity: 1 };
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const existingProductIndex = cart.findIndex(item => item.name === name);
-        if (existingProductIndex > -1) {
-          cart[existingProductIndex].quantity += 1;
-        } else {
-          cart.push(product);
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartCount();
-      });
-    });
-    function updateCartCount() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
-      document.getElementById('cart-count').textContent = cartCount;
-    }
+    document.addEventListener('click', function(event) { const dropupMenu = document.getElementById('userDropupMenu'); const userIcon = document.getElementById('userAccountIcon'); if (dropupMenu && userIcon && !dropupMenu.contains(event.target) && !userIcon.contains(event.target)) { dropupMenu.style.display = 'none'; } });
+    document.getElementById('closeDropup').addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; });
+    document.getElementById('closeSettingsDropup').addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; });
+    document.getElementById('backToMainMenu').addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; document.getElementById('userDropupMenu').style.display = 'block'; });
+    document.getElementById('accountSettingsMain').addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; document.getElementById('userAccountSettingsMenu').style.display = 'block'; updateAccountSettingsMenu(); });
+    document.getElementById('passwordPersonalInfoMain').addEventListener('click', () => { const mainMenu = document.getElementById('userDropupMenu'); const settingsMenu = document.getElementById('userAccountSettingsMenu'); if (mainMenu && settingsMenu) { mainMenu.style.display = 'none'; settingsMenu.style.display = 'block'; updateAccountSettingsMenu(); } });
+    document.getElementById('contactUs').addEventListener('click', () => { window.open('https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==', '_blank'); });
+    document.getElementById('signOutMain').addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
+    document.getElementById('signOutSettings').addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
+    function updateAccountSettingsMenu() { const user = auth.currentUser; if (user) { document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user'; document.getElementById('userNameDisplay').textContent = user.displayName || 'user'; document.getElementById('userEmailDisplay').textContent = user.email || ''; document.getElementById('newPasswordInput').value = ''; } }
+    document.getElementById('changePasswordBtn').addEventListener('click', () => { const newPassword = document.getElementById('newPasswordInput').value.trim(); if (newPassword.length < 6) { alert('Password must be at least 6 characters long.'); return; } const user = auth.currentUser; if (user) { user.updatePassword(newPassword).then(() => { alert('Password changed successfully.'); document.getElementById('newPasswordInput').value = ''; }).catch(error => alert('Failed to change password: ' + error.message)); } else { alert('No user is currently signed in.'); } });
     document.addEventListener('DOMContentLoaded', updateCartCount);
-  </script>
-  <script>
-      // --- SCRIPT FOR SIDE MENU ---
-      document.addEventListener('DOMContentLoaded', () => {
-          const menuIcon = document.querySelector('.menu-icon');
-          const sideMenu = document.getElementById('sideMenu');
-          const closeSideMenu = document.getElementById('closeSideMenu');
-          if (menuIcon) {
-              menuIcon.addEventListener('click', (event) => {
-                  event.stopPropagation();
-                  sideMenu.style.width = '280px';
-              });
-          }
-          if (closeSideMenu) {
-              closeSideMenu.addEventListener('click', () => {
-                  sideMenu.style.width = '0';
-              });
-          }
-          window.addEventListener('click', (event) => {
-              const menuIconContainer = document.querySelector('.menu-icon');
-              if (event.target !== sideMenu && !sideMenu.contains(event.target) && event.target !== menuIconContainer && !menuIconContainer.contains(event.target)) {
-                  if (sideMenu.style.width === '280px') {
-                      sideMenu.style.width = '0';
-                  }
-              }
-          });
-      });
   </script>
 </body>
 </html>
