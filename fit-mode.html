@@ -392,7 +392,9 @@
     </div>
   </div>
 
-  <script src="cart.js"></script>
+    <script src="cart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
     <script>
     // --- SEARCH SCRIPT ---
     const products = [
@@ -413,10 +415,8 @@
 </div>
 <button class="shop-now" data-name="${e.name}" data-price="${e.price.replace("$","")}" data-image="${e.image}">Add to cart</button>`,t.appendChild(o)}):t.innerHTML='<p style="padding: 10px; text-align: center;">No products found.</p>',t.style.display="block"}
   </script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
   <script>
-    // Firebase Configuration
+    // --- SCRIPT FOR MAIN LOGIC ---
     const firebaseConfig = {
       apiKey: "AIzaSyDelMOFKyvYx4u9FCgpq1HTr9eAoyjBjS0",
       authDomain: "abuy-77b4e.firebaseapp.com",
@@ -428,87 +428,97 @@
     };
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
-
-    // DOMContentLoaded Listener for all page events
-    document.addEventListener('DOMContentLoaded', () => {
-        updateCartCount();
-
-        // --- Side Menu Logic ---
-        const menuIcon = document.querySelector('.menu-icon');
-        const sideMenu = document.getElementById('sideMenu');
-        const closeSideMenu = document.getElementById('closeSideMenu');
-        if (menuIcon) {
-            menuIcon.addEventListener('click', (event) => {
-                event.stopPropagation();
-                sideMenu.style.width = '280px';
-            });
-        }
-        if (closeSideMenu) {
-            closeSideMenu.addEventListener('click', () => {
-                sideMenu.style.width = '0';
-            });
-        }
-        window.addEventListener('click', (event) => {
-            const menuIconContainer = document.querySelector('.menu-icon');
-            if (event.target !== sideMenu && !sideMenu.contains(event.target) && event.target !== menuIconContainer && !menuIconContainer.contains(event.target)) {
-                if (sideMenu.style.width === '280px') {
-                    sideMenu.style.width = '0';
-                }
-            }
-        });
-
-        // --- Auth and User Dropdown Logic ---
-        const loginForm = document.getElementById('loginForm');
-        const signupForm = document.getElementById('signupForm');
-        const userAccountIcon = document.getElementById('userAccountIcon');
-        if (loginForm) {
-            loginForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email = document.getElementById('loginEmail').value;
-                const password = document.getElementById('loginPassword').value;
-                try { await auth.signInWithEmailAndPassword(email, password); closeModal('loginModal'); } catch (error) { alert('Login failed: ' + error.message); }
-            });
-        }
-        if (signupForm) {
-            signupForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const firstName = document.getElementById('signupFirstName').value.trim();
-                const email = document.getElementById('signupEmail').value;
-                const password = document.getElementById('signupPassword').value;
-                try { const userCredential = await auth.createUserWithEmailAndPassword(email, password); await userCredential.user.updateProfile({ displayName: firstName }); closeModal('signupModal'); } catch (error) { alert('Signup failed: ' + error.message); }
-            });
-        }
-        auth.onAuthStateChanged(user => {
-            const dropupMenu = document.getElementById('userDropupMenu');
-            const welcomeUserName = document.getElementById('welcomeUserName');
-            if (user) {
-                if (userAccountIcon) { userAccountIcon.className = 'fas fa-user-check'; userAccountIcon.onclick = () => { dropupMenu.style.display = dropupMenu.style.display === 'block' ? 'none' : 'block'; }; }
-                if (welcomeUserName) { welcomeUserName.textContent = user.displayName || 'user'; }
-                closeModal('loginModal'); closeModal('signupModal');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const userAccountIcon = document.getElementById('userAccountIcon');
+    if (loginForm) {
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        try { await auth.signInWithEmailAndPassword(email, password); closeModal('loginModal'); } catch (error) { alert('Login failed: ' + error.message); }
+      });
+    }
+    if (signupForm) {
+      signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const firstName = document.getElementById('signupFirstName').value.trim();
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
+        try { const userCredential = await auth.createUserWithEmailAndPassword(email, password); await userCredential.user.updateProfile({ displayName: firstName }); closeModal('signupModal'); } catch (error) { alert('Signup failed: ' + error.message); }
+      });
+    }
+    auth.onAuthStateChanged(user => {
+      const dropupMenu = document.getElementById('userDropupMenu');
+      const welcomeUserName = document.getElementById('welcomeUserName');
+      if (user) {
+        if (userAccountIcon) {
+          userAccountIcon.className = 'fas fa-user-check';
+          userAccountIcon.onclick = () => {
+            if (dropupMenu.style.display === 'block') {
+              dropupMenu.style.display = 'none';
             } else {
-                if (userAccountIcon) { userAccountIcon.className = 'fas fa-user'; userAccountIcon.onclick = () => openModal('loginModal'); }
-                if (dropupMenu) { dropupMenu.style.display = 'none'; }
-                if (welcomeUserName) { welcomeUserName.textContent = 'user'; }
+              dropupMenu.style.display = 'block';
+              const iconRect = userAccountIcon.getBoundingClientRect();
+              const menuRect = dropupMenu.getBoundingClientRect();
+              const viewportWidth = window.innerWidth;
+              const margin = 15;
+              let leftPos = iconRect.right - menuRect.width;
+              if (leftPos < margin) { leftPos = margin; }
+              if (leftPos + menuRect.width + margin > viewportWidth) { leftPos = viewportWidth - menuRect.width - margin; }
+              dropupMenu.style.left = leftPos + 'px';
+              dropupMenu.style.right = 'auto';
             }
-        });
-        document.getElementById('closeDropup')?.addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; });
-        document.getElementById('closeSettingsDropup')?.addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; });
-        document.getElementById('backToMainMenu')?.addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; document.getElementById('userDropupMenu').style.display = 'block'; });
-        document.getElementById('accountSettingsMain')?.addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; document.getElementById('userAccountSettingsMenu').style.display = 'block'; updateAccountSettingsMenu(); });
-        document.getElementById('passwordPersonalInfoMain')?.addEventListener('click', () => { const mainMenu = document.getElementById('userDropupMenu'); const settingsMenu = document.getElementById('userAccountSettingsMenu'); if (mainMenu && settingsMenu) { mainMenu.style.display = 'none'; settingsMenu.style.display = 'block'; updateAccountSettingsMenu(); } });
-        document.getElementById('contactUs')?.addEventListener('click', () => { window.open('https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==', '_blank'); });
-        document.getElementById('signOutMain')?.addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
-        document.getElementById('signOutSettings')?.addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
-        document.getElementById('changePasswordBtn')?.addEventListener('click', () => { const newPassword = document.getElementById('newPasswordInput').value.trim(); if (newPassword.length < 6) { alert('Password must be at least 6 characters long.'); return; } const user = auth.currentUser; if (user) { user.updatePassword(newPassword).then(() => { alert('Password changed successfully.'); document.getElementById('newPasswordInput').value = ''; }).catch(error => alert('Failed to change password: ' + error.message)); } else { alert('No user is currently signed in.'); } });
+          };
+        }
+        if (welcomeUserName) { welcomeUserName.textContent = user.displayName || 'user'; }
+        closeModal('loginModal');
+        closeModal('signupModal');
+      } else {
+        if (userAccountIcon) {
+          userAccountIcon.className = 'fas fa-user';
+          userAccountIcon.onclick = () => openModal('loginModal');
+        }
+        if (dropupMenu) { dropupMenu.style.display = 'none'; }
+        if (welcomeUserName) { welcomeUserName.textContent = 'user'; }
+      }
     });
-
-    // Global Functions
     function openModal(modalId) { document.getElementById(modalId).style.display = "flex"; }
     function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
+    document.addEventListener('click', function(event) {
+      const dropupMenu = document.getElementById('userDropupMenu');
+      const userIcon = document.getElementById('userAccountIcon');
+      if (dropupMenu && userIcon && !dropupMenu.contains(event.target) && !userIcon.contains(event.target)) { dropupMenu.style.display = 'none'; }
+    });
+    document.getElementById('closeDropup').addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; });
+    document.getElementById('closeSettingsDropup').addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; });
+    document.getElementById('backToMainMenu').addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; document.getElementById('userDropupMenu').style.display = 'block'; });
+    document.getElementById('accountSettingsMain').addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; document.getElementById('userAccountSettingsMenu').style.display = 'block'; updateAccountSettingsMenu(); });
+    document.getElementById('passwordPersonalInfoMain').addEventListener('click', () => {
+      const mainMenu = document.getElementById('userDropupMenu');
+      const settingsMenu = document.getElementById('userAccountSettingsMenu');
+      if (mainMenu && settingsMenu) {
+        mainMenu.style.display = 'none';
+        settingsMenu.style.display = 'block';
+        updateAccountSettingsMenu();
+        setTimeout(() => {
+          const iconRect = userAccountIcon.getBoundingClientRect();
+          const menuRect = settingsMenu.getBoundingClientRect();
+          const viewportWidth = window.innerWidth;
+          const margin = 15;
+          let leftPos = iconRect.right - menuRect.width;
+          if (leftPos < margin) { leftPos = margin; }
+          if (leftPos + menuRect.width + margin > viewportWidth) { leftPos = viewportWidth - menuRect.width - margin; }
+          settingsMenu.style.left = leftPos + 'px';
+          settingsMenu.style.right = 'auto';
+        }, 0);
+      }
+    });
+    document.getElementById('contactUs').addEventListener('click', () => { window.open('https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==', '_blank'); });
+    document.getElementById('signOutMain').addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
+    document.getElementById('signOutSettings').addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
     function updateAccountSettingsMenu() { const user = auth.currentUser; if (user) { document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user'; document.getElementById('userNameDisplay').textContent = user.displayName || 'user'; document.getElementById('userEmailDisplay').textContent = user.email || ''; document.getElementById('newPasswordInput').value = ''; } }
-    function updateCartCount() { const cart = JSON.parse(localStorage.getItem('cart')) || []; const cartCount = cart.reduce((total, item) => total + item.quantity, 0); document.getElementById('cart-count').textContent = cartCount; }
-    
-    // Add to cart functionality
+    document.getElementById('changePasswordBtn').addEventListener('click', () => { const newPassword = document.getElementById('newPasswordInput').value.trim(); if (newPassword.length < 6) { alert('Password must be at least 6 characters long.'); return; } const user = auth.currentUser; if (user) { user.updatePassword(newPassword).then(() => { alert('Password changed successfully.'); document.getElementById('newPasswordInput').value = ''; }).catch(error => alert('Failed to change password: ' + error.message)); } else { alert('No user is currently signed in.'); } });
     document.querySelectorAll('.shop-now').forEach(button => {
       button.addEventListener('click', (e) => {
         const name = e.target.dataset.name;
@@ -526,6 +536,35 @@
         updateCartCount();
       });
     });
+    function updateCartCount() { const cart = JSON.parse(localStorage.getItem('cart')) || []; const cartCount = cart.reduce((total, item) => total + item.quantity, 0); document.getElementById('cart-count').textContent = cartCount; }
+    document.addEventListener('DOMContentLoaded', updateCartCount);
+  </script>
+  <script>
+      // --- SCRIPT FOR SIDE MENU ---
+      document.addEventListener('DOMContentLoaded', () => {
+          const menuIcon = document.querySelector('.menu-icon');
+          const sideMenu = document.getElementById('sideMenu');
+          const closeSideMenu = document.getElementById('closeSideMenu');
+          if (menuIcon) {
+              menuIcon.addEventListener('click', (event) => {
+                  event.stopPropagation();
+                  sideMenu.style.width = '280px';
+              });
+          }
+          if (closeSideMenu) {
+              closeSideMenu.addEventListener('click', () => {
+                  sideMenu.style.width = '0';
+              });
+          }
+          window.addEventListener('click', (event) => {
+              const menuIconContainer = document.querySelector('.menu-icon');
+              if (event.target !== sideMenu && !sideMenu.contains(event.target) && event.target !== menuIconContainer && !menuIconContainer.contains(event.target)) {
+                  if (sideMenu.style.width === '280px') {
+                      sideMenu.style.width = '0';
+                  }
+              }
+          });
+      });
   </script>
 </body>
 </html>
