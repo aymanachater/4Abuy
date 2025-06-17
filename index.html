@@ -113,7 +113,7 @@
   </style>
 </head>
 <body>
-  <div id="sideMenu" style="width: 0px; position: fixed; z-index: 10001; top: 0px; left: 0px; background-color: rgb(255, 255, 255); overflow-x: hidden; transition: ease-out 0.4s; padding-top: 20px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 20px;">
+  <div id="sideMenu" style="width: 0px; position: fixed; z-index: 10001; top: 0px; left: 0px; background-color: rgb(255, 255, 255); overflow-x: hidden; transition: ease-out: 0.4s; padding-top: 20px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 20px;">
     <a href="javascript:void(0)" style="position: absolute; top: 15px; right: 25px; font-size: 36px; text-decoration: none; color: rgb(85, 85, 85);" id="closeSideMenu">×</a>
     <div style="padding: 10px 15px 15px; font-size: 1.1rem; font-weight: 700; color: rgb(17, 17, 17); display: flex; align-items: center; border-bottom: 1px solid rgb(240, 240, 240); margin: 0px 15px 10px;">
       CATEGORY <span style="margin-left: 10px; font-size: 0.8rem;">▼</span>
@@ -362,7 +362,7 @@
   </div>
   <div id="userAccountSettingsMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 280px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-      <button id="backToMainMenu" style="background:none; border:none; font-size: 1.2rem; cursor: pointer;">&_8592;</button>
+      <button id="backToMainMenu" style="background:none; border:none; font-size: 1.2rem; cursor: pointer;">&#8592;</button>
       <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserNameSettings" style="font-weight: 900;">user</span></strong>
       <span id="closeSettingsDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">&times;</span>
     </div>
@@ -422,21 +422,21 @@
         moveCategory(1); 
     }, 3000); 
 
-    carouselWrapper.addEventListener('mouseenter', () => {
-        clearInterval(autoPlayInterval);
-    });
+    if (carouselWrapper) {
+      carouselWrapper.addEventListener('mouseenter', () => {
+          clearInterval(autoPlayInterval);
+      });
 
-    carouselWrapper.addEventListener('mouseleave', () => {
-        autoPlayInterval = setInterval(() => {
-            moveCategory(1);
-        }, 3000);
-    });
+      carouselWrapper.addEventListener('mouseleave', () => {
+          autoPlayInterval = setInterval(() => {
+              moveCategory(1);
+          }, 3000);
+      });
+    }
     
     document.addEventListener("DOMContentLoaded", function() {
-        renderCarousel(); 
-        auth.onAuthStateChanged(function(e){e||sessionStorage.getItem("popupShown")||(document.getElementById("vipModal").style.display="flex",sessionStorage.setItem("popupShown","true"))});
+      if(renderCarousel) renderCarousel();
         
-        // Add to cart functionality
         document.querySelectorAll('.shop-now').forEach(button => {
             button.addEventListener('click', (e) => {
                 const name = e.target.dataset.name;
@@ -458,7 +458,7 @@
             });
         });
         
-        updateCartCount(); // Initial cart count update
+        updateCartCount();
     });
     
     function updateCartCount() {
@@ -493,22 +493,174 @@
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
     const userAccountIcon = document.getElementById('userAccountIcon');
-    if(loginForm){loginForm.addEventListener("submit",async e=>{e.preventDefault();const t=document.getElementById("loginEmail").value,o=document.getElementById("loginPassword").value;try{await auth.signInWithEmailAndPassword(t,o),closeModal("loginModal")}catch(e){console.error("Login error:",e.code,e.message),alert("Login failed: "+e.message)}})}
-    if(signupForm){signupForm.addEventListener("submit",async e=>{e.preventDefault();const t=document.getElementById("signupFirstName").value.trim(),o=document.getElementById("signupEmail").value,n=document.getElementById("signupPassword").value;try{const e=await auth.createUserWithEmailAndPassword(o,n);await e.user.updateProfile({displayName:t}),closeModal("signupModal")}catch(e){console.error("Signup error:",e.code,e.message),alert("Signup failed: "+e.message)}})}
-    auth.onAuthStateChanged(e=>{const t=document.getElementById("userDropupMenu"),o=document.getElementById("welcomeUserName");if(e){if(console.log("User is signed in:",e.email),userAccountIcon){userAccountIcon.className="fas fa-user-check",userAccountIcon.onclick=()=>{if("block"===t.style.display)t.style.display="none";else{t.style.display="block";const e=userAccountIcon.getBoundingClientRect(),o=t.getBoundingClientRect(),n=window.innerWidth,a=15;let c=e.right-o.width;c<a&&(c=a),c+o.width+a>n&&(c=n-o.width-a),t.style.left=c+"px",t.style.right="auto"}}}o&&(o.textContent=e.displayName||"user"),closeModal("loginModal"),closeModal("signupModal")}else console.log("User is signed out"),userAccountIcon&&(userAccountIcon.className="fas fa-user",userAccountIcon.onclick=()=>openModal("loginModal")),t&&(t.style.display="none"),o&&(o.textContent="user")});
-    function openModal(e){var t=document.getElementById(e);t&&(t.style.display="flex")}
-    function closeModal(e){var t=document.getElementById(e);t&&(t.style.display="none")}
-    document.addEventListener("click",function(e){const t=document.getElementById("userDropupMenu"),o=document.getElementById("userAccountIcon");t&&o&&!t.contains(e.target)&&!o.contains(e.target)&&(t.style.display="none")});
-    document.getElementById("closeDropup")?.addEventListener("click",function(){const e=document.getElementById("userDropupMenu");e&&(e.style.display="none")});
-    document.getElementById("closeSettingsDropup")?.addEventListener("click",function(){const e=document.getElementById("userAccountSettingsMenu");e&&(e.style.display="none")});
-    document.getElementById("backToMainMenu")?.addEventListener("click",function(){const e=document.getElementById("userAccountSettingsMenu"),t=document.getElementById("userDropupMenu");e&&t&&(e.style.display="none",t.style.display="block")});
-    document.getElementById("accountSettingsMain")?.addEventListener("click",function(){const e=document.getElementById("userDropupMenu"),t=document.getElementById("userAccountSettingsMenu");e&&t&&(e.style.display="none",t.style.display="block",updateAccountSettingsMenu())});
-    document.getElementById("passwordPersonalInfoMain")?.addEventListener("click",function(){const e=document.getElementById("userDropupMenu"),t=document.getElementById("userAccountSettingsMenu");if(e&&t){e.style.display="none",t.style.display="block",updateAccountSettingsMenu();setTimeout(()=>{const e=userAccountIcon.getBoundingClientRect(),o=t.getBoundingClientRect(),n=window.innerWidth,a=15;let c=e.right-n.width;c<a&&(c=a),c+n.width+a>n&&(c=a-n.width-a),t.style.left=c+"px",t.style.right="auto"},0)}});
-    document.getElementById("contactUs")?.addEventListener("click",function(){window.open("https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==","_blank")});
-    document.getElementById("signOutMain")?.addEventListener("click",function(){confirm("Are you sure you want to sign out?")&&auth.signOut().catch(e=>{console.error("Logout error:",e.message),alert("Logout failed: "+e.message)})});
-    document.getElementById("signOutSettings")?.addEventListener("click",function(){confirm("Are you sure you want to sign out?")&&auth.signOut().catch(e=>{console.error("Logout error:",e.message),alert("Logout failed: "+e.message)})});
-    function updateAccountSettingsMenu(){const e=auth.currentUser;e&&(document.getElementById("welcomeUserNameSettings").textContent=e.displayName||"user",document.getElementById("userNameDisplay").textContent=e.displayName||"user",document.getElementById("userEmailDisplay").textContent=e.email||"",document.getElementById("newPasswordInput").value="")}
-    document.getElementById("changePasswordBtn")?.addEventListener("click",function(){const e=document.getElementById("newPasswordInput").value.trim();if(e.length<6)return void alert("Password must be at least 6 characters long.");const t=auth.currentUser;t?t.updatePassword(e).then(()=>{alert("Password changed successfully."),document.getElementById("newPasswordInput").value=""}).catch(e=>{console.error("Password change error:",e),alert("Failed to change password: "+e.message)}):alert("No user is currently signed in.")});
+
+    if(loginForm){
+      loginForm.addEventListener("submit",async e=>{
+        e.preventDefault();
+        const email=document.getElementById("loginEmail").value;
+        const password=document.getElementById("loginPassword").value;
+        try{
+          await auth.signInWithEmailAndPassword(email,password);
+          closeModal("loginModal");
+        } catch(error){
+          console.error("Login error:",error.code,error.message);
+          alert("Login failed: "+error.message);
+        }
+      });
+    }
+
+    if(signupForm){
+      signupForm.addEventListener("submit",async e=>{
+        e.preventDefault();
+        const firstName=document.getElementById("signupFirstName").value.trim();
+        const email=document.getElementById("signupEmail").value;
+        const password=document.getElementById("signupPassword").value;
+        try {
+          const userCredential=await auth.createUserWithEmailAndPassword(email,password);
+          await userCredential.user.updateProfile({displayName:firstName});
+          closeModal("signupModal");
+        }catch(error){
+          console.error("Signup error:",error.code,error.message);
+          alert("Signup failed: "+error.message);
+        }
+      });
+    }
+
+    auth.onAuthStateChanged(user => {
+      const dropupMenu = document.getElementById('userDropupMenu');
+      const welcomeUserName = document.getElementById('welcomeUserName');
+      if (user) {
+        if (userAccountIcon) {
+          userAccountIcon.className = 'fas fa-user-check';
+          userAccountIcon.onclick = () => { dropupMenu.style.display = dropupMenu.style.display === 'block' ? 'none' : 'block'; };
+        }
+        if (welcomeUserName) { welcomeUserName.textContent = user.displayName || 'user'; }
+        closeModal('loginModal');
+        closeModal('signupModal');
+      } else {
+        if (userAccountIcon) {
+          userAccountIcon.className = 'fas fa-user';
+          userAccountIcon.onclick = () => openModal('loginModal');
+        }
+        if (dropupMenu) { dropupMenu.style.display = 'none'; }
+        if (welcomeUserName) { welcomeUserName.textContent = 'user'; }
+        
+        if (!sessionStorage.getItem("popupShown") && document.getElementById("vipModal")) {
+          document.getElementById("vipModal").style.display="flex";
+          sessionStorage.setItem("popupShown","true");
+        }
+      }
+    });
+
+    function openModal(modalId){
+      var modal = document.getElementById(modalId);
+      if(modal) modal.style.display="flex";
+    }
+
+    function closeModal(modalId){
+      var modal = document.getElementById(modalId);
+      if(modal) modal.style.display="none";
+    }
+
+    document.addEventListener("click",function(event){
+      const dropupMenu=document.getElementById("userDropupMenu");
+      const userIcon=document.getElementById("userAccountIcon");
+      if(dropupMenu && userIcon && !dropupMenu.contains(event.target) && !userIcon.contains(event.target)){
+        dropupMenu.style.display="none";
+      }
+    });
+
+    document.getElementById("closeDropup")?.addEventListener("click",function(){
+      const menu=document.getElementById("userDropupMenu");
+      if(menu) menu.style.display="none";
+    });
+
+    document.getElementById("closeSettingsDropup")?.addEventListener("click",function(){
+      const menu=document.getElementById("userAccountSettingsMenu");
+      if(menu) menu.style.display="none";
+    });
+
+    document.getElementById("backToMainMenu")?.addEventListener("click",function(){
+      const settingsMenu=document.getElementById("userAccountSettingsMenu");
+      const mainMenu=document.getElementById("userDropupMenu");
+      if(settingsMenu&&mainMenu){
+        settingsMenu.style.display="none";
+        mainMenu.style.display="block";
+      }
+    });
+
+    document.getElementById("accountSettingsMain")?.addEventListener("click",function(){
+      const mainMenu=document.getElementById("userDropupMenu");
+      const settingsMenu=document.getElementById("userAccountSettingsMenu");
+      if(mainMenu&&settingsMenu){
+        mainMenu.style.display="none";
+        settingsMenu.style.display="block";
+        updateAccountSettingsMenu();
+      }
+    });
+
+    document.getElementById('passwordPersonalInfoMain')?.addEventListener('click', () => {
+      const mainMenu = document.getElementById('userDropupMenu');
+      const settingsMenu = document.getElementById('userAccountSettingsMenu');
+      if (mainMenu && settingsMenu) {
+        mainMenu.style.display = 'none';
+        settingsMenu.style.display = 'block';
+        updateAccountSettingsMenu();
+      }
+    });
+
+    document.getElementById("contactUs")?.addEventListener("click",function(){
+      window.open("https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==","_blank");
+    });
+
+    document.getElementById("signOutMain")?.addEventListener("click",function(){
+      if(confirm("Are you sure you want to sign out?")){
+        auth.signOut().catch(error=>{
+          console.error("Logout error:",error.message);
+          alert("Logout failed: "+error.message);
+        });
+      }
+    });
+
+    document.getElementById("signOutSettings")?.addEventListener("click",function(){
+      if(confirm("Are you sure you want to sign out?")){
+        auth.signOut().catch(error=>{
+          console.error("Logout error:",error.message);
+          alert("Logout failed: "+error.message);
+        });
+      }
+    });
+
+    function updateAccountSettingsMenu(){
+      const user=auth.currentUser;
+      if(user){
+        document.getElementById("welcomeUserNameSettings").textContent=user.displayName||"user";
+        document.getElementById("userNameDisplay").textContent=user.displayName||"user";
+        document.getElementById("userEmailDisplay").textContent=user.email||"";
+        document.getElementById("newPasswordInput").value="";
+      }
+    }
+
+    document.getElementById("changePasswordBtn")?.addEventListener("click",function(){
+      const newPassword=document.getElementById("newPasswordInput").value.trim();
+      if(newPassword.length<6){
+        alert("Password must be at least 6 characters long.");
+        return;
+      }
+      const user=auth.currentUser;
+      if(user){
+        user.updatePassword(newPassword).then(()=>{
+          alert("Password changed successfully.");
+          document.getElementById("newPasswordInput").value="";
+        }).catch(error=>{
+          console.error("Password change error:",error);
+          alert("Failed to change password: "+error.message);
+        });
+      }else{
+        alert("No user is currently signed in.");
+      }
+    });
+
     const products = [ { name: "T-SHIRT", price: "$110.00", image: "https://www.dropbox.com/scl/fi/m1ykwl7bevu1y4ciemcid/Vice-84-Track-Field-Embroidered-Jogger-Shorts-Ash-XXL.jpg?rlkey=m1850ktm9pn50hst3vfoyvolf&st=n8mdujzc&raw=1", url: "index.html" }, { name: "PRODUCT 2", price: "$120.00", image: "https://www.dropbox.com/scl/fi/47tcdxtztbezjvhf5eatc/Vice-84-Off-Court-GSM-Vintage-Washed-Sweater-Orchid-L.jpg?rlkey=zibhmpght805c9j486kk141bt&st=5v56bwdv&raw=1", url: "index.html" },];
     function openSearchOverlay(){document.getElementById("searchOverlay").style.display="flex"}function closeSearchOverlay(){document.getElementById("searchOverlay").style.display="none"}function handleSearch(e){e.preventDefault();const t=e.target.querySelector(".search-input").value;window.location.href=`search.html?q=${encodeURIComponent(t)}`}function dynamicSearch(e){const t=document.getElementById("searchResults");if(t.innerHTML="",""===e.trim()){t.style.display="none";return}const o=e.toLowerCase(),n=products.filter(e=>e.name.toLowerCase().includes(o));n.length>0?n.forEach(e=>{const o=document.createElement("div");o.className="search-result-item",o.innerHTML=`
 <img src="${e.image}" alt="${e.name}">
@@ -519,4 +671,4 @@
 <button class="shop-now" data-name="${e.name}" data-price="${e.price.replace("$","")}" data-image="${e.image}">Add to cart</button>`,t.appendChild(o)}):t.innerHTML='<p style="padding: 10px; text-align: center;">No products found.</p>',t.style.display="block"}
   </script>
 </body>
-                                                                                                                                                                                                          </html>
+</html>
