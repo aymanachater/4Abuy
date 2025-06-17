@@ -78,7 +78,7 @@
 
   <div class="search-overlay" id="searchOverlay">
     <div class="search-container">
-      <span class="close-search" onclick="closeSearchOverlay()">×</span>
+      <span class="close-search" onclick="closeSearchOverlay()">&times;</span>
       <form class="search-form" onsubmit="handleSearch(event)">
         <input type="text" class="search-input" placeholder="Search for products..." oninput="dynamicSearch(this.value)" required>
         <button type="submit" class="search-submit">Search</button>
@@ -160,10 +160,8 @@
         Follow us on social media to stay updated on new arrivals, exclusive deals, and style inspiration.
       </p>
       <div style="display: flex; justify-content: center; gap: 20px;">
-        <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
-        <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
-        <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
-        <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-pinterest"></i></a>
+        <a href="https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==" style="color: #111; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/share/15xHUKDZhN/" style="color: #111; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
       </div>
     </div>
   </section>
@@ -294,6 +292,25 @@
                 `;
                 t.appendChild(resultLink);
             });
+            // Add event listeners for "Add to cart" buttons dynamically
+            t.querySelectorAll('.shop-now').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const name = e.target.dataset.name;
+                    const price = parseFloat(e.target.dataset.price);
+                    const image = e.target.dataset.image;
+                    const product = { name, price, image, quantity: 1 };
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const existingProductIndex = cart.findIndex(item => item.name === name);
+                    if (existingProductIndex > -1) {
+                        cart[existingProductIndex].quantity += 1;
+                    } else {
+                        cart.push(product);
+                    }
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartCount();
+                });
+            });
+
         } else {
             t.innerHTML = '<p style="padding: 10px; text-align: center;">No products found.</p>';
         }
