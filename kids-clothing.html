@@ -396,7 +396,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
   <script>
-    // --- COMBINED SCRIPT FOR ALL PAGE FUNCTIONALITY ---
+    // --- Search Script ---
     const products = [
         { name: "T-SHIRT", price: "$110.00", image: "https://www.dropbox.com/scl/fi/m1ykwl7bevu1y4ciemcid/Vice-84-Track-Field-Embroidered-Jogger-Shorts-Ash-XXL.jpg?rlkey=m1850ktm9pn50hst3vfoyvolf&st=n8mdujzc&raw=1", url: "index.html" },
         { name: "Vintage Washed Sweater", price: "$120.00", image: "https://www.dropbox.com/scl/fi/47tcdxtztbezjvhf5eatc/Vice-84-Off-Court-GSM-Vintage-Washed-Sweater-Orchid-L.jpg?rlkey=zibhmpght805c9j486kk141bt&st=5v56bwdv&raw=1", url: "index.html" },
@@ -410,14 +410,10 @@
     function openSearchOverlay(){document.getElementById("searchOverlay").style.display="flex"}
     function closeSearchOverlay(){document.getElementById("searchOverlay").style.display="none"}
     function handleSearch(e){e.preventDefault();const t=e.target.querySelector(".search-input").value;window.location.href=`search.html?q=${encodeURIComponent(t)}`}
-    function dynamicSearch(e){const t=document.getElementById("searchResults");if(t.innerHTML="",""===e.trim()){t.style.display="none";return}const o=e.toLowerCase(),n=products.filter(e=>e.name.toLowerCase().includes(o));n.length>0?n.forEach(e=>{const o=document.createElement("div");o.className="search-result-item",o.innerHTML=`
-<img src="${e.image}" alt="${e.name}">
-<div class="search-result-details">
-<h4>${e.name}</h4>
-<p>${e.price}</p>
-</div>
-<button class="shop-now" data-name="${e.name}" data-price="${e.price.replace("$","")}" data-image="${e.image}">Add to cart</button>`,t.appendChild(o)}):t.innerHTML='<p style="padding: 10px; text-align: center;">No products found.</p>',t.style.display="block"}
-
+    function dynamicSearch(e){const t=document.getElementById("searchResults");if(t.innerHTML="",""===e.trim()){t.style.display="none";return}const o=e.toLowerCase(),n=products.filter(e=>e.name.toLowerCase().includes(o));n.length>0?n.forEach(e=>{const o=document.createElement("div");o.className="search-result-item",o.innerHTML=`<img src="${e.image}" alt="${e.name}"><div class="search-result-details"><h4>${e.name}</h4><p>${e.price}</p></div><button class="shop-now" data-name="${e.name}" data-price="${e.price.replace("$","")}" data-image="${e.image}">Add to cart</button>`,t.appendChild(o)}):t.innerHTML='<p style="padding: 10px; text-align: center;">No products found.</p>',t.style.display="block"}
+  </script>
+  <script>
+    // --- Main Page Logic Script ---
     const firebaseConfig = {
       apiKey: "AIzaSyDelMOFKyvYx4u9FCgpq1HTr9eAoyjBjS0",
       authDomain: "abuy-77b4e.firebaseapp.com",
@@ -430,34 +426,34 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
+    function openModal(modalId) { document.getElementById(modalId).style.display = "flex"; }
+    function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
+    function updateCartCount() { const cart = JSON.parse(localStorage.getItem('cart')) || []; const cartCount = cart.reduce((total, item) => total + item.quantity, 0); document.getElementById('cart-count').textContent = cartCount; }
+    function updateAccountSettingsMenu() { const user = auth.currentUser; if (user) { document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user'; document.getElementById('userNameDisplay').textContent = user.displayName || 'user'; document.getElementById('userEmailDisplay').textContent = user.email || ''; document.getElementById('newPasswordInput').value = ''; } }
+
     document.addEventListener('DOMContentLoaded', () => {
         updateCartCount();
+
+        // Side Menu Logic
         const menuIcon = document.querySelector('.menu-icon');
         const sideMenu = document.getElementById('sideMenu');
         const closeSideMenu = document.getElementById('closeSideMenu');
         if (menuIcon) {
-            menuIcon.addEventListener('click', (event) => {
-                event.stopPropagation();
-                sideMenu.style.width = '280px';
-            });
+            menuIcon.addEventListener('click', (event) => { event.stopPropagation(); sideMenu.style.width = '280px'; });
         }
         if (closeSideMenu) {
-            closeSideMenu.addEventListener('click', () => {
-                sideMenu.style.width = '0';
-            });
+            closeSideMenu.addEventListener('click', () => { sideMenu.style.width = '0'; });
         }
         window.addEventListener('click', (event) => {
             const menuIconContainer = document.querySelector('.menu-icon');
             if (event.target !== sideMenu && !sideMenu.contains(event.target) && event.target !== menuIconContainer && !menuIconContainer.contains(event.target)) {
-                if (sideMenu.style.width === '280px') {
-                    sideMenu.style.width = '0';
-                }
+                if (sideMenu.style.width === '280px') { sideMenu.style.width = '0'; }
             }
         });
 
+        // Auth Forms Logic
         const loginForm = document.getElementById('loginForm');
         const signupForm = document.getElementById('signupForm');
-        const userAccountIcon = document.getElementById('userAccountIcon');
         if (loginForm) {
             loginForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -475,29 +471,19 @@
                 try { const userCredential = await auth.createUserWithEmailAndPassword(email, password); await userCredential.user.updateProfile({ displayName: firstName }); closeModal('signupModal'); } catch (error) { alert('Signup failed: ' + error.message); }
             });
         }
-        auth.onAuthStateChanged(user => {
-            const dropupMenu = document.getElementById('userDropupMenu');
-            const welcomeUserName = document.getElementById('welcomeUserName');
-            if (user) {
-                if (userAccountIcon) { userAccountIcon.className = 'fas fa-user-check'; userAccountIcon.onclick = () => { dropupMenu.style.display = dropupMenu.style.display === 'block' ? 'none' : 'block'; }; }
-                if (welcomeUserName) { welcomeUserName.textContent = user.displayName || 'user'; }
-                closeModal('loginModal'); closeModal('signupModal');
-            } else {
-                if (userAccountIcon) { userAccountIcon.className = 'fas fa-user'; userAccountIcon.onclick = () => openModal('loginModal'); }
-                if (dropupMenu) { dropupMenu.style.display = 'none'; }
-                if (welcomeUserName) { welcomeUserName.textContent = 'user'; }
-            }
-        });
+
+        // User Dropdown Menu Logic
         document.getElementById('closeDropup')?.addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; });
         document.getElementById('closeSettingsDropup')?.addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; });
         document.getElementById('backToMainMenu')?.addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; document.getElementById('userDropupMenu').style.display = 'block'; });
         document.getElementById('accountSettingsMain')?.addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; document.getElementById('userAccountSettingsMenu').style.display = 'block'; updateAccountSettingsMenu(); });
-        document.getElementById('passwordPersonalInfoMain')?.addEventListener('click', () => { const mainMenu = document.getElementById('userDropupMenu'); const settingsMenu = document.getElementById('userAccountSettingsMenu'); if (mainMenu && settingsMenu) { mainMenu.style.display = 'none'; settingsMenu.style.display = 'block'; updateAccountSettingsMenu(); } });
+        document.getElementById('passwordPersonalInfoMain')?.addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; document.getElementById('userAccountSettingsMenu').style.display = 'block'; updateAccountSettingsMenu(); });
         document.getElementById('contactUs')?.addEventListener('click', () => { window.open('https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==', '_blank'); });
         document.getElementById('signOutMain')?.addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
         document.getElementById('signOutSettings')?.addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
         document.getElementById('changePasswordBtn')?.addEventListener('click', () => { const newPassword = document.getElementById('newPasswordInput').value.trim(); if (newPassword.length < 6) { alert('Password must be at least 6 characters long.'); return; } const user = auth.currentUser; if (user) { user.updatePassword(newPassword).then(() => { alert('Password changed successfully.'); document.getElementById('newPasswordInput').value = ''; }).catch(error => alert('Failed to change password: ' + error.message)); } else { alert('No user is currently signed in.'); } });
         
+        // Add to Cart Logic
         document.querySelectorAll('.shop-now').forEach(button => {
             button.addEventListener('click', (e) => {
                 const name = e.target.dataset.name;
@@ -517,10 +503,27 @@
         });
     });
 
-    function openModal(modalId) { document.getElementById(modalId).style.display = "flex"; }
-    function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
-    function updateAccountSettingsMenu() { const user = auth.currentUser; if (user) { document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user'; document.getElementById('userNameDisplay').textContent = user.displayName || 'user'; document.getElementById('userEmailDisplay').textContent = user.email || ''; document.getElementById('newPasswordInput').value = ''; } }
-    function updateCartCount() { const cart = JSON.parse(localStorage.getItem('cart')) || []; const cartCount = cart.reduce((total, item) => total + item.quantity, 0); document.getElementById('cart-count').textContent = cartCount; }
+    // Auth State Observer
+    auth.onAuthStateChanged(user => {
+        const dropupMenu = document.getElementById('userDropupMenu');
+        const welcomeUserName = document.getElementById('welcomeUserName');
+        const userAccountIcon = document.getElementById('userAccountIcon');
+        if (user) {
+            if (userAccountIcon) {
+                userAccountIcon.className = 'fas fa-user-check';
+                userAccountIcon.onclick = () => { dropupMenu.style.display = dropupMenu.style.display === 'block' ? 'none' : 'block'; };
+            }
+            if (welcomeUserName) { welcomeUserName.textContent = user.displayName || 'user'; }
+            closeModal('loginModal'); closeModal('signupModal');
+        } else {
+            if (userAccountIcon) {
+                userAccountIcon.className = 'fas fa-user';
+                userAccountIcon.onclick = () => openModal('loginModal');
+            }
+            if (dropupMenu) { dropupMenu.style.display = 'none'; }
+            if (welcomeUserName) { welcomeUserName.textContent = 'user'; }
+        }
+    });
   </script>
 </body>
 </html>
