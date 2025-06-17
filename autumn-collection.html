@@ -172,10 +172,8 @@
         Follow us on social media to stay updated on new arrivals, exclusive deals, and style inspiration.
       </p>
       <div style="display: flex; justify-content: center; gap: 20px;">
-        <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
-        <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
-        <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
-        <a href="#" style="color: #111; font-size: 1.5rem;"><i class="fab fa-pinterest"></i></a>
+        <a href="https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==" style="color: #111; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/share/15xHUKDZhN/" style="color: #111; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
       </div>
     </div>
   </section>
@@ -269,11 +267,10 @@
         // Mens Collection
         { name: "MEN'S LINEN SHIRT & SHORTS SET", price: "400", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180850/Screenshot_20250617_181716_Gallery_j4vtix.jpg", url: "shop-mens.html" },
         { name: "MEN'S WINTER JACKET", price: "550", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180862/Screenshot_20250617_181225_Gallery_dnzl0z.jpg", url: "shop-mens.html" },
-        { name: "MENS' CASUAL SHORT SLEEVE T-SHIRT AND SHORT SET-KNIT", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180854/Screenshot_20250617_181509_Gallery_euud9i.jpg", url: "shop-mens.html" },
+        { name: "MENS' CASUAL SHORT SLEEVE T-SHIRT AND SHORT SET-KNIT", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180854/Screenshot_20250617_181509/Gallery_euud9i.jpg", url: "shop-mens.html" },
         // Womens Collection
         { name: "HIGH-NECK ZIP-UP PUFFER JACKET", price: "500", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181546_Gallery_g8xvaz.jpg", url: "shop-womens.html" },
         // Streetwear & Urban
-        // Note: Products here might be duplicates from other sections, they are included as they appear on the page
         // Winter Collection
         { name: "MEN'S VINTAGE-INSPIRED CREWNECK SWEATSHIRT", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181156_Gallery_qabe76.jpg", url: "winter-collection.html" },
         { name: "MEN'S WINTER CAMO JACKET", price: "550", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181137_Gallery_o1pbhj.jpg", url: "winter-collection.html" }
@@ -310,6 +307,25 @@
                 `;
                 t.appendChild(resultLink);
             });
+            // Add event listeners for "Add to cart" buttons dynamically
+            t.querySelectorAll('.shop-now').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const name = e.target.dataset.name;
+                    const price = parseFloat(e.target.dataset.price);
+                    const image = e.target.dataset.image;
+                    const product = { name, price, image, quantity: 1 };
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const existingProductIndex = cart.findIndex(item => item.name === name);
+                    if (existingProductIndex > -1) {
+                        cart[existingProductIndex].quantity += 1;
+                    } else {
+                        cart.push(product);
+                    }
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartCount();
+                });
+            });
+
         } else {
             t.innerHTML = '<p style="padding: 10px; text-align: center;">No products found.</p>';
         }
