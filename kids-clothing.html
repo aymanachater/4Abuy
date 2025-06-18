@@ -93,38 +93,38 @@
     <div class="product-card">
       <img src="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181447_Gallery_xiab27.jpg" alt="Product 1">
       <h3>BOYS' SUMMER DENIM 2PCS SET</h3>
-      <p class="price">300 DH</p>
-      <button class="shop-now" data-name="BOYS' SUMMER DENIM 2PCS SET" data-price="300" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181447_Gallery_xiab27.jpg">Add to cart</button>
+      <p class="price">$33.00</p>
+      <button class="shop-now" data-name="BOYS' SUMMER DENIM 2PCS SET" data-price="33.00" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181447_Gallery_xiab27.jpg">Add to cart</button>
     </div>
     <div class="product-card">
       <img src="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_181023_Gallery_kahkjg.jpg" alt="Product 2">
       <h3>4PCS SET FOR BABY BOYS</h3>
-      <p class="price">350 DH</p>
-      <button class="shop-now" data-name="4PCS SET FOR BABY BOYS" data-price="350" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_181023_Gallery_kahkjg.jpg">Add to cart</button>
+      <p class="price">$38.50</p>
+      <button class="shop-now" data-name="4PCS SET FOR BABY BOYS" data-price="38.50" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_181023_Gallery_kahkjg.jpg">Add to cart</button>
     </div>
     <div class="product-card">
       <img src="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_180943_Gallery_b063l5.jpg" alt="Product 3">
       <h3>2PCS YOUNG BOY'S CASUAL CARTOON BEAR</h3>
-      <p class="price">250 DH</p>
-      <button class="shop-now" data-name="2PCS YOUNG BOY'S CASUAL CARTOON BEAR" data-price="250" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_180943_Gallery_b063l5.jpg">Add to cart</button>
+      <p class="price">$27.50</p>
+      <button class="shop-now" data-name="2PCS YOUNG BOY'S CASUAL CARTOON BEAR" data-price="27.50" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_180943_Gallery_b063l5.jpg">Add to cart</button>
     </div>
     <div class="product-card">
       <img src="https://res.cloudinary.com/dav8t2igs/image/upload/v1750184012/Screenshot_20250617_191315_Dropbox_qlllms.jpg" alt="Product 4">
       <h3>YOUNGSTERS BOYS SUMMER SOLID COLOR JACQUARD 2PCS</h3>
-      <p class="price">250 DH</p>
-      <button class="shop-now" data-name="YOUNGSTERS BOYS SUMMER SOLID COLOR JACQUARD 2PCS" data-price="250" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750184012/Screenshot_20250617_191315_Dropbox_qlllms.jpg">Add to cart</button>
+      <p class="price">$27.50</p>
+      <button class="shop-now" data-name="YOUNGSTERS BOYS SUMMER SOLID COLOR JACQUARD 2PCS" data-price="27.50" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750184012/Screenshot_20250617_191315_Dropbox_qlllms.jpg">Add to cart</button>
     </div>
     <div class="product-card">
       <img src="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180860/Screenshot_20250617_181308_Gallery_v4nydq.jpg" alt="Product 5">
       <h3>NEW GIRLS' ROUND NECK SHORT SLEEVE</h3>
-      <p class="price">350 DH</p>
-      <button class="shop-now" data-name="NEW GIRLS' ROUND NECK SHORT SLEEVE" data-price="350" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180860/Screenshot_20250617_181308_Gallery_v4nydq.jpg">Add to cart</button>
+      <p class="price">$38.50</p>
+      <button class="shop-now" data-name="NEW GIRLS' ROUND NECK SHORT SLEEVE" data-price="38.50" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180860/Screenshot_20250617_181308_Gallery_v4nydq.jpg">Add to cart</button>
     </div>
     <div class="product-card">
       <img src="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180861/Screenshot_20250617_181325_Gallery_uugn2e.jpg" alt="Product 6">
       <h3>2PCS TRENDY GIRLS SUMMER OUTFIT</h3>
-      <p class="price">300 DH</p>
-      <button class="shop-now" data-name="2PCS TRENDY GIRLS SUMMER OUTFIT" data-price="300" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180861/Screenshot_20250617_181325_Gallery_uugn2e.jpg">Add to cart</button>
+      <p class="price">$33.00</p>
+      <button class="shop-now" data-name="2PCS TRENDY GIRLS SUMMER OUTFIT" data-price="33.00" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180861/Screenshot_20250617_181325_Gallery_uugn2e.jpg">Add to cart</button>
     </div>
   </div>
 
@@ -261,52 +261,45 @@
         updateCartCount();
     });
 
-    function updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-        const cartCountSpan = document.getElementById('cart-count');
-        if (cartCountSpan) {
-            cartCountSpan.textContent = totalQuantity;
-        }
-    }
-
     const products = [
         // Autumn Collection
-        { name: "VARSITY POLO CROP TOP", price: "350", image: "https://www.dropbox.com/scl/fi/uwhh020bcmhbh3jxfeyj7/Picsart_25-06-16_00-04-01-001.png?rlkey=6rdfyt52h6kndfr7hx1ayeugc&st=5n28lpxn&raw=1", url: "autumn-collection.html" },
-        { name: "MEN'S RELAXED FIT POLO", price: "350", image: "https://www.dropbox.com/scl/fi/bm9a6ibukyhzofr0tjoex/Picsart_25-06-16_00-03-06-166.jpg?rlkey=5sygxecpy2awogs5dfohr7k8l&st=xmk06467&raw=1", url: "autumn-collection.html" },
-        { name: "SUMMER MEADOW DRESS", price: "750", image: "https://www.dropbox.com/scl/fi/zpynavtbpiep6dik5o7si/Picsart_25-06-16_00-04-35-040.jpg?rlkey=735ild6ahjkuryh2xw35jl2uh&st=jxx1bxt5&raw=1", url: "autumn-collection.html" },
-        { name: "GUIRENIAO MEN'S POLO SHIRT", price: "350", image: "https://www.dropbox.com/scl/fi/qjo8jtffamf49kd182ayx/Picsart_25-06-16_17-55-03-982.png?rlkey=ahhk5nma58rqdv2ost60x1ngf&st=wg6zd3q6&raw=1", url: "autumn-collection.html" },
-        { name: "MEN'S LIGHT BLUE JEANS", price: "400", image: "https://www.dropbox.com/scl/fi/3sh94wskcr8e4uezi1776/Picsart_25-06-16_17-53-23-387.png?rlkey=qcfxxrnf1m6dnu5k8s1l88oum&st=8kvfxqiv&raw=1", url: "autumn-collection.html" },
-        { name: "THE FLORA DRESS", price: "750", image: "https://www.dropbox.com/scl/fi/2656yxhkmkar8a48i7ejq/Picsart_25-06-16_00-09-03-032.jpg?rlkey=pcjhndrubinwzily2zvhykd1v&st=crssept7&raw=1", url: "autumn-collection.html" },
+        { name: "VARSITY POLO CROP TOP", price: "38.50", image: "https://www.dropbox.com/scl/fi/uwhh020bcmhbh3jxfeyj7/Picsart_25-06-16_00-04-01-001.png?rlkey=6rdfyt52h6kndfr7hx1ayeugc&st=5n28lpxn&raw=1", url: "autumn-collection.html" },
+        { name: "MEN'S RELAXED FIT POLO", price: "38.50", image: "https://www.dropbox.com/scl/fi/bm9a6ibukyhzofr0tjoex/Picsart_25-06-16_00-03-06-166.jpg?rlkey=5sygxecpy2awogs5dfohr7k8l&st=xmk06467&raw=1", url: "autumn-collection.html" },
+        { name: "SUMMER MEADOW DRESS", price: "82.50", image: "https://www.dropbox.com/scl/fi/zpynavtbpiep6dik5o7si/Picsart_25-06-16_00-04-35-040.jpg?rlkey=735ild6ahjkuryh2xw35jl2uh&st=jxx1bxt5&raw=1", url: "autumn-collection.html" },
+        { name: "GUIRENIAO MEN'S POLO SHIRT", price: "38.50", image: "https://www.dropbox.com/scl/fi/qjo8jtffamf49kd182ayx/Picsart_25-06-16_17-55-03-982.png?rlkey=ahhk5nma58rqdv2ost60x1ngf&st=wg6zd3q6&raw=1", url: "autumn-collection.html" },
+        { name: "MEN'S LIGHT BLUE JEANS", price: "44.00", image: "https://www.dropbox.com/scl/fi/3sh94wskcr8e4uezi1776/Picsart_25-06-16_17-53-23-387.png?rlkey=qcfxxrnf1m6dnu5k8s1l88oum&st=8kvfxqiv&raw=1", url: "autumn-collection.html" },
+        { name: "THE FLORA DRESS", price: "82.50", image: "https://www.dropbox.com/scl/fi/2656yxhkmkar8a48i7ejq/Picsart_25-06-16_00-09-03-032.jpg?rlkey=pcjhndrubinwzily2zvhykd1v&st=crssept7&raw=1", url: "autumn-collection.html" },
         // Everyday Luxe
-        { name: "PROVENCAL GARDEN DRESS", price: "750", image: "https://www.dropbox.com/scl/fi/x49cxbsbxgha0bikcvwc0/Picsart_25-06-16_00-05-01-894.jpg?rlkey=2nuloxz028mvxokey3ezx4s55&st=slt7zzz4&raw=1", url: "everyday-luxe.html" },
-        { name: "BLUE PORCELAIN BOW TOP", price: "400", image: "https://www.dropbox.com/scl/fi/5l8aieje8ntppt9a9ukl8/Picsart_25-06-16_00-09-29-556.png?rlkey=vy1bc7xgor2g2akbqp1jnpk6l&st=xoogxe6w&raw=1", url: "everyday-luxe.html" },
+        { name: "PROVENCAL GARDEN DRESS", price: "82.50", image: "https://www.dropbox.com/scl/fi/x49cxbsbxgha0bikcvwc0/Picsart_25-06-16_00-05-01-894.jpg?rlkey=2nuloxz028mvxokey3ezx4s55&st=slt7zzz4&raw=1", url: "everyday-luxe.html" },
+        { name: "BLUE PORCELAIN BOW TOP", price: "44.00", image: "https://www.dropbox.com/scl/fi/5l8aieje8ntppt9a9ukl8/Picsart_25-06-16_00-09-29-556.png?rlkey=vy1bc7xgor2g2akbqp1jnpk6l&st=xoogxe6w&raw=1", url: "everyday-luxe.html" },
         // Fit Mode
-        { name: "WOMEN'S GYM & BARBELL GRAPHIC PRINT T-SHIRT", price: "200", image: "https://www.dropbox.com/scl/fi/xvst4zsw2n2tui3xe3d2u/Picsart_25-06-16_21-08-51-123.png?rlkey=312s0et5auebht6227fqvcd2i&st=acn6y872&raw=1", url: "fit-mode.html" },
-        { name: "MEN'S ATHELTIC PANTS", price: "300", image: "https://www.dropbox.com/scl/fi/z4c0lp8lg02h1lxufhsfj/Picsart_25-06-16_21-09-26-913.png?rlkey=f83crvlhrv1egirh38m143ig3&st=qslrnr57&raw=1", url: "fit-mode.html" },
-        { name: "MEN'S QUICK-DRY ATHLETIC SHORTS", price: "200", image: "https://www.dropbox.com/scl/fi/1dzpnutpopylb41m4if96/Picsart_25-06-16_21-10-16-542.png?rlkey=dnl4e8k2v8m5w2koh6e6ejos7&st=llcrpd82&raw=1", url: "fit-mode.html" },
-        { name: "MEN'S HOODED SHORT SLEEVE T-SHIRT", price: "300", image: "https://www.dropbox.com/scl/fi/iq427qmqeuum0tbguazg2/Picsart_25-06-16_21-10-52-765.png?rlkey=43rkiwi49vec3i40uh0sbjfa3&st=rho9hlrz&raw=1", url: "fit-mode.html" },
-        { name: "MEN'S QUICK-DRY VEST", price: "200", image: "https://www.dropbox.com/scl/fi/4zuqrguhuotngs1nd5htc/Picsart_25-06-16_21-11-30-025.png?rlkey=30ahli5s4k24hybpmh8vrit2c&st=we8syspn&raw=1", url: "fit-mode.html" },
-        { name: "MEN'S HIGH-NECK ATHLETIC T-SHIRT", price: "300", image: "https://www.dropbox.com/scl/fi/xyddswe5dilei3iape3jx/Picsart_25-06-16_21-12-07-157.png?rlkey=a7oqb9ka5m7ju5021rzqkdbdh&st=hh380sq2&raw=1", url: "fit-mode.html" },
+        { name: "WOMEN'S GYM & BARBELL GRAPHIC PRINT T-SHIRT", price: "22.00", image: "https://www.dropbox.com/scl/fi/xvst4zsw2n2tui3xe3d2u/Picsart_25-06-16_21-08-51-123.png?rlkey=312s0et5auebht6227fqvcd2i&st=acn6y872&raw=1", url: "fit-mode.html" },
+        { name: "MEN'S ATHELTIC PANTS", price: "33.00", image: "https://www.dropbox.com/scl/fi/z4c0lp8lg02h1lxufhsfj/Picsart_25-06-16_21-09-26-913.png?rlkey=f83crvlhrv1egirh38m143ig3&st=qslrnr57&raw=1", url: "fit-mode.html" },
+        { name: "MEN'S QUICK-DRY ATHLETIC SHORTS", price: "22.00", image: "https://www.dropbox.com/scl/fi/1dzpnutpopylb41m4if96/Picsart_25-06-16_21-10-16-542.png?rlkey=dnl4e8k2v8m5w2koh6e6ejos7&st=llcrpd82&raw=1", url: "fit-mode.html" },
+        { name: "MEN'S HOODED SHORT SLEEVE T-SHIRT", price: "33.00", image: "https://www.dropbox.com/scl/fi/iq427qmqeuum0tbguazg2/Picsart_25-06-16_21-10-52-765.png?rlkey=43rkiwi49vec3i40uh0sbjfa3&st=rho9hlrz&raw=1", url: "fit-mode.html" },
+        { name: "MEN'S QUICK-DRY VEST", price: "22.00", image: "https://www.dropbox.com/scl/fi/4zuqrguhuotngs1nd5htc/Picsart_25-06-16_21-11-30-025.png?rlkey=30ahli5s4k24hybpmh8vrit2c&st=we8syspn&raw=1", url: "fit-mode.html" },
+        { name: "MEN'S HIGH-NECK ATHLETIC T-SHIRT", price: "33.00", image: "https://www.dropbox.com/scl/fi/xyddswe5dilei3iape3jx/Picsart_25-06-16_21-12-07-157.png?rlkey=a7oqb9ka5m7ju5021rzqkdbdh&st=hh380sq2&raw=1", url: "fit-mode.html" },
         // Kids Clothing
-        { name: "BOYS' SUMMER DENIM 2PCS SET", price: "300", image: "https://www.dropbox.com/scl/fi/vdvasd7zx2ab05d0pkgho/Picsart_25-06-16_20-21-35-180.png?rlkey=yt2xk8xvzz7lg7suz6k1sdz3p&st=m0deeigf&raw=1", url: "kids-clothing.html" },
-        { name: "4PCS SET FOR BABY BOYS", price: "350", image: "https://www.dropbox.com/scl/fi/6mxdeky5bfznx6kxooed0/Picsart_25-06-16_20-22-22-964.png?rlkey=1hrfeb9onzpvvf5nct7ci9oya&st=osfwy33c&raw=1", url: "kids-clothing.html" },
-        { name: "2PCS YOUNG BOY'S CASUAL CARTOON BEAR", price: "250", image: "https://www.dropbox.com/scl/fi/m43gjgtb73t0dx4omw75l/Picsart_25-06-16_20-23-10-144.png?rlkey=pphge1punw5gt0s8wh2qhz6rq&st=pspb7xfb&raw=1", url: "kids-clothing.html" },
-        { name: "YOUNGSTERS BOYS SUMMER SOLID COLOR JACQUARD 2PCS", price: "250", image: "https://www.dropbox.com/scl/fi/owwjbame7lp9kx3y5c756/Picsart_25-06-16_20-23-59-165.png?rlkey=p6rxj8sjl4jlxnm3z4l0t5xqq&st=250xdm2r&raw=1", url: "kids-clothing.html" },
-        { name: "NEW GIRLS' ROUND NECK SHORT SLEEVE", price: "350", image: "https://www.dropbox.com/scl/fi/45k8nyczwoihakavax3ki/Picsart_25-06-16_20-24-54-490.png?rlkey=7v2uar6opzbvex1ubigl142mg&st=58b1yifa&raw=1", url: "kids-clothing.html" },
-        { name: "2PCS TRENDY GIRLS SUMMER OUTFIT", price: "300", image: "https://www.dropbox.com/scl/fi/dwnoaiibobkzfuwwdudqx/Picsart_25-06-16_20-25-47-978.png?rlkey=8ldszb4gpt30fe9kgng8sfd1y&st=imfsefmd&raw=1", url: "kids-clothing.html" },
+        { name: "BOYS' SUMMER DENIM 2PCS SET", price: "33.00", image: "https://www.dropbox.com/scl/fi/vdvasd7zx2ab05d0pkgho/Picsart_25-06-16_20-21-35-180.png?rlkey=yt2xk8xvzz7lg7suz6k1sdz3p&st=m0deeigf&raw=1", url: "kids-clothing.html" },
+        { name: "4PCS SET FOR BABY BOYS", price: "38.50", image: "https://www.dropbox.com/scl/fi/6mxdeky5bfznx6kxooed0/Picsart_25-06-16_20-22-22-964.png?rlkey=1hrfeb9onzpvvf5nct7ci9oya&st=osfwy33c&raw=1", url: "kids-clothing.html" },
+        { name: "2PCS YOUNG BOY'S CASUAL CARTOON BEAR", price: "27.50", image: "https://www.dropbox.com/scl/fi/m43gjgtb73t0dx4omw75l/Picsart_25-06-16_20-23-10-144.png?rlkey=pphge1punw5gt0s8wh2qhz6rq&st=pspb7xfb&raw=1", url: "kids-clothing.html" },
+        { name: "YOUNGSTERS BOYS SUMMER SOLID COLOR JACQUARD 2PCS", price: "27.50", image: "https://www.dropbox.com/scl/fi/owwjbame7lp9kx3y5c756/Picsart_25-06-16_20-23-59-165.png?rlkey=p6rxj8sjl4jlxnm3z4l0t5xqq&st=250xdm2r&raw=1", url: "kids-clothing.html" },
+        { name: "NEW GIRLS' ROUND NECK SHORT SLEEVE", price: "38.50", image: "https://www.dropbox.com/scl/fi/45k8nyczwoihakavax3ki/Picsart_25-06-16_20-24-54-490.png?rlkey=7v2uar6opzbvex1ubigl142mg&st=58b1yifa&raw=1", url: "kids-clothing.html" },
+        { name: "2PCS TRENDY GIRLS SUMMER OUTFIT", price: "33.00", image: "https://www.dropbox.com/scl/fi/dwnoaiibobkzfuwwdudqx/Picsart_25-06-16_20-25-47-978.png?rlkey=8ldszb4gpt30fe9kgng8sfd1y&st=imfsefmd&raw=1", url: "kids-clothing.html" },
         // Mens Collection
-        { name: "MEN'S LINEN SHIRT & SHORTS SET", price: "400", image: "https://www.dropbox.com/scl/fi/k2zbgyfr53cdvq6xnxq5z/Picsart_25-06-16_00-02-34-826.jpg?rlkey=8ytwyssc6u6hcog7eg08pyue3&st=9t2k3unu&raw=1", url: "shop-mens.html" },
-        { name: "MEN'S WINTER JACKET", price: "550", image: "https://www.dropbox.com/scl/fi/3980ifchostefu2ln47x0/Picsart_25-06-16_17-50-46-448.png?rlkey=nqtr1fljq1jmtnakyap6gozyi&st=j91f9wos&raw=1", url: "shop-mens.html" },
-        { name: "MENS' CASUAL SHORT SLEEVE T-SHIRT AND SHORT SET-KNIT", price: "350", image: "https://www.dropbox.com/scl/fi/zpuyiue5mbhg4t8brid7j/Picsart_25-06-16_17-51-40-255.png?rlkey=9xksqnjoitpzdks01ke38tima&st=q3sg58f4&raw=1", url: "shop-mens.html" },
+        { name: "MEN'S LINEN SHIRT & SHORTS SET", price: "44.00", image: "https://www.dropbox.com/scl/fi/k2zbgyfr53cdvq6xnxq5z/Picsart_25-06-16_00-02-34-826.jpg?rlkey=8ytwyssc6u6hcog7eg08pyue3&st=9t2k3unu&raw=1", url: "shop-mens.html" },
+        { name: "MEN'S WINTER JACKET", price: "60.50", image: "https://www.dropbox.com/scl/fi/3980ifchostefu2ln47x0/Picsart_25-06-16_17-50-46-448.png?rlkey=nqtr1fljq1jmtnakyap6gozyi&st=j91f9wos&raw=1", url: "shop-mens.html" },
+        { name: "MENS' CASUAL SHORT SLEEVE T-SHIRT AND SHORT SET-KNIT", price: "38.50", image: "https://www.dropbox.com/scl/fi/zpuyiue5mbhg4t8brid7j/Picsart_25-06-16_17-51-40-255.png?rlkey=9xksqnjoitpzdks01ke38tima&st=q3sg58f4&raw=1", url: "shop-mens.html" },
         // Womens Collection
-        { name: "HIGH-NECK ZIP-UP PUFFER JACKET", price: "500", image: "https://www.dropbox.com/scl/fi/bvuvf9tsn6cfxf6izgy1v/Picsart_25-06-16_00-10-35-563.png?rlkey=69xpqoqd6ywg0or7f73kr1wc4&st=b39t3joe&raw=1", url: "shop-womens.html" },
+        { name: "HIGH-NECK ZIP-UP PUFFER JACKET", price: "55.00", image: "https://www.dropbox.com/scl/fi/bvuvf9tsn6cfxf6izgy1v/Picsart_25-06-16_00-10-35-563.png?rlkey=69xpqoqd6ywg0or7f73kr1wc4&st=b39t3joe&raw=1", url: "shop-womens.html" },
         // Winter Collection
-        { name: "MEN'S VINTAGE-INSPIRED CREWNECK SWEATSHIRT", price: "350", image: "https://www.dropbox.com/scl/fi/5j3gr4ww6z75wun4qbbpq/Picsart_25-06-16_18-47-13-922.png?rlkey=jqegxws3f05kr7s57evb5j3vl&st=xdpj9yv7&raw=1", url: "winter-collection.html" },
-        { name: "MEN'S WINTER CAMO JACKET", price: "550", image: "https://www.dropbox.com/scl/fi/2hxoc3nyv51t723adu17d/Picsart_25-06-16_18-48-04-533.png?rlkey=qsid1wfvqvc3gfqg51qt11gpa&st=fr4ehxkl&raw=1", url: "winter-collection.html" }
+        { name: "MEN'S VINTAGE-INSPIRED CREWNECK SWEATSHIRT", price: "38.50", image: "https://www.dropbox.com/scl/fi/5j3gr4ww6z75wun4qbbpq/Picsart_25-06-16_18-47-13-922.png?rlkey=jqegxws3f05kr7s57evb5j3vl&st=xdpj9yv7&raw=1", url: "winter-collection.html" },
+        { name: "MEN'S WINTER CAMO JACKET", price: "60.50", image: "https://www.dropbox.com/scl/fi/2hxoc3nyv51t723adu17d/Picsart_25-06-16_18-48-04-533.png?rlkey=qsid1wfvqvc3gfqg51qt11gpa&st=fr4ehxkl&raw=1", url: "winter-collection.html" }
     ];
 
-    function openSearchOverlay(){document.getElementById("searchOverlay").style.display="flex"}function closeSearchOverlay(){document.getElementById("searchOverlay").style.display="none"}function handleSearch(e){e.preventDefault();const t=e.target.querySelector(".search-input").value;window.location.href=`search.html?q=${encodeURIComponent(t)}`}
+    function openSearchOverlay(){document.getElementById("searchOverlay").style.display="flex"}
+    function closeSearchOverlay(){document.getElementById("searchOverlay").style.display="none"}
+    function handleSearch(e){e.preventDefault();const t=e.target.querySelector(".search-input").value;window.location.href=`search.html?q=${encodeURIComponent(t)}`}
     
     function dynamicSearch(e) {
         const t = document.getElementById("searchResults");
@@ -329,7 +322,7 @@
                     <img src="${item.image}" alt="${item.name}">
                     <div class="search-result-details">
                         <h4>${item.name}</h4>
-                        <p>${item.price} DH</p>
+                        <p>$${item.price}</p>
                     </div>
                     <button class="shop-now" data-name="${item.name}" data-price="${item.price}" data-image="${item.image}">Add to cart</button>
                 `;
@@ -358,6 +351,15 @@
             t.innerHTML = '<p style="padding: 10px; text-align: center;">No products found.</p>';
         }
         t.style.display = "block";
+    }
+
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+        const cartCountSpan = document.getElementById('cart-count');
+        if (cartCountSpan) {
+            cartCountSpan.textContent = totalQuantity;
+        }
     }
 
     const firebaseConfig = { apiKey: "AIzaSyDelMOFKyvYx4u9FCgpq1HTr9eAoyjBjS0", authDomain: "abuy-77b4e.firebaseapp.com", projectId: "abuy-77b4e", storageBucket: "abuy-77b4e.appspot.com", messagingSenderId: "1081289117876", appId: "1:1081289117876:web:b3479e942dea9dc14607e1", measurementId: "G-31SH8VCRYG" };
@@ -398,6 +400,7 @@
     document.getElementById('signOutSettings').addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
     function updateAccountSettingsMenu() { const user = auth.currentUser; if (user) { document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user'; document.getElementById('userNameDisplay').textContent = user.displayName || 'user'; document.getElementById('userEmailDisplay').textContent = user.email || ''; document.getElementById('newPasswordInput').value = ''; } }
     document.getElementById('changePasswordBtn').addEventListener('click', () => { const newPassword = document.getElementById('newPasswordInput').value.trim(); if (newPassword.length < 6) { alert('Password must be at least 6 characters long.'); return; } const user = auth.currentUser; if (user) { user.updatePassword(newPassword).then(() => { alert('Password changed successfully.'); document.getElementById('newPasswordInput').value = ''; }).catch(error => alert('Failed to change password: ' + error.message)); } else { alert('No user is currently signed in.'); } });
+    
   </script>
 </body>
 </html>
