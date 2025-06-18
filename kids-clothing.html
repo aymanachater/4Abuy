@@ -217,51 +217,40 @@
     const auth = firebase.auth();
 
     // Exchange Rate
-    const DH_TO_USD_RATE = 0.10; // Example: 1 DH = 0.10 USD (as of 2025-06-18, check current rate for accuracy)
-
-    // Function to convert DH to USD
+    const DH_TO_USD_RATE = 0.10; 
     function convertDhToUsd(priceInDh) {
         return (parseFloat(priceInDh) * DH_TO_USD_RATE).toFixed(2);
     }
 
-    // Products Array for Search
     const products = [
-        // Autumn Collection
         { name: "VARSITY POLO CROP TOP", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181650_Gallery_suych0.jpg", url: "autumn-collection.html" },
         { name: "MEN'S RELAXED FIT POLO", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181659_Gallery_nxmaz7.jpg", url: "autumn-collection.html" },
         { name: "SUMMER MEADOW DRESS", price: convertDhToUsd("750"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180852/Screenshot_20250617_181628_Gallery_cvryuy.jpg", url: "autumn-collection.html" },
         { name: "GUIRENIAO MEN'S POLO SHIRT", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180862/Screenshot_20250617_181211_Gallery_y1cfyx.jpg", url: "autumn-collection.html" },
         { name: "MEN'S LIGHT BLUE JEANS", price: convertDhToUsd("400"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180856/Screenshot_20250617_181457_Gallery_ztknre.jpg", url: "autumn-collection.html" },
         { name: "THE FLORA DRESS", price: convertDhToUsd("750"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181601_Gallery_rnpkwg.jpg", url: "autumn-collection.html" },
-        // Everyday Luxe
         { name: "PROVENCAL GARDEN DRESS", price: convertDhToUsd("750"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180852/Screenshot_20250617_181638_Gallery_ixl6bn.jpg", url: "everyday-luxe.html" },
         { name: "BLUE PORCELAIN BOW TOP", price: convertDhToUsd("400"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180854/Screenshot_20250617_181530_Gallery_ti9e6z.jpg", url: "everyday-luxe.html" },
-        // Fit Mode
         { name: "WOMEN'S GYM & BARBELL GRAPHIC PRINT T-SHIRT", price: convertDhToUsd("200"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180859/Screenshot_20250617_181348_Gallery_crqzwx.jpg", url: "fit-mode.html" },
         { name: "MEN'S ATHELTIC PANTS", price: convertDhToUsd("300"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180859/Screenshot_20250617_181337_Gallery_tepxet.jpg", url: "fit-mode.html" },
         { name: "MEN'S QUICK-DRY ATHLETIC SHORTS", price: convertDhToUsd("200"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180856/Screenshot_20250617_181436_Gallery_fv8smt.jpg", url: "fit-mode.html" },
         { name: "MEN'S HOODED SHORT SLEEVE T-SHIRT", price: convertDhToUsd("300"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180858/Screenshot_20250617_181359_Gallery_atdeza.jpg", url: "fit-mode.html" },
         { name: "MEN'S QUICK-DRY VEST", price: convertDhToUsd("200"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181412_Gallery_dchdbt.jpg", url: "fit-mode.html" },
         { name: "MEN'S HIGH-NECK ATHLETIC T-SHIRT", price: convertDhToUsd("300"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181423_Gallery_jxcxm7.jpg", url: "fit-mode.html" },
-        // Kids Clothing
         { name: "BOYS' SUMMER DENIM 2PCS SET", price: convertDhToUsd("300"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181447_Gallery_xiab27.jpg", url: "kids-clothing.html" },
         { name: "4PCS SET FOR BABY BOYS", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_181023_Gallery_kahkjg.jpg", url: "kids-clothing.html" },
         { name: "2PCS YOUNG BOY'S CASUAL CARTOON BEAR", price: convertDhToUsd("250"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_180943_Gallery_b063l5.jpg", url: "kids-clothing.html" },
         { name: "YOUNGSTERS BOYS SUMMER SOLID COLOR JACQUARD 2PCS", price: convertDhToUsd("250"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750184012/Screenshot_20250617_191315_Dropbox_qlllms.jpg", url: "kids-clothing.html" },
         { name: "NEW GIRLS' ROUND NECK SHORT SLEEVE", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180860/Screenshot_20250617_181308_Gallery_v4nydq.jpg", url: "kids-clothing.html" },
         { name: "2PCS TRENDY GIRLS SUMMER OUTFIT", price: convertDhToUsd("300"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180861/Screenshot_20250617_181325_Gallery_uugn2e.jpg", url: "kids-clothing.html" },
-        // Mens Collection
         { name: "MEN'S LINEN SHIRT & SHORTS SET", price: convertDhToUsd("400"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180850/Screenshot_20250617_181716_Gallery_j4vtix.jpg", url: "shop-mens.html" },
         { name: "MEN'S WINTER JACKET", price: convertDhToUsd("550"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180862/Screenshot_20250617_181225_Gallery_dnzl0z.jpg", url: "shop-mens.html" },
-        { name: "MENS' CASUAL SHORT SLEEVE T-SHIRT AND SHORT SET-KNIT", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180854/Screenshot_20250617_181509_Gallery_euud9i.jpg", url: "shop-mens.html" },
-        // Womens Collection
+        { name: "MENS' CASUAL SHORT SLEEVE T-SHIRT AND SHORT SET-KNIT", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180854/Screenshot_20250617_181509/Gallery_euud9i.jpg", url: "shop-mens.html" },
         { name: "HIGH-NECK ZIP-UP PUFFER JACKET", price: convertDhToUsd("500"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181546_Gallery_g8xvaz.jpg", url: "shop-womens.html" },
-        // Winter Collection
         { name: "MEN'S VINTAGE-INSPIRED CREWNECK SWEATSHIRT", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181156_Gallery_qabe76.jpg", url: "winter-collection.html" },
         { name: "MEN'S WINTER CAMO JACKET", price: convertDhToUsd("550"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181137_Gallery_o1pbhj.jpg", url: "winter-collection.html" }
     ];
 
-    // Search Functions
     function openSearchOverlay(){document.getElementById("searchOverlay").style.display="flex"}
     function closeSearchOverlay(){document.getElementById("searchOverlay").style.display="none"}
     function handleSearch(e){e.preventDefault();const t=e.target.querySelector(".search-input").value;window.location.href=`search.html?q=${encodeURIComponent(t)}`}
@@ -320,10 +309,9 @@
         t.style.display = "block";
     }
 
-    // General UI/Auth Functions
     function openModal(modalId) { document.getElementById(modalId).style.display = "flex"; }
     function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
-
+    
     function updateCartCount() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const cartCount = cart.reduce((total, item) => total + (item.quantity || 1), 0);
@@ -343,7 +331,6 @@
         } 
     }
 
-    // Main Event Listeners
     document.addEventListener('DOMContentLoaded', () => {
         updateCartCount();
 
@@ -352,15 +339,10 @@
         const closeSideMenu = document.getElementById('closeSideMenu');
 
         if (menuIcon) {
-            menuIcon.addEventListener('click', (event) => {
-                event.stopPropagation();
-                sideMenu.style.width = '280px';
-            });
+            menuIcon.addEventListener('click', (event) => { event.stopPropagation(); sideMenu.style.width = '280px'; });
         }
         if (closeSideMenu) {
-            closeSideMenu.addEventListener('click', () => {
-                sideMenu.style.width = '0';
-            });
+            closeSideMenu.addEventListener('click', () => { sideMenu.style.width = '0'; });
         }
         window.addEventListener('click', (event) => {
             const menuIconContainer = document.querySelector('.menu-icon');
@@ -377,12 +359,7 @@
                 e.preventDefault(); 
                 const email = document.getElementById('loginEmail').value; 
                 const password = document.getElementById('loginPassword').value; 
-                try { 
-                    await auth.signInWithEmailAndPassword(email, password); 
-                    closeModal('loginModal'); 
-                } catch (error) { 
-                    alert('Login failed: ' + error.message); 
-                } 
+                try { await auth.signInWithEmailAndPassword(email, password); closeModal('loginModal'); } catch (error) { alert('Login failed: ' + error.message); } 
             }); 
         }
 
@@ -408,7 +385,7 @@
                 const name = e.target.dataset.name;
                 const price = parseFloat(e.target.dataset.price);
                 const image = e.target.dataset.image;
-                const product = { name, price, image, quantity: 1 };
+                const product = { name, price, image, quantity: 1, category: 'kids' }; // Linea modificata
                 let cart = JSON.parse(localStorage.getItem('cart')) || [];
                 const existingProductIndex = cart.findIndex(item => item.name === name);
                 if (existingProductIndex > -1) {
@@ -430,6 +407,7 @@
         document.getElementById('signOutMain')?.addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
         document.getElementById('signOutSettings')?.addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
         document.getElementById('changePasswordBtn')?.addEventListener('click', () => { const newPassword = document.getElementById('newPasswordInput').value.trim(); if (newPassword.length < 6) { alert('Password must be at least 6 characters long.'); return; } const user = auth.currentUser; if (user) { user.updatePassword(newPassword).then(() => { alert('Password changed successfully.'); document.getElementById('newPasswordInput').value = ''; }).catch(error => alert('Failed to change password: ' + error.message)); } else { alert('No user is currently signed in.'); } });
+
     });
 
     auth.onAuthStateChanged(user => {
@@ -447,6 +425,7 @@
         if (welcomeUserName) { welcomeUserName.textContent = 'user'; }
       }
     });
+
   </script>
 </body>
 </html>
