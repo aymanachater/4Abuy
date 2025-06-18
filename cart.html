@@ -220,17 +220,6 @@
 </head>
 <body>
 
-  <div class="search-overlay" id="searchOverlay">
-    <div class="search-container">
-      <span class="close-search" onclick="closeSearchOverlay()">&times;</span>
-      <form class="search-form" onsubmit="handleSearch(event)">
-        <input type="text" class="search-input" placeholder="Search for products..." oninput="dynamicSearch(this.value)" required>
-        <button type="submit" class="search-submit">Search</button>
-      </form>
-      <div id="searchResults" class="search-results-container"></div>
-    </div>
-  </div>
-
   <div id="sideMenu" style="width: 0px; position: fixed; z-index: 10001; top: 0px; left: 0px; background-color: rgb(255, 255, 255); overflow-x: hidden; transition: ease-out 0.4s; padding-top: 20px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 20px;">
     <a href="javascript:void(0)" style="position: absolute; top: 15px; right: 25px; font-size: 36px; text-decoration: none; color: rgb(85, 85, 85);" id="closeSideMenu">×</a>
     <div style="padding: 10px 15px 15px; font-size: 1.1rem; font-weight: 700; color: rgb(17, 17, 17); display: flex; align-items: center; border-bottom: 1px solid rgb(240, 240, 240); margin: 0px 15px 10px;">
@@ -262,40 +251,19 @@
       <i class="fas fa-search" onclick="openSearchOverlay()"></i>
       <a href="cart.html"><i class="fas fa-shopping-cart"></i><span id="cart-count">0</span></a>
       <i class="fas fa-user" id="userAccountIcon" style="cursor: pointer;"></i>
-      <div id="userDropupMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 250px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-          <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserName" style="font-weight: 900;">user</span></strong>
-          <span id="closeDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">&times;</span>
-        </div>
-        <div style="font-weight: 600; margin-bottom: 8px; cursor: pointer;" id="accountSettingsMain">Account Settings</div>
-        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="passwordPersonalInfoMain"><i class="fas fa-lock"></i> Password &amp; Personal Info</div>
-        <div style="font-weight: 600; margin: 15px 0 8px 0;">We're here to help, 24/7</div>
-        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="contactUs"><i class="fas fa-comment"></i> Contact Us</div>
-        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutMain"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
-      </div>
-      <div id="userAccountSettingsMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 280px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-          <button id="backToMainMenu" style="background:none; border:none; font-size: 1.2rem; cursor: pointer;">&#8592;</button>
-          <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserNameSettings" style="font-weight: 900;">user</span></strong>
-          <span id="closeSettingsDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">&times;</span>
-        </div>
-        <div style="margin-bottom: 10px;">
-          <label for="userNameDisplay" style="font-weight: 600;">Name:</label>
-          <div id="userNameDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">User Name</div>
-        </div>
-        <div style="margin-bottom: 10px;">
-          <label for="userEmailDisplay" style="font-weight: 600;">Email:</label>
-          <div id="userEmailDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">user@example.com</div>
-        </div>
-        <div style="margin-bottom: 15px;">
-          <label for="newPasswordInput" style="font-weight: 600;">Change Password:</label>
-          <input type="password" id="newPasswordInput" placeholder="New Password" style="width: 100%; padding: 6px 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px;">
-          <button id="changePasswordBtn" style="margin-top: 8px; width: 100%; padding: 8px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Change Password</button>
-        </div>
-        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutSettings"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
-      </div>
     </div>
   </header>
+
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-container">
+      <span class="close-search" onclick="closeSearchOverlay()">&times;</span>
+      <form class="search-form" onsubmit="handleSearch(event)">
+        <input type="text" class="search-input" placeholder="Search for products..." oninput="dynamicSearch(this.value)" required>
+        <button type="submit" class="search-submit">Search</button>
+      </form>
+      <div id="searchResults" class="search-results-container"></div>
+    </div>
+  </div>
 
   <h1 class="cart-title">YOUR CART</h1>
 
@@ -390,12 +358,59 @@
     </div>
   </div>
   
+  <div id="userDropupMenu" style="display:none; position: fixed; top: 50px; right: 20px; width: 250px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserName" style="font-weight: 900;">user</span></strong>
+        <span id="closeDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">×</span>
+    </div>
+    <div style="font-weight: 600; margin-bottom: 8px; cursor: pointer;" id="accountSettingsMain">Account Settings</div>
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="passwordPersonalInfoMain"><i class="fas fa-lock"></i> Password & Personal Info</div>
+    <div style="font-weight: 600; margin: 15px 0 8px 0;">We're here to help, 24/7</div>
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="contactUs"><i class="fas fa-comment"></i> Contact Us</div>
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutMain"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
+  </div>
+  <div id="userAccountSettingsMenu" style="display:none; position: fixed; top: 50px; right: 20px; width: 280px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <button id="backToMainMenu" style="background:none; border:none; font-size: 1.2rem; cursor: pointer;">&#8592;</button>
+        <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserNameSettings" style="font-weight: 900;">user</span></strong>
+        <span id="closeSettingsDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">×</span>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <label for="userNameDisplay" style="font-weight: 600;">Name:</label>
+        <div id="userNameDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">User Name</div>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <label for="userEmailDisplay" style="font-weight: 600;">Email:</label>
+        <div id="userEmailDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">user@example.com</div>
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label for="newPasswordInput" style="font-weight: 600;">Change Password:</label>
+        <input type="password" id="newPasswordInput" placeholder="New Password" style="width: 100%; padding: 6px 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px;">
+        <button id="changePasswordBtn" style="margin-top: 8px; width: 100%; padding: 8px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Change Password</button>
+    </div>
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutSettings"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
+  </div>
+
   <script src="https://www.paypal.com/sdk/js?client-id=AW4mFXiCm4jDyiUAbUftg97fSoOnXv1LQURG_1604-Ju_5vRDye21zvHJu_S91JvkNAyJ4nl0UocJhrS&amp;currency=USD"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
   <script src="cart.js"></script>
 
   <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDelMOFKyvYx4u9FCgpq1HTr9eAoyjBjS0",
+      authDomain: "abuy-77b4e.firebaseapp.com",
+      projectId: "abuy-77b4e",
+      storageBucket: "abuy-77b4e.firebasestorage.app",
+      messagingSenderId: "1081289117876",
+      appId: "1:1081289117876:web:b3479e942dea9dc14607e1",
+      measurementId: "G-31SH8VCRYG"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Products array for search
     const products = [
         // Autumn Collection
         { name: "VARSITY POLO CROP TOP", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181650_Gallery_suych0.jpg", url: "autumn-collection.html" },
@@ -427,12 +442,12 @@
         { name: "MENS' CASUAL SHORT SLEEVE T-SHIRT AND SHORT SET-KNIT", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180854/Screenshot_20250617_181509/Gallery_euud9i.jpg", url: "shop-mens.html" },
         // Womens Collection
         { name: "HIGH-NECK ZIP-UP PUFFER JACKET", price: "500", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181546_Gallery_g8xvaz.jpg", url: "shop-womens.html" },
-        // Streetwear & Urban
         // Winter Collection
         { name: "MEN'S VINTAGE-INSPIRED CREWNECK SWEATSHIRT", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181156_Gallery_qabe76.jpg", url: "winter-collection.html" },
         { name: "MEN'S WINTER CAMO JACKET", price: "550", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181137_Gallery_o1pbhj.jpg", url: "winter-collection.html" }
     ];
     
+    // Search Functions
     function openSearchOverlay(){document.getElementById("searchOverlay").style.display="flex"}
     function closeSearchOverlay(){document.getElementById("searchOverlay").style.display="none"}
     function handleSearch(e){e.preventDefault();const t=e.target.querySelector(".search-input").value;window.location.href=`search.html?q=${encodeURIComponent(t)}`}
@@ -464,9 +479,11 @@
                 `;
                 t.appendChild(resultLink);
             });
-            // Add event listeners for "Add to cart" buttons dynamically
+            
             t.querySelectorAll('.shop-now').forEach(button => {
                 button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     const name = e.target.dataset.name;
                     const price = parseFloat(e.target.dataset.price);
                     const image = e.target.dataset.image;
@@ -479,7 +496,7 @@
                         cart.push(product);
                     }
                     localStorage.setItem('cart', JSON.stringify(cart));
-                    updateCartCount(); // Make sure this function is accessible or defined
+                    updateCartCount();
                 });
             });
 
@@ -489,19 +506,21 @@
         t.style.display = "block";
     }
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyDelMOFKyvYx4u9FCgpq1HTr9eAoyjBjS0",
-      authDomain: "abuy-77b4e.firebaseapp.com",
-      projectId: "abuy-77b4e",
-      storageBucket: "abuy-77b4e.firebasestorage.app",
-      messagingSenderId: "1081289117876",
-      appId: "1:1081289117876:web:b3479e942dea9dc14607e1",
-      measurementId: "G-31SH8VCRYG"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+    function openModal(modalId) { document.getElementById(modalId).style.display = "flex"; }
+    function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
+    
+    function updateAccountSettingsMenu() { 
+        const user = auth.currentUser; 
+        if (user) { 
+            document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user'; 
+            document.getElementById('userNameDisplay').textContent = user.displayName || 'user'; 
+            document.getElementById('userEmailDisplay').textContent = user.email || ''; 
+            document.getElementById('newPasswordInput').value = ''; 
+        } 
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
+        // Menu Logic
         const menuIcon = document.querySelector('.menu-icon');
         const sideMenu = document.getElementById('sideMenu');
         const closeSideMenu = document.getElementById('closeSideMenu');
@@ -525,9 +544,9 @@
             }
         });
 
+        // Auth Forms
         const loginForm = document.getElementById('loginForm');
         const signupForm = document.getElementById('signupForm');
-        const userAccountIcon = document.getElementById('userAccountIcon');
         if (loginForm) {
             loginForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -545,9 +564,12 @@
                 try { const userCredential = await auth.createUserWithEmailAndPassword(email, password); await userCredential.user.updateProfile({ displayName: firstName }); closeModal('signupModal'); } catch (error) { alert('Signup failed: ' + error.message); }
             });
         }
+
+        // Auth State Change
         auth.onAuthStateChanged(user => {
             const dropupMenu = document.getElementById('userDropupMenu');
             const welcomeUserName = document.getElementById('welcomeUserName');
+            const userAccountIcon = document.getElementById('userAccountIcon');
             if (user) {
                 if (userAccountIcon) { userAccountIcon.className = 'fas fa-user-check'; userAccountIcon.onclick = () => { dropupMenu.style.display = dropupMenu.style.display === 'block' ? 'none' : 'block'; }; }
                 if (welcomeUserName) { welcomeUserName.textContent = user.displayName || 'user'; }
@@ -558,16 +580,19 @@
                 if (welcomeUserName) { welcomeUserName.textContent = 'user'; }
             }
         });
+
+        // Dropdown Menu Listeners
         document.getElementById('closeDropup')?.addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; });
         document.getElementById('closeSettingsDropup')?.addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; });
         document.getElementById('backToMainMenu')?.addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; document.getElementById('userDropupMenu').style.display = 'block'; });
         document.getElementById('accountSettingsMain')?.addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; document.getElementById('userAccountSettingsMenu').style.display = 'block'; updateAccountSettingsMenu(); });
-        document.getElementById('passwordPersonalInfoMain')?.addEventListener('click', () => { const mainMenu = document.getElementById('userDropupMenu'); const settingsMenu = document.getElementById('userAccountSettingsMenu'); if (mainMenu && settingsMenu) { mainMenu.style.display = 'none'; settingsMenu.style.display = 'block'; updateAccountSettingsMenu(); } });
+        document.getElementById('passwordPersonalInfoMain')?.addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; document.getElementById('userAccountSettingsMenu').style.display = 'block'; updateAccountSettingsMenu(); });
         document.getElementById('contactUs')?.addEventListener('click', () => { window.open('https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==', '_blank'); });
         document.getElementById('signOutMain')?.addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
         document.getElementById('signOutSettings')?.addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
         document.getElementById('changePasswordBtn')?.addEventListener('click', () => { const newPassword = document.getElementById('newPasswordInput').value.trim(); if (newPassword.length < 6) { alert('Password must be at least 6 characters long.'); return; } const user = auth.currentUser; if (user) { user.updatePassword(newPassword).then(() => { alert('Password changed successfully.'); document.getElementById('newPasswordInput').value = ''; }).catch(error => alert('Failed to change password: ' + error.message)); } else { alert('No user is currently signed in.'); } });
 
+        // PayPal Logic
         function getCartTotal() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             if (cart.length === 0) { return '0.00'; }
@@ -588,6 +613,7 @@
                 },
                 onApprove: (data, actions) => {
                     return actions.order.capture().then(function(orderData) {
+                        alert('Transaction completed by ' + orderData.payer.name.given_name);
                         localStorage.removeItem('cart');
                         window.location.reload();
                     });
@@ -598,10 +624,6 @@
             if(paypalContainer) paypalContainer.style.display = 'none';
         }
     });
-
-    function openModal(modalId) { document.getElementById(modalId).style.display = "flex"; }
-    function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
-    function updateAccountSettingsMenu() { const user = auth.currentUser; if (user) { document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user'; document.getElementById('userNameDisplay').textContent = user.displayName || 'user'; document.getElementById('userEmailDisplay').textContent = user.email || ''; document.getElementById('newPasswordInput').value = ''; } }
   </script>
 </body>
 </html>
