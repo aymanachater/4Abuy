@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cartItemsContainer.innerHTML = '';
             if (cart.length === 0) {
                 cartItemsContainer.innerHTML = '<div class="cart-empty-message">Your cart is empty</div>';
-                document.getElementById('cart-total').textContent = 'Total Price: 0.00 DH';
+                document.getElementById('cart-total').textContent = 'Total Price: $0.00';
                 const paypalContainer = document.getElementById('paypal-button-container');
                 if (paypalContainer) paypalContainer.style.display = 'none';
                 return;
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <img src="${item.image}" alt="${item.name}">
                     <div class="cart-item-details">
                         <h3>${item.name}</h3>
-                        <p>${typeof item.price === 'string' ? item.price.replace('$', '') + ' DH' : item.price.toFixed(2) + ' DH'}</p>
+                        <p>$${typeof item.price === 'string' ? parseFloat(item.price.replace(/[^0-9.-]+/g, "")).toFixed(2) : item.price.toFixed(2)}</p>
 
                         <div class="cart-item-selector">
                             <label for="color-select-${index}">Color:</label>
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 cartItemsContainer.appendChild(cartItem);
             });
-            document.getElementById('cart-total').textContent = `Total Price: ${totalPrice.toFixed(2)} DH`;
+            document.getElementById('cart-total').textContent = `Total Price: $${totalPrice.toFixed(2)}`;
             saveCart();
             updateCartCount();
         }
