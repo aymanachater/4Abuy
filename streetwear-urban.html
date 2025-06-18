@@ -238,7 +238,37 @@
                 }
             }
         });
+        
+        // --- ADD TO CART FUNCTIONALITY ---
+        document.querySelectorAll('.product-grid .shop-now').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const name = e.target.dataset.name;
+                const price = parseFloat(e.target.dataset.price);
+                const image = e.target.dataset.image;
+                const product = { name, price, image, quantity: 1 };
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const existingProductIndex = cart.findIndex(item => item.name === name);
+                if (existingProductIndex > -1) {
+                    cart[existingProductIndex].quantity += 1;
+                } else {
+                    cart.push(product);
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+            });
+        });
+        
+        updateCartCount();
     });
+
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+        const cartCountSpan = document.getElementById('cart-count');
+        if (cartCountSpan) {
+            cartCountSpan.textContent = totalQuantity;
+        }
+    }
 
     const products = [
         // Autumn Collection
@@ -368,7 +398,6 @@
     document.getElementById('signOutSettings').addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
     function updateAccountSettingsMenu() { const user = auth.currentUser; if (user) { document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user'; document.getElementById('userNameDisplay').textContent = user.displayName || 'user'; document.getElementById('userEmailDisplay').textContent = user.email || ''; document.getElementById('newPasswordInput').value = ''; } }
     document.getElementById('changePasswordBtn').addEventListener('click', () => { const newPassword = document.getElementById('newPasswordInput').value.trim(); if (newPassword.length < 6) { alert('Password must be at least 6 characters long.'); return; } const user = auth.currentUser; if (user) { user.updatePassword(newPassword).then(() => { alert('Password changed successfully.'); document.getElementById('newPasswordInput').value = ''; }).catch(error => alert('Failed to change password: ' + error.message)); } else { alert('No user is currently signed in.'); } });
-    document.addEventListener('DOMContentLoaded', updateCartCount);
   </script>
 </body>
 </html>
