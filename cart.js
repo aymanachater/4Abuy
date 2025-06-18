@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartCount = document.getElementById('cart-count');
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    // Exchange Rate (This should ideally be consistent across all files or fetched dynamically)
-    const DH_TO_USD_RATE = 0.10; // Example: 1 DH = 0.10 USD (as of 2025-06-18, check current rate for accuracy)
+    // Exchange Rate
+    const DH_TO_USD_RATE = 0.10;
 
     function updateCartCount() {
         const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
@@ -41,8 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let totalPrice = 0;
             cart.forEach((item, index) => {
-                // Ensure price is treated as a number, and if it somehow comes from DH, convert it.
-                // Assuming prices stored in local storage are already in USD from other pages.
                 const priceNumber = parseFloat(String(item.price).replace(/[^0-9.-]+/g, ""));
                 if (!item.quantity) {
                     item.quantity = 1;
@@ -51,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cartItem = document.createElement('div');
                 cartItem.className = 'cart-item';
 
-                // This part generates the HTML for each item in the cart
+                // HTML for each item in the cart
                 cartItem.innerHTML = `
                     <img src="${item.image}" alt="${item.name}">
                     <div class="cart-item-details">
@@ -59,12 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p>$${priceNumber.toFixed(2)}</p>
 
                         <div class="cart-item-selector">
-                            <label for="color-select-${index}">Color:</label>
-                            <select name="color" id="color-select-${index}" onchange="updateCartOption(${index}, 'color', this.value)">
-                                <option value="Original" ${!item.color || item.color === 'Original' ? 'selected' : ''}>Original (As in photo)</option>
-                                <option value="Black" ${item.color === 'Black' ? 'selected' : ''}>Black</option>
-                                <option value="White" ${item.color === 'White' ? 'selected' : ''}>White</option>
-                            </select>
+                            <label>Color:</label>
+                            <span style="padding: 6px 8px; font-family: 'Segoe UI', Arial, sans-serif; font-size: 0.95rem;">Original (As in photo)</span>
                         </div>
 
                         <div class="cart-item-selector">
