@@ -42,38 +42,6 @@
       <i class="fas fa-search" onclick="openSearchOverlay()"></i>
       <a href="cart.html"><i class="fas fa-shopping-cart"></i><span id="cart-count">0</span></a>
       <i class="fas fa-user" id="userAccountIcon" style="cursor: pointer;"></i>
-      <div id="userDropupMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 250px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-          <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserName" style="font-weight: 900;">user</span></strong>
-          <span id="closeDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">×</span>
-        </div>
-        <div style="font-weight: 600; margin-bottom: 8px; cursor: pointer;" id="accountSettingsMain">Account Settings</div>
-        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="passwordPersonalInfoMain"><i class="fas fa-lock"></i> Password &amp; Personal Info</div>
-        <div style="font-weight: 600; margin: 15px 0 8px 0;">We're here to help, 24/7</div>
-        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="contactUs"><i class="fas fa-comment"></i> Contact Us</div>
-        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutMain"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
-      </div>
-      <div id="userAccountSettingsMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 280px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-          <button id="backToMainMenu" style="background:none; border:none; font-size: 1.2rem; cursor: pointer;">←</button>
-          <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserNameSettings" style="font-weight: 900;">user</span></strong>
-          <span id="closeSettingsDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">×</span>
-        </div>
-        <div style="margin-bottom: 10px;">
-          <label for="userNameDisplay" style="font-weight: 600;">Name:</label>
-          <div id="userNameDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">User Name</div>
-        </div>
-        <div style="margin-bottom: 10px;">
-          <label for="userEmailDisplay" style="font-weight: 600;">Email:</label>
-          <div id="userEmailDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">user@example.com</div>
-        </div>
-        <div style="margin-bottom: 15px;">
-          <label for="newPasswordInput" style="font-weight: 600;">Change Password:</label>
-          <input type="password" id="newPasswordInput" placeholder="New Password" style="width: 100%; padding: 6px 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px;">
-          <button id="changePasswordBtn" style="margin-top: 8px; width: 100%; padding: 8px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Change Password</button>
-        </div>
-        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutSettings"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
-      </div>
     </div>
   </header>
 
@@ -206,6 +174,39 @@
     </div>
   </div>
 
+  <div id="userDropupMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 250px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserName" style="font-weight: 900;">user</span></strong>
+      <span id="closeDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">×</span>
+    </div>
+    <div style="font-weight: 600; margin-bottom: 8px; cursor: pointer;" id="accountSettingsMain">Account Settings</div>
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="passwordPersonalInfoMain"><i class="fas fa-lock"></i> Password &amp; Personal Info</div>
+    <div style="font-weight: 600; margin: 15px 0 8px 0;">We're here to help, 24/7</div>
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="contactUs"><i class="fas fa-comment"></i> Contact Us</div>
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutMain"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
+  </div>
+  <div id="userAccountSettingsMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 280px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <button id="backToMainMenu" style="background:none; border:none; font-size: 1.2rem; cursor: pointer;">←</button>
+      <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserNameSettings" style="font-weight: 900;">user</span></strong>
+      <span id="closeSettingsDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">×</span>
+    </div>
+    <div style="margin-bottom: 10px;">
+      <label for="userNameDisplay" style="font-weight: 600;">Name:</label>
+      <div id="userNameDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">User Name</div>
+    </div>
+    <div style="margin-bottom: 10px;">
+      <label for="userEmailDisplay" style="font-weight: 600;">Email:</label>
+      <div id="userEmailDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">user@example.com</div>
+    </div>
+    <div style="margin-bottom: 15px;">
+      <label for="newPasswordInput" style="font-weight: 600;">Change Password:</label>
+      <input type="password" id="newPasswordInput" placeholder="New Password" style="width: 100%; padding: 6px 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px;">
+      <button id="changePasswordBtn" style="margin-top: 8px; width: 100%; padding: 8px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Change Password</button>
+    </div>
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutSettings"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
+  </div>
+
   <script src="cart.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
@@ -290,7 +291,6 @@
         { name: "MENS' CASUAL SHORT SLEEVE T-SHIRT AND SHORT SET-KNIT", price: "38.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180854/Screenshot_20250617_181509/Gallery_euud9i.jpg", url: "shop-mens.html" },
         // Womens Collection
         { name: "HIGH-NECK ZIP-UP PUFFER JACKET", price: "55.00", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181546_Gallery_g8xvaz.jpg", url: "shop-womens.html" },
-        // Streetwear & Urban
         // Winter Collection
         { name: "MEN'S VINTAGE-INSPIRED CREWNECK SWEATSHIRT", price: "38.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181156_Gallery_qabe76.jpg", url: "winter-collection.html" },
         { name: "MEN'S WINTER CAMO JACKET", price: "60.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181137_Gallery_o1pbhj.jpg", url: "winter-collection.html" }
