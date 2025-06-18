@@ -259,7 +259,7 @@
     const auth = firebase.auth();
 
     // Exchange Rate (Update this value as needed)
-    const DH_TO_USD_RATE = 0.10; // Example: 1 DH = 0.10 USD (you can get a live rate from an API)
+    const DH_TO_USD_RATE = 0.10; // Example: 1 DH = 0.10 USD (as of 2025-06-18, check current rate for accuracy)
 
     // Function to convert DH to USD
     function convertDhToUsd(priceInDh) {
@@ -318,13 +318,13 @@
         { name: "HIGH-NECK ZIP-UP PUFFER JACKET", price: convertDhToUsd("500"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181546_Gallery_g8xvaz.jpg", url: "shop-womens.html" },
         // Winter Collection
         { name: "MEN'S VINTAGE-INSPIRED CREWNECK SWEATSHIRT", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181156_Gallery_qabe76.jpg", url: "winter-collection.html" },
-        { name: "MEN'S WINTER CAMO JACKET", price: convertDhToUsd("550"), image: "https://res.cloudinary.com/dav1750180863/Screenshot_20250617_181137_Gallery_o1pbhj.jpg", url: "winter-collection.html" }
+        { name: "MEN'S WINTER CAMO JACKET", price: convertDhToUsd("550"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181137_Gallery_o1pbhj.jpg", url: "winter-collection.html" }
     ];
 
     function openSearchOverlay(){document.getElementById("searchOverlay").style.display="flex"}
     function closeSearchOverlay(){document.getElementById("searchOverlay").style.display="none"}
     function handleSearch(e){e.preventDefault();const t=e.target.querySelector(".search-input").value;window.location.href=`search.html?q=${encodeURIComponent(t)}`}
-    
+
     function dynamicSearch(e) {
         const t = document.getElementById("searchResults");
         t.innerHTML = "";
@@ -333,23 +333,23 @@
             return;
         }
         const o = e.toLowerCase();
-        
+
         // Remove duplicates based on product name
         const uniqueProducts = Array.from(new Map(products.map(item => [item.name, item])).values());
-        
+
         const n = uniqueProducts.filter(item => item.name.toLowerCase().includes(o));
-        
+
         if (n.length > 0) {
             n.forEach(item => {
                 const resultLink = document.createElement("a");
                 resultLink.href = item.url;
                 resultLink.className = "search-result-item";
-                
+
                 resultLink.innerHTML = `
                     <img src="${item.image}" alt="${item.name}">
                     <div class="search-result-details">
                         <h4>${item.name}</h4>
-                        <p>$${item.price}</p> // Changed to display with USD symbol
+                        <p>$${item.price}</p>
                     </div>
                     <button class="shop-now" data-name="${item.name}" data-price="${item.price}" data-image="${item.image}">Add to cart</button>
                 `;
@@ -383,7 +383,7 @@
     // Modal, Auth, and Menu Logic
     function openModal(modalId) { document.getElementById(modalId).style.display = "flex"; }
     function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
-    
+
     document.addEventListener('DOMContentLoaded', () => {
         if(typeof renderCarousel === "function") renderCarousel();
         updateCartCount();
@@ -455,7 +455,7 @@
         document.getElementById('contactUs')?.addEventListener('click', () => { window.open('https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==', '_blank'); });
         document.getElementById('signOutMain')?.addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
         document.getElementById('signOutSettings')?.addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
-        
+
         document.querySelectorAll('.shop-now').forEach(button => {
             button.addEventListener('click', (e) => {
                 const name = e.target.dataset.name;
@@ -474,10 +474,10 @@
             });
         });
     });
-    
+
     function updateAccountSettingsMenu() { const user = auth.currentUser; if (user) { document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user'; document.getElementById('userNameDisplay').textContent = user.displayName || 'user'; document.getElementById('userEmailDisplay').textContent = user.email || ''; document.getElementById('newPasswordInput').value = ''; } }
     document.getElementById('changePasswordBtn')?.addEventListener('click', () => { const newPassword = document.getElementById('newPasswordInput').value.trim(); if (newPassword.length < 6) { alert('Password must be at least 6 characters long.'); return; } const user = auth.currentUser; if (user) { user.updatePassword(newPassword).then(() => { alert('Password changed successfully.'); document.getElementById('newPasswordInput').value = ''; }).catch(error => alert('Failed to change password: ' + error.message)); } else { alert('No user is currently signed in.'); } });
-    
+
     function updateCartCount() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
