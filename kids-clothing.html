@@ -41,38 +41,6 @@
       <i class="fas fa-search" onclick="openSearchOverlay()"></i>
       <a href="cart.html"><i class="fas fa-shopping-cart"></i><span id="cart-count">0</span></a>
       <i class="fas fa-user" id="userAccountIcon" style="cursor: pointer;"></i>
-      <div id="userDropupMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 250px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-          <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserName" style="font-weight: 900;">user</span></strong>
-          <span id="closeDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">&times;</span>
-        </div>
-        <div style="font-weight: 600; margin-bottom: 8px; cursor: pointer;" id="accountSettingsMain">Account Settings</div>
-        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="passwordPersonalInfoMain"><i class="fas fa-lock"></i> Password &amp; Personal Info</div>
-        <div style="font-weight: 600; margin: 15px 0 8px 0;">We're here to help, 24/7</div>
-        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="contactUs"><i class="fas fa-comment"></i> Contact Us</div>
-        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutMain"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
-      </div>
-      <div id="userAccountSettingsMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 280px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-          <button id="backToMainMenu" style="background:none; border:none; font-size: 1.2rem; cursor: pointer;">&#8592;</button>
-          <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserNameSettings" style="font-weight: 900;">user</span></strong>
-          <span id="closeSettingsDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">&times;</span>
-        </div>
-        <div style="margin-bottom: 10px;">
-          <label for="userNameDisplay" style="font-weight: 600;">Name:</label>
-          <div id="userNameDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">User Name</div>
-        </div>
-        <div style="margin-bottom: 10px;">
-          <label for="userEmailDisplay" style="font-weight: 600;">Email:</label>
-          <div id="userEmailDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">user@example.com</div>
-        </div>
-        <div style="margin-bottom: 15px;">
-          <label for="newPasswordInput" style="font-weight: 600;">Change Password:</label>
-          <input type="password" id="newPasswordInput" placeholder="New Password" style="width: 100%; padding: 6px 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px;">
-          <button id="changePasswordBtn" style="margin-top: 8px; width: 100%; padding: 8px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Change Password</button>
-        </div>
-        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutSettings"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
-      </div>
     </div>
   </header>
 
@@ -205,40 +173,50 @@
     </div>
   </div>
 
+  <div id="userDropupMenu" style="display:none; position: fixed; top: 50px; right: 20px; width: 250px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserName" style="font-weight: 900;">user</span></strong>
+        <span id="closeDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">×</span>
+    </div>
+    <div style="font-weight: 600; margin-bottom: 8px; cursor: pointer;" id="accountSettingsMain">Account Settings</div>
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="passwordPersonalInfoMain"><i class="fas fa-lock"></i> Password & Personal Info</div>
+    <div style="font-weight: 600; margin: 15px 0 8px 0;">We're here to help, 24/7</div>
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="contactUs"><i class="fas fa-comment"></i> Contact Us</div>
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutMain"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
+  </div>
+  <div id="userAccountSettingsMenu" style="display:none; position: fixed; top: 50px; right: 20px; width: 280px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <button id="backToMainMenu" style="background:none; border:none; font-size: 1.2rem; cursor: pointer;">&#8592;</button>
+        <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserNameSettings" style="font-weight: 900;">user</span></strong>
+        <span id="closeSettingsDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">×</span>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <label for="userNameDisplay" style="font-weight: 600;">Name:</label>
+        <div id="userNameDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">User Name</div>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <label for="userEmailDisplay" style="font-weight: 600;">Email:</label>
+        <div id="userEmailDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">user@example.com</div>
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label for="newPasswordInput" style="font-weight: 600;">Change Password:</label>
+        <input type="password" id="newPasswordInput" placeholder="New Password" style="width: 100%; padding: 6px 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px;">
+        <button id="changePasswordBtn" style="margin-top: 8px; width: 100%; padding: 8px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Change Password</button>
+    </div>
+    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutSettings"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
+  </div>
+  
   <script src="cart.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
   
   <script>
-    // --- SCRIPT TO CONTROL THE SIDE MENU AND MODALS ---
-    document.addEventListener('DOMContentLoaded', () => {
-        const menuIcon = document.querySelector('.menu-icon');
-        const sideMenu = document.getElementById('sideMenu');
-        const closeSideMenu = document.getElementById('closeSideMenu');
+    // Firebase Configuration
+    const firebaseConfig = { apiKey: "AIzaSyDelMOFKyvYx4u9FCgpq1HTr9eAoyjBjS0", authDomain: "abuy-77b4e.firebaseapp.com", projectId: "abuy-77b4e", storageBucket: "abuy-77b4e.appspot.com", messagingSenderId: "1081289117876", appId: "1:1081289117876:web:b3479e942dea9dc14607e1", measurementId: "G-31SH8VCRYG" };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-        if (menuIcon) {
-            menuIcon.addEventListener('click', (event) => {
-                event.stopPropagation();
-                sideMenu.style.width = '280px';
-            });
-        }
-
-        if (closeSideMenu) {
-            closeSideMenu.addEventListener('click', () => {
-                sideMenu.style.width = '0';
-            });
-        }
-
-        window.addEventListener('click', (event) => {
-            const menuIconContainer = document.querySelector('.menu-icon');
-            if (event.target !== sideMenu && !sideMenu.contains(event.target) && event.target !== menuIconContainer && !menuIconContainer.contains(event.target)) {
-                if (sideMenu.style.width === '280px') {
-                    sideMenu.style.width = '0';
-                }
-            }
-        });
-    });
-
+    // Products Array for Search
     const products = [
         // Autumn Collection
         { name: "VARSITY POLO CROP TOP", price: "350", image: "https://www.dropbox.com/scl/fi/uwhh020bcmhbh3jxfeyj7/Picsart_25-06-16_00-04-01-001.png?rlkey=6rdfyt52h6kndfr7hx1ayeugc&st=5n28lpxn&raw=1", url: "autumn-collection.html" },
@@ -275,7 +253,10 @@
         { name: "MEN'S WINTER CAMO JACKET", price: "550", image: "https://www.dropbox.com/scl/fi/2hxoc3nyv51t723adu17d/Picsart_25-06-16_18-48-04-533.png?rlkey=qsid1wfvqvc3gfqg51qt11gpa&st=fr4ehxkl&raw=1", url: "winter-collection.html" }
     ];
 
-    function openSearchOverlay(){document.getElementById("searchOverlay").style.display="flex"}function closeSearchOverlay(){document.getElementById("searchOverlay").style.display="none"}function handleSearch(e){e.preventDefault();const t=e.target.querySelector(".search-input").value;window.location.href=`search.html?q=${encodeURIComponent(t)}`}
+    // Search Functions
+    function openSearchOverlay(){document.getElementById("searchOverlay").style.display="flex"}
+    function closeSearchOverlay(){document.getElementById("searchOverlay").style.display="none"}
+    function handleSearch(e){e.preventDefault();const t=e.target.querySelector(".search-input").value;window.location.href=`search.html?q=${encodeURIComponent(t)}`}
     
     function dynamicSearch(e) {
         const t = document.getElementById("searchResults");
@@ -304,9 +285,11 @@
                 `;
                 t.appendChild(resultLink);
             });
-            // Add event listeners for "Add to cart" buttons dynamically
+            
             t.querySelectorAll('.shop-now').forEach(button => {
                 button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     const name = e.target.dataset.name;
                     const price = parseFloat(e.target.dataset.price);
                     const image = e.target.dataset.image;
@@ -329,19 +312,121 @@
         t.style.display = "block";
     }
 
-    const firebaseConfig = { apiKey: "AIzaSyDelMOFKyvYx4u9FCgpq1HTr9eAoyjBjS0", authDomain: "abuy-77b4e.firebaseapp.com", projectId: "abuy-77b4e", storageBucket: "abuy-77b4e.appspot.com", messagingSenderId: "1081289117876", appId: "1:1081289117876:web:b3479e942dea9dc14607e1", measurementId: "G-31SH8VCRYG" };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const loginForm = document.getElementById('loginForm');
-    const signupForm = document.getElementById('signupForm');
-    const userAccountIcon = document.getElementById('userAccountIcon');
+    // General UI/Auth Functions
+    function openModal(modalId) { document.getElementById(modalId).style.display = "flex"; }
+    function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
+    
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCount = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+        const cartCountSpan = document.getElementById('cart-count');
+        if(cartCountSpan) {
+            cartCountSpan.textContent = cartCount;
+        }
+    }
 
-    if (loginForm) { loginForm.addEventListener('submit', async (e) => { e.preventDefault(); const email = document.getElementById('loginEmail').value; const password = document.getElementById('loginPassword').value; try { await auth.signInWithEmailAndPassword(email, password); closeModal('loginModal'); } catch (error) { alert('Login failed: ' + error.message); } }); }
-    if (signupForm) { signupForm.addEventListener('submit', async (e) => { e.preventDefault(); const firstName = document.getElementById('signupFirstName').value.trim(); const email = document.getElementById('signupEmail').value; const password = document.getElementById('signupPassword').value; try { const userCredential = await auth.createUserWithEmailAndPassword(email, password); await userCredential.user.updateProfile({ displayName: firstName }); closeModal('signupModal'); } catch (error) { alert('Signup failed: ' + error.message); } }); }
+    function updateAccountSettingsMenu() { 
+        const user = auth.currentUser; 
+        if (user) { 
+            document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user'; 
+            document.getElementById('userNameDisplay').textContent = user.displayName || 'user'; 
+            document.getElementById('userEmailDisplay').textContent = user.email || ''; 
+            document.getElementById('newPasswordInput').value = ''; 
+        } 
+    }
+
+    // Main Event Listeners
+    document.addEventListener('DOMContentLoaded', () => {
+        updateCartCount();
+
+        const menuIcon = document.querySelector('.menu-icon');
+        const sideMenu = document.getElementById('sideMenu');
+        const closeSideMenu = document.getElementById('closeSideMenu');
+        if (menuIcon) {
+            menuIcon.addEventListener('click', (event) => {
+                event.stopPropagation();
+                sideMenu.style.width = '280px';
+            });
+        }
+        if (closeSideMenu) {
+            closeSideMenu.addEventListener('click', () => {
+                sideMenu.style.width = '0';
+            });
+        }
+        window.addEventListener('click', (event) => {
+            const menuIconContainer = document.querySelector('.menu-icon');
+            if (event.target !== sideMenu && !sideMenu.contains(event.target) && event.target !== menuIconContainer && !menuIconContainer.contains(event.target)) {
+                if (sideMenu.style.width === '280px') {
+                    sideMenu.style.width = '0';
+                }
+            }
+        });
+
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) { 
+            loginForm.addEventListener('submit', async (e) => { 
+                e.preventDefault(); 
+                const email = document.getElementById('loginEmail').value; 
+                const password = document.getElementById('loginPassword').value; 
+                try { 
+                    await auth.signInWithEmailAndPassword(email, password); 
+                    closeModal('loginModal'); 
+                } catch (error) { 
+                    alert('Login failed: ' + error.message); 
+                } 
+            }); 
+        }
+
+        const signupForm = document.getElementById('signupForm');
+        if (signupForm) { 
+            signupForm.addEventListener('submit', async (e) => { 
+                e.preventDefault(); 
+                const firstName = document.getElementById('signupFirstName').value.trim(); 
+                const email = document.getElementById('signupEmail').value; 
+                const password = document.getElementById('signupPassword').value; 
+                try { 
+                    const userCredential = await auth.createUserWithEmailAndPassword(email, password); 
+                    await userCredential.user.updateProfile({ displayName: firstName }); 
+                    closeModal('signupModal'); 
+                } catch (error) { 
+                    alert('Signup failed: ' + error.message); 
+                } 
+            }); 
+        }
+        
+        document.querySelectorAll('.product-grid .shop-now').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const name = e.target.dataset.name;
+                const price = parseFloat(e.target.dataset.price);
+                const image = e.target.dataset.image;
+                const product = { name, price, image, quantity: 1 };
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const existingProductIndex = cart.findIndex(item => item.name === name);
+                if (existingProductIndex > -1) {
+                    cart[existingProductIndex].quantity += 1;
+                } else {
+                    cart.push(product);
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+            });
+        });
+
+        document.getElementById('closeDropup')?.addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; });
+        document.getElementById('closeSettingsDropup')?.addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; });
+        document.getElementById('backToMainMenu')?.addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; document.getElementById('userDropupMenu').style.display = 'block'; });
+        document.getElementById('accountSettingsMain')?.addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; document.getElementById('userAccountSettingsMenu').style.display = 'block'; updateAccountSettingsMenu(); });
+        document.getElementById('passwordPersonalInfoMain')?.addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; document.getElementById('userAccountSettingsMenu').style.display = 'block'; updateAccountSettingsMenu(); });
+        document.getElementById('contactUs')?.addEventListener('click', () => { window.open('https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==', '_blank'); });
+        document.getElementById('signOutMain')?.addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
+        document.getElementById('signOutSettings')?.addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
+        document.getElementById('changePasswordBtn')?.addEventListener('click', () => { const newPassword = document.getElementById('newPasswordInput').value.trim(); if (newPassword.length < 6) { alert('Password must be at least 6 characters long.'); return; } const user = auth.currentUser; if (user) { user.updatePassword(newPassword).then(() => { alert('Password changed successfully.'); document.getElementById('newPasswordInput').value = ''; }).catch(error => alert('Failed to change password: ' + error.message)); } else { alert('No user is currently signed in.'); } });
+    });
 
     auth.onAuthStateChanged(user => {
       const dropupMenu = document.getElementById('userDropupMenu');
       const welcomeUserName = document.getElementById('welcomeUserName');
+      const userAccountIcon = document.getElementById('userAccountIcon');
       if (user) {
         if (userAccountIcon) { userAccountIcon.className = 'fas fa-user-check'; userAccountIcon.onclick = () => { dropupMenu.style.display = dropupMenu.style.display === 'block' ? 'none' : 'block'; }; }
         if (welcomeUserName) { welcomeUserName.textContent = user.displayName || 'user'; }
@@ -353,21 +438,6 @@
         if (welcomeUserName) { welcomeUserName.textContent = 'user'; }
       }
     });
-
-    function openModal(modalId) { document.getElementById(modalId).style.display = "flex"; }
-    function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
-    document.addEventListener('click', function(event) { const dropupMenu = document.getElementById('userDropupMenu'); const userIcon = document.getElementById('userAccountIcon'); if (dropupMenu && userIcon && !dropupMenu.contains(event.target) && !userIcon.contains(event.target)) { dropupMenu.style.display = 'none'; } });
-    document.getElementById('closeDropup').addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; });
-    document.getElementById('closeSettingsDropup').addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; });
-    document.getElementById('backToMainMenu').addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; document.getElementById('userDropupMenu').style.display = 'block'; });
-    document.getElementById('accountSettingsMain').addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; document.getElementById('userAccountSettingsMenu').style.display = 'block'; updateAccountSettingsMenu(); });
-    document.getElementById('passwordPersonalInfoMain').addEventListener('click', () => { const mainMenu = document.getElementById('userDropupMenu'); const settingsMenu = document.getElementById('userAccountSettingsMenu'); if (mainMenu && settingsMenu) { mainMenu.style.display = 'none'; settingsMenu.style.display = 'block'; updateAccountSettingsMenu(); } });
-    document.getElementById('contactUs').addEventListener('click', () => { window.open('https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==', '_blank'); });
-    document.getElementById('signOutMain').addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
-    document.getElementById('signOutSettings').addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
-    function updateAccountSettingsMenu() { const user = auth.currentUser; if (user) { document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user'; document.getElementById('userNameDisplay').textContent = user.displayName || 'user'; document.getElementById('userEmailDisplay').textContent = user.email || ''; document.getElementById('newPasswordInput').value = ''; } }
-    document.getElementById('changePasswordBtn').addEventListener('click', () => { const newPassword = document.getElementById('newPasswordInput').value.trim(); if (newPassword.length < 6) { alert('Password must be at least 6 characters long.'); return; } const user = auth.currentUser; if (user) { user.updatePassword(newPassword).then(() => { alert('Password changed successfully.'); document.getElementById('newPasswordInput').value = ''; }).catch(error => alert('Failed to change password: ' + error.message)); } else { alert('No user is currently signed in.'); } });
-    document.addEventListener('DOMContentLoaded', updateCartCount);
   </script>
 </body>
 </html>
