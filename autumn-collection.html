@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>4Abuy - Autumn Collection</title>
-  <link rel="icon" href="logo.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f8f8f8;color:#111}#cart-count{color:red!important;font-weight:700;font-size:.9rem;margin-left:4px}.announcement{background:#f4f4f4;color:#111;text-align:center;font-size:1rem;padding:.5rem;letter-spacing:1px}header{position:fixed;top:0;left:0;width:100%;z-index:999;box-shadow:0 2px 6px rgba(0,0,0,.15);background-color:#fff;color:#111;display:flex;justify-content:space-between;align-items:center;padding:10px 20px}.header-left{display:flex;align-items:center;gap:1rem}.menu-icon{font-size:24px;cursor:pointer}.icons{display:flex;gap:20px;font-size:20px;padding-right:40px;align-items:center;white-space:nowrap}.icons i{cursor:pointer;transition:transform .2s}.icons i:hover{transform:scale(1.2)}.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;padding:120px 20px 40px;max-width:1200px;margin:0 auto}.product-card{background:#fff;border-radius:9px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06);text-align:center}.product-card img{width:100%;height:300px;object-fit:cover}.product-card h3{font-size:1rem;margin:10px 0 5px}.product-card .price{font-size:.95rem;color:#000;font-weight:700}.shop-now{margin-top:10px;padding:8px 20px;font-size:.9rem;background-color:#000;color:#fff;border:none;border-radius:20px;cursor:pointer;margin-bottom:10px}.shop-now:hover{background-color:#444}.about-us{padding:60px 20px;background:#f8f8f8;max-width:1200px;margin:0 auto}.auth-modal{display:none;position:fixed;z-index:10000;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;font-family:'Segoe UI',Arial,sans-serif}.auth-modal-content{background-color:#fff;margin:auto;padding:30px;border-radius:12px;box-shadow:0 0 30px rgba(0,0,0,.3);width:90%;max-width:450px;position:relative;text-align:center}.auth-modal .close-btn{position:absolute;top:10px;right:20px;color:#aaa;font-size:28px;font-weight:700;cursor:pointer}.auth-modal h2{margin-top:0;margin-bottom:25px;font-size:1.8rem;color:#333}.auth-modal input[type=email],.auth-modal input[type=password]{width:calc(100% - 24px);padding:12px;margin-bottom:20px;border:1px solid #ccc;border-radius:5px;font-size:1rem;box-sizing:border-box}.auth-modal button[type=submit]{background-color:#000;color:#fff;padding:12px 20px;border:none;border-radius:25px;cursor:pointer;font-size:1rem;font-weight:600;width:100%;transition:background-color .2s;box-sizing:border-box}.auth-modal .switch-form-link{display:block;margin-top:20px;font-size:.9rem;color:#555}.auth-modal .switch-form-link a{color:#cc00aa;text-decoration:underline;font-weight:700;cursor:pointer}.icons a{color:#000}.search-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);z-index:10001;justify-content:center;align-items:flex-start;padding-top:100px}.search-container{width:90%;max-width:600px;background:#fff;padding:20px;border-radius:8px;position:relative}.search-form{display:flex;gap:10px}.search-input{flex:1;padding:12px;border:2px solid #ddd;border-radius:4px;font-size:16px}.search-submit{padding:12px 24px;background:#000;color:#fff;border:none;border-radius:4px;cursor:pointer}.close-search{position:absolute;top:-40px;right:0;color:#fff;font-size:24px;cursor:pointer}.search-results-container{margin-top:15px;max-height:400px;overflow-y:auto;background:#fdfdfd;border-radius:4px;border:1px solid #eee;display:none}.search-result-item{display:flex;align-items:center;padding:10px;border-bottom:1px solid #f0f0f0; text-decoration: none; color: inherit;}.search-result-item:last-child{border-bottom:none}.search-result-item img{width:60px;height:60px;object-fit:cover;margin-right:15px;border-radius:4px}.search-result-details{flex-grow:1}.search-result-details h4{margin:0 0 5px;font-size:1rem}.search-result-details p{margin:0;font-size:.9rem;color:#333;font-weight:700}.search-result-item .shop-now{padding:6px 12px;font-size:.8rem;white-space:nowrap}
@@ -42,6 +41,38 @@
       <i class="fas fa-search" onclick="openSearchOverlay()"></i>
       <a href="cart.html"><i class="fas fa-shopping-cart"></i><span id="cart-count">0</span></a>
       <i class="fas fa-user" id="userAccountIcon" style="cursor: pointer;"></i>
+      <div id="userDropupMenu" style="display:none; position: fixed; top: 50px; right: 20px; width: 250px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserName" style="font-weight: 900;">user</span></strong>
+          <span id="closeDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">×</span>
+        </div>
+        <div style="font-weight: 600; margin-bottom: 8px; cursor: pointer;" id="accountSettingsMain">Account Settings</div>
+        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="passwordPersonalInfoMain"><i class="fas fa-lock"></i> Password &amp; Personal Info</div>
+        <div style="font-weight: 600; margin: 15px 0 8px 0;">We're here to help, 24/7</div>
+        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="contactUs"><i class="fas fa-comment"></i> Contact Us</div>
+        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutMain"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
+      </div>
+      <div id="userAccountSettingsMenu" style="display:none; position: fixed; top: 50px; right: 20px; width: 280px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <button id="backToMainMenu" style="background:none; border:none; font-size: 1.2rem; cursor: pointer;">←</button>
+          <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserNameSettings" style="font-weight: 900;">user</span></strong>
+          <span id="closeSettingsDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">×</span>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <label for="userNameDisplay" style="font-weight: 600;">Name:</label>
+          <div id="userNameDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">User Name</div>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <label for="userEmailDisplay" style="font-weight: 600;">Email:</label>
+          <div id="userEmailDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">user@example.com</div>
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label for="newPasswordInput" style="font-weight: 600;">Change Password:</label>
+          <input type="password" id="newPasswordInput" placeholder="New Password" style="width: 100%; padding: 6px 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px;">
+          <button id="changePasswordBtn" style="margin-top: 8px; width: 100%; padding: 8px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Change Password</button>
+        </div>
+        <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutSettings"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
+      </div>
     </div>
   </header>
 
@@ -61,38 +92,38 @@
     <div class="product-card">
       <img src="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181650_Gallery_suych0.jpg" alt="Product 1">
       <h3>VARSITY POLO CROP TOP</h3>
-      <p class="price">$38.50</p>
-      <button class="shop-now" data-name="VARSITY POLO CROP TOP" data-price="38.50" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181650_Gallery_suych0.jpg">Add to cart</button>
+      <p class="price">350 DH</p>
+      <button class="shop-now" data-name="VARSITY POLO CROP TOP" data-price="350" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181650_Gallery_suych0.jpg">Add to cart</button>
     </div>
     <div class="product-card">
       <img src="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181659_Gallery_nxmaz7.jpg" alt="Product 6">
       <h3>MEN'S RELAXED FIT POLO</h3>
-      <p class="price">$38.50</p>
-      <button class="shop-now" data-name="MEN'S RELAXED FIT POLO" data-price="38.50" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181659_Gallery_nxmaz7.jpg">Add to cart</button>
+      <p class="price">350 DH</p>
+      <button class="shop-now" data-name="MEN'S RELAXED FIT POLO" data-price="350" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181659_Gallery_nxmaz7.jpg">Add to cart</button>
     </div>
     <div class="product-card">
       <img src="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180852/Screenshot_20250617_181628_Gallery_cvryuy.jpg" alt="Product 7">
       <h3>SUMMER MEADOW DRESS</h3>
-      <p class="price">$82.50</p>
-      <button class="shop-now" data-name="SUMMER MEADOW DRESS" data-price="82.50" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180852/Screenshot_20250617_181628_Gallery_cvryuy.jpg">Add to cart</button>
+      <p class="price">750 DH</p>
+      <button class="shop-now" data-name="SUMMER MEADOW DRESS" data-price="750" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180852/Screenshot_20250617_181628_Gallery_cvryuy.jpg">Add to cart</button>
     </div>
     <div class="product-card">
       <img src="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180862/Screenshot_20250617_181211_Gallery_y1cfyx.jpg" alt="Product 8">
       <h3>GUIRENIAO MEN'S POLO SHIRT</h3>
-      <p class="price">$38.50</p>
-      <button class="shop-now" data-name="GUIRENIAO MEN'S POLO SHIRT" data-price="38.50" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180862/Screenshot_20250617_181211_Gallery_y1cfyx.jpg">Add to cart</button>
+      <p class="price">350 DH</p>
+      <button class="shop-now" data-name="GUIRENIAO MEN'S POLO SHIRT" data-price="350" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180862/Screenshot_20250617_181211_Gallery_y1cfyx.jpg">Add to cart</button>
     </div>
     <div class="product-card">
       <img src="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180856/Screenshot_20250617_181457_Gallery_ztknre.jpg" alt="Product 9">
       <h3>MEN'S LIGHT BLUE JEANS</h3>
-      <p class="price">$44.00</p>
-      <button class="shop-now" data-name="MEN'S LIGHT BLUE JEANS" data-price="44.00" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180856/Screenshot_20250617_181457_Gallery_ztknre.jpg">Add to cart</button>
+      <p class="price">400 DH</p>
+      <button class="shop-now" data-name="MEN'S LIGHT BLUE JEANS" data-price="400" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180856/Screenshot_20250617_181457_Gallery_ztknre.jpg">Add to cart</button>
     </div>
     <div class="product-card">
       <img src="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181601_Gallery_rnpkwg.jpg" alt="Product 10">
       <h3>THE FLORA DRESS</h3>
-      <p class="price">$82.50</p>
-      <button class="shop-now" data-name="THE FLORA DRESS" data-price="82.50" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181601_Gallery_rnpkwg.jpg">Add to cart</button>
+      <p class="price">750 DH</p>
+      <button class="shop-now" data-name="THE FLORA DRESS" data-price="750" data-image="https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181601_Gallery_rnpkwg.jpg">Add to cart</button>
     </div>
   </div>
 
@@ -174,39 +205,6 @@
     </div>
   </div>
 
-  <div id="userDropupMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 250px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-      <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserName" style="font-weight: 900;">user</span></strong>
-      <span id="closeDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">×</span>
-    </div>
-    <div style="font-weight: 600; margin-bottom: 8px; cursor: pointer;" id="accountSettingsMain">Account Settings</div>
-    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="passwordPersonalInfoMain"><i class="fas fa-lock"></i> Password &amp; Personal Info</div>
-    <div style="font-weight: 600; margin: 15px 0 8px 0;">We're here to help, 24/7</div>
-    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="contactUs"><i class="fas fa-comment"></i> Contact Us</div>
-    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutMain"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
-  </div>
-  <div id="userAccountSettingsMenu" style="display:none; position: absolute; top: 50px; right: 20px; width: 280px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; z-index: 10000; padding: 15px;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-      <button id="backToMainMenu" style="background:none; border:none; font-size: 1.2rem; cursor: pointer;">←</button>
-      <strong style="font-size: 1.1rem;">Welcome <span id="welcomeUserNameSettings" style="font-weight: 900;">user</span></strong>
-      <span id="closeSettingsDropup" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">×</span>
-    </div>
-    <div style="margin-bottom: 10px;">
-      <label for="userNameDisplay" style="font-weight: 600;">Name:</label>
-      <div id="userNameDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">User Name</div>
-    </div>
-    <div style="margin-bottom: 10px;">
-      <label for="userEmailDisplay" style="font-weight: 600;">Email:</label>
-      <div id="userEmailDisplay" style="padding: 6px 8px; background: #f0f0f0; border-radius: 4px; margin-top: 4px;">user@example.com</div>
-    </div>
-    <div style="margin-bottom: 15px;">
-      <label for="newPasswordInput" style="font-weight: 600;">Change Password:</label>
-      <input type="password" id="newPasswordInput" placeholder="New Password" style="width: 100%; padding: 6px 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px;">
-      <button id="changePasswordBtn" style="margin-top: 8px; width: 100%; padding: 8px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Change Password</button>
-    </div>
-    <div style="padding: 8px 0; cursor: pointer; display: flex; align-items: center; gap: 8px;" id="signOutSettings"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
-  </div>
-
   <script src="cart.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
@@ -239,61 +237,42 @@
                 }
             }
         });
-
-        // --- ADD TO CART FUNCTIONALITY ---
-        document.querySelectorAll('.product-grid .shop-now').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const name = e.target.dataset.name;
-                const price = parseFloat(e.target.dataset.price);
-                const image = e.target.dataset.image;
-                const product = { name, price, image, quantity: 1 };
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                const existingProductIndex = cart.findIndex(item => item.name === name);
-                if (existingProductIndex > -1) {
-                    cart[existingProductIndex].quantity += 1;
-                } else {
-                    cart.push(product);
-                }
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCartCount();
-            });
-        });
     });
 
     const products = [
         // Autumn Collection
-        { name: "VARSITY POLO CROP TOP", price: "38.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181650_Gallery_suych0.jpg", url: "autumn-collection.html" },
-        { name: "MEN'S RELAXED FIT POLO", price: "38.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181659_Gallery_nxmaz7.jpg", url: "autumn-collection.html" },
-        { name: "SUMMER MEADOW DRESS", price: "82.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180852/Screenshot_20250617_181628_Gallery_cvryuy.jpg", url: "autumn-collection.html" },
-        { name: "GUIRENIAO MEN'S POLO SHIRT", price: "38.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180862/Screenshot_20250617_181211_Gallery_y1cfyx.jpg", url: "autumn-collection.html" },
-        { name: "MEN'S LIGHT BLUE JEANS", price: "44.00", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180856/Screenshot_20250617_181457_Gallery_ztknre.jpg", url: "autumn-collection.html" },
-        { name: "THE FLORA DRESS", price: "82.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181601_Gallery_rnpkwg.jpg", url: "autumn-collection.html" },
+        { name: "VARSITY POLO CROP TOP", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181650_Gallery_suych0.jpg", url: "autumn-collection.html" },
+        { name: "MEN'S RELAXED FIT POLO", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181659_Gallery_nxmaz7.jpg", url: "autumn-collection.html" },
+        { name: "SUMMER MEADOW DRESS", price: "750", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180852/Screenshot_20250617_181628_Gallery_cvryuy.jpg", url: "autumn-collection.html" },
+        { name: "GUIRENIAO MEN'S POLO SHIRT", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180862/Screenshot_20250617_181211_Gallery_y1cfyx.jpg", url: "autumn-collection.html" },
+        { name: "MEN'S LIGHT BLUE JEANS", price: "400", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180856/Screenshot_20250617_181457_Gallery_ztknre.jpg", url: "autumn-collection.html" },
+        { name: "THE FLORA DRESS", price: "750", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181601_Gallery_rnpkwg.jpg", url: "autumn-collection.html" },
         // Everyday Luxe
-        { name: "PROVENCAL GARDEN DRESS", price: "82.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180852/Screenshot_20250617_181638_Gallery_ixl6bn.jpg", url: "everyday-luxe.html" },
-        { name: "BLUE PORCELAIN BOW TOP", price: "44.00", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180854/Screenshot_20250617_181530_Gallery_ti9e6z.jpg", url: "everyday-luxe.html" },
+        { name: "PROVENCAL GARDEN DRESS", price: "750", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180852/Screenshot_20250617_181638_Gallery_ixl6bn.jpg", url: "everyday-luxe.html" },
+        { name: "BLUE PORCELAIN BOW TOP", price: "400", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180854/Screenshot_20250617_181530_Gallery_ti9e6z.jpg", url: "everyday-luxe.html" },
         // Fit Mode
-        { name: "WOMEN'S GYM & BARBELL GRAPHIC PRINT T-SHIRT", price: "22.00", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180859/Screenshot_20250617_181348_Gallery_crqzwx.jpg", url: "fit-mode.html" },
-        { name: "MEN'S ATHELTIC PANTS", price: "33.00", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180859/Screenshot_20250617_181337_Gallery_tepxet.jpg", url: "fit-mode.html" },
-        { name: "MEN'S QUICK-DRY ATHLETIC SHORTS", price: "22.00", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180856/Screenshot_20250617_181436_Gallery_fv8smt.jpg", url: "fit-mode.html" },
-        { name: "MEN'S HOODED SHORT SLEEVE T-SHIRT", price: "33.00", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180858/Screenshot_20250617_181359_Gallery_atdeza.jpg", url: "fit-mode.html" },
-        { name: "MEN'S QUICK-DRY VEST", price: "22.00", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181412_Gallery_dchdbt.jpg", url: "fit-mode.html" },
-        { name: "MEN'S HIGH-NECK ATHLETIC T-SHIRT", price: "33.00", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181423_Gallery_jxcxm7.jpg", url: "fit-mode.html" },
+        { name: "WOMEN'S GYM & BARBELL GRAPHIC PRINT T-SHIRT", price: "200", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180859/Screenshot_20250617_181348_Gallery_crqzwx.jpg", url: "fit-mode.html" },
+        { name: "MEN'S ATHELTIC PANTS", price: "300", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180859/Screenshot_20250617_181337_Gallery_tepxet.jpg", url: "fit-mode.html" },
+        { name: "MEN'S QUICK-DRY ATHLETIC SHORTS", price: "200", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180856/Screenshot_20250617_181436_Gallery_fv8smt.jpg", url: "fit-mode.html" },
+        { name: "MEN'S HOODED SHORT SLEEVE T-SHIRT", price: "300", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180858/Screenshot_20250617_181359_Gallery_atdeza.jpg", url: "fit-mode.html" },
+        { name: "MEN'S QUICK-DRY VEST", price: "200", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181412_Gallery_dchdbt.jpg", url: "fit-mode.html" },
+        { name: "MEN'S HIGH-NECK ATHLETIC T-SHIRT", price: "300", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181423_Gallery_jxcxm7.jpg", url: "fit-mode.html" },
         // Kids Clothing
-        { name: "BOYS' SUMMER DENIM 2PCS SET", price: "33.00", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181447_Gallery_xiab27.jpg", url: "kids-clothing.html" },
-        { name: "4PCS SET FOR BABY BOYS", price: "38.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_181023_Gallery_kahkjg.jpg", url: "kids-clothing.html" },
-        { name: "2PCS YOUNG BOY'S CASUAL CARTOON BEAR", price: "27.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_180943_Gallery_b063l5.jpg", url: "kids-clothing.html" },
-        { name: "YOUNGSTERS BOYS SUMMER SOLID COLOR JACQUARD 2PCS", price: "27.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750184012/Screenshot_20250617_191315_Dropbox_qlllms.jpg", url: "kids-clothing.html" },
-        { name: "NEW GIRLS' ROUND NECK SHORT SLEEVE", price: "38.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180860/Screenshot_20250617_181308_Gallery_v4nydq.jpg", url: "kids-clothing.html" },
-        { name: "2PCS TRENDY GIRLS SUMMER OUTFIT", price: "33.00", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180861/Screenshot_20250617_181325_Gallery_uugn2e.jpg", url: "kids-clothing.html" },
+        { name: "BOYS' SUMMER DENIM 2PCS SET", price: "300", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181447_Gallery_xiab27.jpg", url: "kids-clothing.html" },
+        { name: "4PCS SET FOR BABY BOYS", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_181023_Gallery_kahkjg.jpg", url: "kids-clothing.html" },
+        { name: "2PCS YOUNG BOY'S CASUAL CARTOON BEAR", price: "250", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_180943_Gallery_b063l5.jpg", url: "kids-clothing.html" },
+        { name: "YOUNGSTERS BOYS SUMMER SOLID COLOR JACQUARD 2PCS", price: "250", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750184012/Screenshot_20250617_191315_Dropbox_qlllms.jpg", url: "kids-clothing.html" },
+        { name: "NEW GIRLS' ROUND NECK SHORT SLEEVE", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180860/Screenshot_20250617_181308_Gallery_v4nydq.jpg", url: "kids-clothing.html" },
+        { name: "2PCS TRENDY GIRLS SUMMER OUTFIT", price: "300", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180861/Screenshot_20250617_181325_Gallery_uugn2e.jpg", url: "kids-clothing.html" },
         // Mens Collection
-        { name: "MEN'S LINEN SHIRT & SHORTS SET", price: "44.00", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180850/Screenshot_20250617_181716_Gallery_j4vtix.jpg", url: "shop-mens.html" },
-        { name: "MEN'S WINTER JACKET", price: "60.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180862/Screenshot_20250617_181225_Gallery_dnzl0z.jpg", url: "shop-mens.html" },
-        { name: "MENS' CASUAL SHORT SLEEVE T-SHIRT AND SHORT SET-KNIT", price: "38.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180854/Screenshot_20250617_181509/Gallery_euud9i.jpg", url: "shop-mens.html" },
+        { name: "MEN'S LINEN SHIRT & SHORTS SET", price: "400", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180850/Screenshot_20250617_181716_Gallery_j4vtix.jpg", url: "shop-mens.html" },
+        { name: "MEN'S WINTER JACKET", price: "550", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180862/Screenshot_20250617_181225_Gallery_dnzl0z.jpg", url: "shop-mens.html" },
+        { name: "MENS' CASUAL SHORT SLEEVE T-SHIRT AND SHORT SET-KNIT", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180854/Screenshot_20250617_181509/Gallery_euud9i.jpg", url: "shop-mens.html" },
         // Womens Collection
-        { name: "HIGH-NECK ZIP-UP PUFFER JACKET", price: "55.00", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181546_Gallery_g8xvaz.jpg", url: "shop-womens.html" },
+        { name: "HIGH-NECK ZIP-UP PUFFER JACKET", price: "500", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181546_Gallery_g8xvaz.jpg", url: "shop-womens.html" },
         // Winter Collection
-        { name: "MEN'S VINTAGE-INSPIRED CREWNECK SWEATSHIRT", price: "38.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181156_Gallery_qabe76.jpg", url: "winter-collection.html" },
-        { name: "MEN'S WINTER CAMO JACKET", price: "60.50", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181137_Gallery_o1pbhj.jpg", url: "winter-collection.html" }
+        { name: "MEN'S VINTAGE-INSPIRED CREWNECK SWEATSHIRT", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181156_Gallery_qabe76.jpg", url: "winter-collection.html" },
+        { name: "MEN'S WINTER CAMO JACKET", price: "550", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181137_Gallery_o1pbhj.jpg", url: "winter-collection.html" }
     ];
 
     function openSearchOverlay(){document.getElementById("searchOverlay").style.display="flex"}
@@ -321,7 +300,7 @@
                     <img src="${item.image}" alt="${item.name}">
                     <div class="search-result-details">
                         <h4>${item.name}</h4>
-                        <p>$${item.price}</p>
+                        <p>${item.price} DH</p>
                     </div>
                     <button class="shop-now" data-name="${item.name}" data-price="${item.price}" data-image="${item.image}">Add to cart</button>
                 `;
@@ -350,15 +329,6 @@
             t.innerHTML = '<p style="padding: 10px; text-align: center;">No products found.</p>';
         }
         t.style.display = "block";
-    }
-
-    function updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-        const cartCountSpan = document.getElementById('cart-count');
-        if (cartCountSpan) {
-            cartCountSpan.textContent = totalQuantity;
-        }
     }
 
     const firebaseConfig = { apiKey: "AIzaSyDelMOFKyvYx4u9FCgpq1HTr9eAoyjBjS0", authDomain: "abuy-77b4e.firebaseapp.com", projectId: "abuy-77b4e", storageBucket: "abuy-77b4e.appspot.com", messagingSenderId: "1081289117876", appId: "1:1081289117876:web:b3479e942dea9dc14607e1", measurementId: "G-31SH8VCRYG" };
@@ -399,7 +369,6 @@
     document.getElementById('signOutSettings').addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
     function updateAccountSettingsMenu() { const user = auth.currentUser; if (user) { document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user'; document.getElementById('userNameDisplay').textContent = user.displayName || 'user'; document.getElementById('userEmailDisplay').textContent = user.email || ''; document.getElementById('newPasswordInput').value = ''; } }
     document.getElementById('changePasswordBtn').addEventListener('click', () => { const newPassword = document.getElementById('newPasswordInput').value.trim(); if (newPassword.length < 6) { alert('Password must be at least 6 characters long.'); return; } const user = auth.currentUser; if (user) { user.updatePassword(newPassword).then(() => { alert('Password changed successfully.'); document.getElementById('newPasswordInput').value = ''; }).catch(error => alert('Failed to change password: ' + error.message)); } else { alert('No user is currently signed in.'); } });
-    
     document.addEventListener('DOMContentLoaded', updateCartCount);
   </script>
 </body>
