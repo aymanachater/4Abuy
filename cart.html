@@ -270,7 +270,7 @@
   <div class="cart-container" id="cart-items">
     </div>
   <div id="cart-total" style="max-width: 1200px; margin: 20px auto; font-size: 1.2rem; font-weight: bold; text-align: right; padding-right: 20px;">
-    Total Price: 0.00 DH
+    Total Price: $0.00
   </div>
 
   <div style="max-width: 1200px; margin: 10px auto 40px auto; padding: 0 20px; text-align: center;">
@@ -410,41 +410,49 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
-    // Products array for search
+    // Exchange Rate (Update this value as needed)
+    const DH_TO_USD_RATE = 0.10; // Example: 1 DH = 0.10 USD (as of 2025-06-18, check current rate for accuracy)
+
+    // Function to convert DH to USD (added for consistency, though product prices should already be in USD from other pages)
+    function convertDhToUsd(priceInDh) {
+        return (parseFloat(priceInDh) * DH_TO_USD_RATE).toFixed(2);
+    }
+
+    // Products array for search (prices converted to USD)
     const products = [
         // Autumn Collection
-        { name: "VARSITY POLO CROP TOP", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181650_Gallery_suych0.jpg", url: "autumn-collection.html" },
-        { name: "MEN'S RELAXED FIT POLO", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181659_Gallery_nxmaz7.jpg", url: "autumn-collection.html" },
-        { name: "SUMMER MEADOW DRESS", price: "750", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180852/Screenshot_20250617_181628_Gallery_cvryuy.jpg", url: "autumn-collection.html" },
-        { name: "GUIRENIAO MEN'S POLO SHIRT", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180862/Screenshot_20250617_181211_Gallery_y1cfyx.jpg", url: "autumn-collection.html" },
-        { name: "MEN'S LIGHT BLUE JEANS", price: "400", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180856/Screenshot_20250617_181457_Gallery_ztknre.jpg", url: "autumn-collection.html" },
-        { name: "THE FLORA DRESS", price: "750", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181601_Gallery_rnpkwg.jpg", url: "autumn-collection.html" },
+        { name: "VARSITY POLO CROP TOP", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181650_Gallery_suych0.jpg", url: "autumn-collection.html" },
+        { name: "MEN'S RELAXED FIT POLO", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180851/Screenshot_20250617_181659_Gallery_nxmaz7.jpg", url: "autumn-collection.html" },
+        { name: "SUMMER MEADOW DRESS", price: convertDhToUsd("750"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180852/Screenshot_20250617_181628_Gallery_cvryuy.jpg", url: "autumn-collection.html" },
+        { name: "GUIRENIAO MEN'S POLO SHIRT", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180862/Screenshot_20250617_181211_Gallery_y1cfyx.jpg", url: "autumn-collection.html" },
+        { name: "MEN'S LIGHT BLUE JEANS", price: convertDhToUsd("400"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180856/Screenshot_20250617_181457_Gallery_ztknre.jpg", url: "autumn-collection.html" },
+        { name: "THE FLORA DRESS", price: convertDhToUsd("750"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181601_Gallery_rnpkwg.jpg", url: "autumn-collection.html" },
         // Everyday Luxe
-        { name: "PROVENCAL GARDEN DRESS", price: "750", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180852/Screenshot_20250617_181638_Gallery_ixl6bn.jpg", url: "everyday-luxe.html" },
-        { name: "BLUE PORCELAIN BOW TOP", price: "400", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180854/Screenshot_20250617_181530_Gallery_ti9e6z.jpg", url: "everyday-luxe.html" },
+        { name: "PROVENCAL GARDEN DRESS", price: convertDhToUsd("750"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180852/Screenshot_20250617_181638_Gallery_ixl6bn.jpg", url: "everyday-luxe.html" },
+        { name: "BLUE PORCELAIN BOW TOP", price: convertDhToUsd("400"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180854/Screenshot_20250617_181530_Gallery_ti9e6z.jpg", url: "everyday-luxe.html" },
         // Fit Mode
-        { name: "WOMEN'S GYM & BARBELL GRAPHIC PRINT T-SHIRT", price: "200", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180859/Screenshot_20250617_181348_Gallery_crqzwx.jpg", url: "fit-mode.html" },
-        { name: "MEN'S ATHELTIC PANTS", price: "300", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180859/Screenshot_20250617_181337_Gallery_tepxet.jpg", url: "fit-mode.html" },
-        { name: "MEN'S QUICK-DRY ATHLETIC SHORTS", price: "200", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180856/Screenshot_20250617_181436_Gallery_fv8smt.jpg", url: "fit-mode.html" },
-        { name: "MEN'S HOODED SHORT SLEEVE T-SHIRT", price: "300", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180858/Screenshot_20250617_181359_Gallery_atdeza.jpg", url: "fit-mode.html" },
-        { name: "MEN'S QUICK-DRY VEST", price: "200", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181412_Gallery_dchdbt.jpg", url: "fit-mode.html" },
-        { name: "MEN'S HIGH-NECK ATHLETIC T-SHIRT", price: "300", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181423_Gallery_jxcxm7.jpg", url: "fit-mode.html" },
+        { name: "WOMEN'S GYM & BARBELL GRAPHIC PRINT T-SHIRT", price: convertDhToUsd("200"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180859/Screenshot_20250617_181348_Gallery_crqzwx.jpg", url: "fit-mode.html" },
+        { name: "MEN'S ATHELTIC PANTS", price: convertDhToUsd("300"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180859/Screenshot_20250617_181337_Gallery_tepxet.jpg", url: "fit-mode.html" },
+        { name: "MEN'S QUICK-DRY ATHLETIC SHORTS", price: convertDhToUsd("200"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180856/Screenshot_20250617_181436_Gallery_fv8smt.jpg", url: "fit-mode.html" },
+        { name: "MEN'S HOODED SHORT SLEEVE T-SHIRT", price: convertDhToUsd("300"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180858/Screenshot_20250617_181359_Gallery_atdeza.jpg", url: "fit-mode.html" },
+        { name: "MEN'S QUICK-DRY VEST", price: convertDhToUsd("200"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181412_Gallery_dchdbt.jpg", url: "fit-mode.html" },
+        { name: "MEN'S HIGH-NECK ATHLETIC T-SHIRT", price: convertDhToUsd("300"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181423_Gallery_jxcxm7.jpg", url: "fit-mode.html" },
         // Kids Clothing
-        { name: "BOYS' SUMMER DENIM 2PCS SET", price: "300", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181447_Gallery_xiab27.jpg", url: "kids-clothing.html" },
-        { name: "4PCS SET FOR BABY BOYS", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_181023_Gallery_kahkjg.jpg", url: "kids-clothing.html" },
-        { name: "2PCS YOUNG BOY'S CASUAL CARTOON BEAR", price: "250", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_180943_Gallery_b063l5.jpg", url: "kids-clothing.html" },
-        { name: "YOUNGSTERS BOYS SUMMER SOLID COLOR JACQUARD 2PCS", price: "250", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750184012/Screenshot_20250617_191315_Dropbox_qlllms.jpg", url: "kids-clothing.html" },
-        { name: "NEW GIRLS' ROUND NECK SHORT SLEEVE", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180860/Screenshot_20250617_181308_Gallery_v4nydq.jpg", url: "kids-clothing.html" },
-        { name: "2PCS TRENDY GIRLS SUMMER OUTFIT", price: "300", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180861/Screenshot_20250617_181325_Gallery_uugn2e.jpg", url: "kids-clothing.html" },
+        { name: "BOYS' SUMMER DENIM 2PCS SET", price: convertDhToUsd("300"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180857/Screenshot_20250617_181447_Gallery_xiab27.jpg", url: "kids-clothing.html" },
+        { name: "4PCS SET FOR BABY BOYS", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_181023_Gallery_kahkjg.jpg", url: "kids-clothing.html" },
+        { name: "2PCS YOUNG BOY'S CASUAL CARTOON BEAR", price: convertDhToUsd("250"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180864/Screenshot_20250617_180943_Gallery_b063l5.jpg", url: "kids-clothing.html" },
+        { name: "YOUNGSTERS BOYS SUMMER SOLID COLOR JACQUARD 2PCS", price: convertDhToUsd("250"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750184012/Screenshot_20250617_191315_Dropbox_qlllms.jpg", url: "kids-clothing.html" },
+        { name: "NEW GIRLS' ROUND NECK SHORT SLEEVE", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180860/Screenshot_20250617_181308_Gallery_v4nydq.jpg", url: "kids-clothing.html" },
+        { name: "2PCS TRENDY GIRLS SUMMER OUTFIT", price: convertDhToUsd("300"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180861/Screenshot_20250617_181325_Gallery_uugn2e.jpg", url: "kids-clothing.html" },
         // Mens Collection
-        { name: "MEN'S LINEN SHIRT & SHORTS SET", price: "400", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180850/Screenshot_20250617_181716_Gallery_j4vtix.jpg", url: "shop-mens.html" },
-        { name: "MEN'S WINTER JACKET", price: "550", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180862/Screenshot_20250617_181225_Gallery_dnzl0z.jpg", url: "shop-mens.html" },
-        { name: "MENS' CASUAL SHORT SLEEVE T-SHIRT AND SHORT SET-KNIT", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180854/Screenshot_20250617_181509/Gallery_euud9i.jpg", url: "shop-mens.html" },
+        { name: "MEN'S LINEN SHIRT & SHORTS SET", price: convertDhToUsd("400"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180850/Screenshot_20250617_181716_Gallery_j4vtix.jpg", url: "shop-mens.html" },
+        { name: "MEN'S WINTER JACKET", price: convertDhToUsd("550"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180862/Screenshot_20250617_181225_Gallery_dnzl0z.jpg", url: "shop-mens.html" },
+        { name: "MENS' CASUAL SHORT SLEEVE T-SHIRT AND SHORT SET-KNIT", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180854/Screenshot_20250617_181509/Gallery_euud9i.jpg", url: "shop-mens.html" },
         // Womens Collection
-        { name: "HIGH-NECK ZIP-UP PUFFER JACKET", price: "500", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181546_Gallery_g8xvaz.jpg", url: "shop-womens.html" },
+        { name: "HIGH-NECK ZIP-UP PUFFER JACKET", price: convertDhToUsd("500"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180853/Screenshot_20250617_181546_Gallery_g8xvaz.jpg", url: "shop-womens.html" },
         // Winter Collection
-        { name: "MEN'S VINTAGE-INSPIRED CREWNECK SWEATSHIRT", price: "350", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181156_Gallery_qabe76.jpg", url: "winter-collection.html" },
-        { name: "MEN'S WINTER CAMO JACKET", price: "550", image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181137_Gallery_o1pbhj.jpg", url: "winter-collection.html" }
+        { name: "MEN'S VINTAGE-INSPIRED CREWNECK SWEATSHIRT", price: convertDhToUsd("350"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181156_Gallery_qabe76.jpg", url: "winter-collection.html" },
+        { name: "MEN'S WINTER CAMO JACKET", price: convertDhToUsd("550"), image: "https://res.cloudinary.com/dav8t2igs/image/upload/v1750180863/Screenshot_20250617_181137_Gallery_o1pbhj.jpg", url: "winter-collection.html" }
     ];
     
     // Search Functions
@@ -473,7 +481,7 @@
                     <img src="${item.image}" alt="${item.name}">
                     <div class="search-result-details">
                         <h4>${item.name}</h4>
-                        <p>${item.price} DH</p>
+                        <p>$${item.price}</p>
                     </div>
                     <button class="shop-now" data-name="${item.name}" data-price="${item.price}" data-image="${item.image}">Add to cart</button>
                 `;
