@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartCount = document.getElementById('cart-count');
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    // Exchange Rate
     const DH_TO_USD_RATE = 0.10;
 
     function updateCartCount() {
@@ -49,18 +48,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cartItem = document.createElement('div');
                 cartItem.className = 'cart-item';
 
-                // HTML for each item in the cart
-                cartItem.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}">
-                    <div class="cart-item-details">
-                        <h3>${item.name}</h3>
-                        <p>$${priceNumber.toFixed(2)}</p>
-
+                let sizeSelectorHtml = '';
+                if (item.category === 'kids') {
+                    sizeSelectorHtml = `
                         <div class="cart-item-selector">
-                            <label>Color:</label>
-                            <span style="padding: 6px 8px; font-family: 'Segoe UI', Arial, sans-serif; font-size: 0.95rem;">Original (As in photo)</span>
+                            <label for="age-select-${index}">Age:</label>
+                            <select name="age" id="age-select-${index}" onchange="updateCartOption(${index}, 'size', this.value)">
+                                <option value="1-2Y" ${item.size === '1-2Y' ? 'selected' : ''}>1-2Y</option>
+                                <option value="3-4Y" ${!item.size || item.size === '3-4Y' ? 'selected' : ''}>3-4Y</option>
+                                <option value="5-6Y" ${item.size === '5-6Y' ? 'selected' : ''}>5-6Y</option>
+                            </select>
                         </div>
-
+                    `;
+                } else {
+                    sizeSelectorHtml = `
                         <div class="cart-item-selector">
                             <label for="size-select-${index}">Size:</label>
                             <select name="size" id="size-select-${index}" onchange="updateCartOption(${index}, 'size', this.value)">
@@ -70,7 +71,19 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <option value="XL" ${item.size === 'XL' ? 'selected' : ''}>XL</option>
                             </select>
                         </div>
-                        
+                    `;
+                }
+
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-details">
+                        <h3>${item.name}</h3>
+                        <p>$${priceNumber.toFixed(2)}</p>
+                        <div class="cart-item-selector">
+                            <label>Color:</label>
+                            <span style="padding: 6px 8px; font-family: 'Segoe UI', Arial, sans-serif; font-size: 0.95rem;">Original (As in photo)</span>
+                        </div>
+                        ${sizeSelectorHtml}
                         <div class="cart-item-selector">
                             <label for="quantity-input-${index}">Quantity:</label>
                             <div class="quantity-selector">
@@ -79,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <button class="quantity-btn plus-btn" data-index="${index}">+</button>
                             </div>
                         </div>
-                        
                         <button class="cart-item-remove" data-index="${index}">Remove</button>
                     </div>
                 `;
