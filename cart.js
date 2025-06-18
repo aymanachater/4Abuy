@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartCount = document.getElementById('cart-count');
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+    // Exchange Rate (This should ideally be consistent across all files or fetched dynamically)
+    const DH_TO_USD_RATE = 0.10; // Example: 1 DH = 0.10 USD (as of 2025-06-18, check current rate for accuracy)
+
     function updateCartCount() {
         const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
         if (cartCount) {
@@ -38,6 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let totalPrice = 0;
             cart.forEach((item, index) => {
+                // Ensure price is treated as a number, and if it somehow comes from DH, convert it.
+                // Assuming prices stored in local storage are already in USD from other pages.
                 const priceNumber = parseFloat(String(item.price).replace(/[^0-9.-]+/g, ""));
                 if (!item.quantity) {
                     item.quantity = 1;
@@ -51,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <img src="${item.image}" alt="${item.name}">
                     <div class="cart-item-details">
                         <h3>${item.name}</h3>
-                        <p>$${typeof item.price === 'string' ? parseFloat(item.price.replace(/[^0-9.-]+/g, "")).toFixed(2) : item.price.toFixed(2)}</p>
+                        <p>$${priceNumber.toFixed(2)}</p>
 
                         <div class="cart-item-selector">
                             <label for="color-select-${index}">Color:</label>
