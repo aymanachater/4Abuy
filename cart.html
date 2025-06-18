@@ -39,6 +39,9 @@
         .checkout-btn { display: block; width: 100%; padding: 15px; background: #000; color: #fff; text-align: center; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1rem; font-weight: bold; }
         #emptyCartMessage { text-align: center; padding: 50px; }
 
+        /* Auth Modals */
+        .auth-modal{display:none;position:fixed;z-index:10000;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;font-family:'Segoe UI',Arial,sans-serif}.auth-modal-content{background-color:#fff;margin:auto;padding:30px;border-radius:12px;box-shadow:0 0 30px rgba(0,0,0,.3);width:90%;max-width:450px;position:relative;text-align:center}.auth-modal .close-btn{position:absolute;top:10px;right:20px;color:#aaa;font-size:28px;font-weight:700;cursor:pointer}.auth-modal h2{margin-top:0;margin-bottom:25px;font-size:1.8rem;color:#333}.auth-modal input[type=email],.auth-modal input[type=password]{width:calc(100% - 24px);padding:12px;margin-bottom:20px;border:1px solid #ccc;border-radius:5px;font-size:1rem;box-sizing:border-box}.auth-modal button[type=submit]{background-color:#000;color:#fff;padding:12px 20px;border:none;border-radius:25px;cursor:pointer;font-size:1rem;font-weight:600;width:100%;transition:background-color .2s;box-sizing:border-box}.auth-modal .switch-form-link{display:block;margin-top:20px;font-size:.9rem;color:#555}.auth-modal .switch-form-link a{color:#cc00aa;text-decoration:underline;font-weight:700;cursor:pointer}
+
         /* Search Overlay Styles */
         .search-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);z-index:10001;justify-content:center;align-items:flex-start;padding-top:100px}
         .search-container{width:90%;max-width:600px;background:#fff;padding:20px;border-radius:8px;position:relative}
@@ -140,6 +143,33 @@
             <h2>Your cart is empty.</h2>
             <p>Looks like you haven't added anything to your cart yet.</p>
             <a href="index.html" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background: #000; color: #fff; text-decoration: none; border-radius: 5px;">Continue Shopping</a>
+        </div>
+    </div>
+    
+    <div id="loginModal" class="auth-modal">
+        <div class="auth-modal-content">
+          <span class="close-btn" onclick="closeModal('loginModal')">×</span>
+          <h2>Login</h2>
+          <form id="loginForm">
+            <input type="email" id="loginEmail" placeholder="Email Address" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button type="submit">LOGIN</button>
+          </form>
+          <p class="switch-form-link">Don't have an account? <a onclick="openModal('signupModal'); closeModal('loginModal'); return false;">Sign Up</a></p>
+        </div>
+    </div>
+    
+    <div id="signupModal" class="auth-modal">
+        <div class="auth-modal-content">
+          <span class="close-btn" onclick="closeModal('signupModal')">×</span>
+          <h2>Create Account</h2>
+          <form id="signupForm">
+            <input type="text" id="signupFirstName" placeholder="First Name" required style="margin-bottom: 10px; padding: 10px; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc; width: calc(100% - 22px); box-sizing: border-box;">
+            <input type="email" id="signupEmail" placeholder="Email Address" required>
+            <input type="password" id="signupPassword" placeholder="Password" required>
+            <button type="submit">SIGN UP</button>
+          </form>
+          <p class="switch-form-link">Already have an account? <a onclick="openModal('loginModal'); closeModal('signupModal'); return false;">Login</a></p>
         </div>
     </div>
 
@@ -278,10 +308,9 @@
                     `;
                     t.appendChild(resultLink);
                 });
-                // Add event listeners for "Add to cart" buttons dynamically
                 t.querySelectorAll('.shop-now').forEach(button => {
                     button.addEventListener('click', (ev) => {
-                        ev.preventDefault(); // Prevent navigation
+                        ev.preventDefault();
                         const name = ev.target.dataset.name;
                         const price = parseFloat(ev.target.dataset.price);
                         const image = ev.target.dataset.image;
@@ -294,7 +323,7 @@
                             cart.push(product);
                         }
                         localStorage.setItem('cart', JSON.stringify(cart));
-                        updateCartCount(); // This function is in cart.js
+                        updateCartCount();
                         alert(`'${name}' has been added to your cart.`);
                     });
                 });
@@ -309,41 +338,12 @@
         const firebaseConfig = { apiKey: "AIzaSyDelMOFKyvYx4u9FCgpq1HTr9eAoyjBjS0", authDomain: "abuy-77b4e.firebaseapp.com", projectId: "abuy-77b4e", storageBucket: "abuy-77b4e.appspot.com", messagingSenderId: "1081289117876", appId: "1:1081289117876:web:b3479e942dea9dc14607e1", measurementId: "G-31SH8VCRYG" };
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
-        const userAccountIcon = document.getElementById('userAccountIcon');
-
-        auth.onAuthStateChanged(user => {
-            const dropupMenu = document.getElementById('userDropupMenu');
-            const welcomeUserName = document.getElementById('welcomeUserName');
-            if (user) {
-                if (userAccountIcon) { userAccountIcon.className = 'fas fa-user-check'; userAccountIcon.onclick = () => { dropupMenu.style.display = dropupMenu.style.display === 'block' ? 'none' : 'block'; }; }
-                if (welcomeUserName) { welcomeUserName.textContent = user.displayName || 'user'; }
-            } else {
-                if (userAccountIcon) { userAccountIcon.className = 'fas fa-user'; userAccountIcon.onclick = () => alert('Please sign in to view your account.'); }
-                if (dropupMenu) { dropupMenu.style.display = 'none'; }
-                if (welcomeUserName) { welcomeUserName.textContent = 'user'; }
-            }
-        });
-
-        document.addEventListener('click', function(event) { 
-            const dropupMenu = document.getElementById('userDropupMenu'); 
-            const settingsMenu = document.getElementById('userAccountSettingsMenu');
-            const userIcon = document.getElementById('userAccountIcon'); 
-            if (dropupMenu && userIcon && !dropupMenu.contains(event.target) && !settingsMenu.contains(event.target) && !userIcon.contains(event.target)) { 
-                dropupMenu.style.display = 'none'; 
-                settingsMenu.style.display = 'none';
-            } 
-        });
-        document.getElementById('closeDropup').addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; });
-        document.getElementById('closeSettingsDropup').addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; });
-        document.getElementById('backToMainMenu').addEventListener('click', () => { document.getElementById('userAccountSettingsMenu').style.display = 'none'; document.getElementById('userDropupMenu').style.display = 'block'; });
-        document.getElementById('accountSettingsMain').addEventListener('click', () => { document.getElementById('userDropupMenu').style.display = 'none'; document.getElementById('userAccountSettingsMenu').style.display = 'block'; updateAccountSettingsMenu(); });
-        document.getElementById('passwordPersonalInfoMain').addEventListener('click', () => { const mainMenu = document.getElementById('userDropupMenu'); const settingsMenu = document.getElementById('userAccountSettingsMenu'); if (mainMenu && settingsMenu) { mainMenu.style.display = 'none'; settingsMenu.style.display = 'block'; updateAccountSettingsMenu(); } });
-        document.getElementById('contactUs').addEventListener('click', () => { window.open('https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==', '_blank'); });
-        document.getElementById('signOutMain').addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
-        document.getElementById('signOutSettings').addEventListener('click', () => { if (confirm('Are you sure you want to sign out?')) { auth.signOut().catch(error => alert('Logout failed: ' + error.message)); } });
-        function updateAccountSettingsMenu() { const user = auth.currentUser; if (user) { document.getElementById('welcomeUserNameSettings').textContent = user.displayName || 'user'; document.getElementById('userNameDisplay').textContent = user.displayName || 'user'; document.getElementById('userEmailDisplay').textContent = user.email || ''; document.getElementById('newPasswordInput').value = ''; } }
-        document.getElementById('changePasswordBtn').addEventListener('click', () => { const newPassword = document.getElementById('newPasswordInput').value.trim(); if (newPassword.length < 6) { alert('Password must be at least 6 characters long.'); return; } const user = auth.currentUser; if (user) { user.updatePassword(newPassword).then(() => { alert('Password changed successfully.'); document.getElementById('newPasswordInput').value = ''; }).catch(error => alert('Failed to change password: ' + error.message)); } else { alert('No user is currently signed in.'); } });
-
+        const loginForm=document.getElementById("loginForm"),signupForm=document.getElementById("signupForm"),userAccountIcon=document.getElementById("userAccountIcon");
+        loginForm&&loginForm.addEventListener("submit",async e=>{e.preventDefault();const t=document.getElementById("loginEmail").value,n=document.getElementById("loginPassword").value;try{await auth.signInWithEmailAndPassword(t,n),closeModal("loginModal")}catch(e){alert("Login failed: "+e.message)}}),signupForm&&signupForm.addEventListener("submit",async e=>{e.preventDefault();const t=document.getElementById("signupFirstName").value.trim(),n=document.getElementById("signupEmail").value,o=document.getElementById("signupPassword").value;try{const e=await auth.createUserWithEmailAndPassword(n,o);await e.user.updateProfile({displayName:t}),closeModal("signupModal")}catch(e){alert("Signup failed: "+e.message)}}),auth.onAuthStateChanged(e=>{const t=document.getElementById("userDropupMenu"),n=document.getElementById("welcomeUserName");e?(userAccountIcon&&(userAccountIcon.className="fas fa-user-check",userAccountIcon.onclick=()=>{t.style.display="block"===t.style.display?"none":"block"}),n&&(n.textContent=e.displayName||"user"),closeModal("loginModal"),closeModal("signupModal")):(userAccountIcon&&(userAccountIcon.className="fas fa-user",userAccountIcon.onclick=()=>openModal("loginModal")),t&&(t.style.display="none"),n&&(n.textContent="user"))});
+        function openModal(e){document.getElementById(e).style.display="flex"}
+        function closeModal(e){document.getElementById(e).style.display="none"}
+        document.addEventListener("click",function(e){const t=document.getElementById("userDropupMenu"),n=document.getElementById("userAccountIcon");t&&n&&!t.contains(e.target)&&!n.contains(e.target)&&(t.style.display="none")}),document.getElementById("closeDropup").addEventListener("click",()=>{document.getElementById("userDropupMenu").style.display="none"}),document.getElementById("closeSettingsDropup").addEventListener("click",()=>{document.getElementById("userAccountSettingsMenu").style.display="none"}),document.getElementById("backToMainMenu").addEventListener("click",()=>{document.getElementById("userAccountSettingsMenu").style.display="none",document.getElementById("userDropupMenu").style.display="block"}),document.getElementById("accountSettingsMain").addEventListener("click",()=>{document.getElementById("userDropupMenu").style.display="none",document.getElementById("userAccountSettingsMenu").style.display="block",updateAccountSettingsMenu()}),document.getElementById("passwordPersonalInfoMain").addEventListener("click",()=>{const e=document.getElementById("userDropupMenu"),t=document.getElementById("userAccountSettingsMenu");e&&t&&(e.style.display="none",t.style.display="block",updateAccountSettingsMenu())}),document.getElementById("contactUs").addEventListener("click",()=>{window.open("https://www.instagram.com/ayman_achater?igsh=MTI3ZjJxbDMzdzd3cg==","_blank")}),document.getElementById("signOutMain").addEventListener("click",()=>{confirm("Are you sure you want to sign out?")&&auth.signOut().catch(e=>alert("Logout failed: "+e.message))}),document.getElementById("signOutSettings").addEventListener("click",()=>{confirm("Are you sure you want to sign out?")&&auth.signOut().catch(e=>alert("Logout failed: "+e.message))});
+        function updateAccountSettingsMenu(){const e=auth.currentUser;e&&(document.getElementById("welcomeUserNameSettings").textContent=e.displayName||"user",document.getElementById("userNameDisplay").textContent=e.displayName||"user",document.getElementById("userEmailDisplay").textContent=e.email||"",document.getElementById("newPasswordInput").value="")}document.getElementById("changePasswordBtn").addEventListener("click",()=>{const e=document.getElementById("newPasswordInput").value.trim();if(e.length<6)return void alert("Password must be at least 6 characters long.");const t=auth.currentUser;t?t.updatePassword(e).then(()=>{alert("Password changed successfully."),document.getElementById("newPasswordInput").value=""}).catch(e=>alert("Failed to change password: "+e.message)):alert("No user is currently signed in.")});
     </script>
 </body>
 </html>
