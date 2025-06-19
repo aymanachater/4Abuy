@@ -346,18 +346,13 @@
             return;
         }
         const o = e.toLowerCase();
-
-        // Remove duplicates based on product name
         const uniqueProducts = Array.from(new Map(products.map(item => [item.name, item])).values());
-
         const n = uniqueProducts.filter(item => item.name.toLowerCase().includes(o));
-
         if (n.length > 0) {
             n.forEach(item => {
                 const resultLink = document.createElement("a");
                 resultLink.href = item.url;
                 resultLink.className = "search-result-item";
-
                 resultLink.innerHTML = `
                     <img src="${item.image}" alt="${item.name}">
                     <div class="search-result-details">
@@ -368,25 +363,30 @@
                 `;
                 t.appendChild(resultLink);
             });
-            // Add event listeners for "Add to cart" buttons dynamically
             t.querySelectorAll('.shop-now').forEach(button => {
                 button.addEventListener('click', (e) => {
-                    const name = e.target.dataset.name;
-                    const price = parseFloat(e.target.dataset.price);
-                    const image = e.target.dataset.image;
-                    const product = { name, price, image, quantity: 1 };
-                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                    const existingProductIndex = cart.findIndex(item => item.name === name);
-                    if (existingProductIndex > -1) {
-                        cart[existingProductIndex].quantity += 1;
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const user = auth.currentUser;
+                    if (user) {
+                        const name = e.target.dataset.name;
+                        const price = parseFloat(e.target.dataset.price);
+                        const image = e.target.dataset.image;
+                        const product = { name, price, image, quantity: 1 };
+                        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                        const existingProductIndex = cart.findIndex(item => item.name === name);
+                        if (existingProductIndex > -1) {
+                            cart[existingProductIndex].quantity += 1;
+                        } else {
+                            cart.push(product);
+                        }
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateCartCount();
                     } else {
-                        cart.push(product);
+                        openModal('loginModal');
                     }
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    updateCartCount();
                 });
             });
-
         } else {
             t.innerHTML = '<p style="padding: 10px; text-align: center;">No products found.</p>';
         }
@@ -471,19 +471,24 @@
 
         document.querySelectorAll('.shop-now').forEach(button => {
             button.addEventListener('click', (e) => {
-                const name = e.target.dataset.name;
-                const price = parseFloat(e.target.dataset.price);
-                const image = e.target.dataset.image;
-                const product = { name, price, image, quantity: 1 };
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                const existingProductIndex = cart.findIndex(item => item.name === name);
-                if (existingProductIndex > -1) {
-                    cart[existingProductIndex].quantity += 1;
+                const user = auth.currentUser;
+                if (user) {
+                    const name = e.target.dataset.name;
+                    const price = parseFloat(e.target.dataset.price);
+                    const image = e.target.dataset.image;
+                    const product = { name, price, image, quantity: 1 };
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const existingProductIndex = cart.findIndex(item => item.name === name);
+                    if (existingProductIndex > -1) {
+                        cart[existingProductIndex].quantity += 1;
+                    } else {
+                        cart.push(product);
+                    }
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartCount();
                 } else {
-                    cart.push(product);
+                    openModal('loginModal');
                 }
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCartCount();
             });
         });
     });
@@ -493,7 +498,7 @@
 
     function updateCartCount() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+        const cartCount = cart.reduce((total, item) => total + (item.quantity || 1), 0);
         const cartCountSpan = document.getElementById('cart-count');
         if(cartCountSpan) {
             cartCountSpan.textContent = cartCount;
