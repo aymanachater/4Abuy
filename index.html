@@ -26,7 +26,8 @@
       overflow: hidden;
       background: #111;
     }
-    .hero iframe {
+    /* --- CSS MODIFIED --- */
+    .hero video {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -36,7 +37,6 @@
       width: auto;
       height: auto;
       z-index: 1;
-      border: none;
     }
     .hero-bg-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.60); z-index: 2; }
     .hero-content { position: relative; z-index: 3; text-align: center; width: 100%; max-width: 480px; margin: auto; padding: 2rem 1rem; }
@@ -115,11 +115,10 @@
     </div>
   </div>
   <section class="hero">
-    <iframe
-      src="https://player.cloudinary.com/embed/?cloud_name=dav8t2igs&public_id=PinDown.io_1750203361_wmavwx&player[autoplay]=true&player[muted]=true&player[loop]=true&player[controls]=false&transformation=%7B%22crop%22%3A%22fill%22%2C%22gravity%22%3A%22auto%22%7D"
-      allow="autoplay; fullscreen"
-      frameborder="0"
-    ></iframe>
+    <video autoplay loop muted playsinline poster="https://res.cloudinary.com/dav8t2igs/video/upload/PinDown.io_1750203361_wmavwx.jpg">
+      <source src="https://res.cloudinary.com/dav8t2igs/video/upload/PinDown.io_1750203361_wmavwx.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
     <div class="hero-bg-overlay"></div>
     <div class="hero-content">
       <div class="available">AVAILABLE!</div>
