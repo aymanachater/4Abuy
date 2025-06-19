@@ -483,19 +483,24 @@
                 button.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    const name = e.target.dataset.name;
-                    const price = parseFloat(e.target.dataset.price);
-                    const image = e.target.dataset.image;
-                    const product = { name, price, image, quantity: 1 };
-                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                    const existingProductIndex = cart.findIndex(item => item.name === name);
-                    if (existingProductIndex > -1) {
-                        cart[existingProductIndex].quantity += 1;
+                    const user = auth.currentUser;
+                    if (user) {
+                        const name = e.target.dataset.name;
+                        const price = parseFloat(e.target.dataset.price);
+                        const image = e.target.dataset.image;
+                        const product = { name, price, image, quantity: 1 };
+                        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                        const existingProductIndex = cart.findIndex(item => item.name === name);
+                        if (existingProductIndex > -1) {
+                            cart[existingProductIndex].quantity += 1;
+                        } else {
+                            cart.push(product);
+                        }
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateCartCount();
                     } else {
-                        cart.push(product);
+                        openModal('loginModal');
                     }
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    updateCartCount();
                 });
             });
 
@@ -590,19 +595,24 @@
         
         document.querySelectorAll('.product-grid .shop-now').forEach(button => {
             button.addEventListener('click', (e) => {
-                const name = e.target.dataset.name;
-                const price = parseFloat(e.target.dataset.price);
-                const image = e.target.dataset.image;
-                const product = { name, price, image, quantity: 1 };
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                const existingProductIndex = cart.findIndex(item => item.name === name);
-                if (existingProductIndex > -1) {
-                    cart[existingProductIndex].quantity += 1;
+                const user = auth.currentUser;
+                if (user) {
+                    const name = e.target.dataset.name;
+                    const price = parseFloat(e.target.dataset.price);
+                    const image = e.target.dataset.image;
+                    const product = { name, price, image, quantity: 1 };
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const existingProductIndex = cart.findIndex(item => item.name === name);
+                    if (existingProductIndex > -1) {
+                        cart[existingProductIndex].quantity += 1;
+                    } else {
+                        cart.push(product);
+                    }
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartCount();
                 } else {
-                    cart.push(product);
+                    openModal('loginModal');
                 }
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCartCount();
             });
         });
 
